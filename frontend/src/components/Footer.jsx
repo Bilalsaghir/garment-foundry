@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { GFMonogram } from "./GFMonogram";
+import { BrandLogo } from "./BrandLogo";
 
 export default function Footer() {
   return (
@@ -9,13 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Brand */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <GFMonogram size={44} color="#F2F2F2" />
-              <div className="leading-tight">
-                <div className="font-display text-[14px] tracking-luxe text-[#F2F2F2]">GARMENT FOUNDRY</div>
-                <div className="font-body text-[9px] tracking-luxe text-[#777] mt-1">APPAREL MANUFACTURING &amp; SOURCING</div>
-              </div>
-            </div>
+            <BrandLogo height={96} />
             <p className="mt-8 max-w-md font-body text-[13px] leading-[1.9] text-[#999]">
               A United Kingdom based apparel manufacturing and sourcing partner. We help fashion labels, uniform programmes and private-label brands move from brief to bulk with precision and quiet confidence.
             </p>

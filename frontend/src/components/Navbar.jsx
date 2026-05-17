@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { GFMonogram } from "./GFMonogram";
+import { BrandLogo } from "./BrandLogo";
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
@@ -36,12 +36,8 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
-        <Link to="/" data-testid="nav-logo-link" className="flex items-center gap-3 group">
-          <GFMonogram size={36} color="#F2F2F2" />
-          <span className="hidden sm:flex flex-col leading-none">
-            <span className="font-display text-[13px] tracking-luxe text-[#F2F2F2]">GARMENT FOUNDRY</span>
-            <span className="font-body text-[9px] tracking-luxe text-[#777] mt-1">APPAREL MANUFACTURING &amp; SOURCING</span>
-          </span>
+        <Link to="/" data-testid="nav-logo-link" className="flex items-center group">
+          <BrandLogo height={56} className="transition-opacity group-hover:opacity-90" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8">
