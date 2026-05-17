@@ -8,6 +8,7 @@ from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorGridFSBucket
 from bson import ObjectId
 import os
 import io
+import time
 import asyncio
 import logging
 import secrets
@@ -15,6 +16,7 @@ import uuid
 import jwt
 import bcrypt
 import csv
+from collections import defaultdict, deque
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
@@ -156,6 +158,48 @@ def sanitize_fields(d: dict, fields: List[str]) -> dict:
         if f in d and isinstance(d[f], str):
             d[f] = sanitize_html(d[f])
     return d
+
+
+# ---------- Rate limiting (in-memory, per-IP sliding window) ----------
+UPLOAD_LIMIT_COUNT = 10           # max uploads
+UPLOAD_LIMIT_WINDOW = 300         # per 5 minutes
+_upload_buckets: Dict[str, deque] = defaultdict(deque)
+
+
+def _client_ip(request: Request) -> str:
+    fwd = request.headers.get('x-forwarded-for', '')
+    if fwd:
+        return fwd.split(',')[0].strip()
+    return request.client.host if request.client else 'unknown'
+
+
+def check_upload_rate(request: Request) -> None:
+    ip = _client_ip(request)
+    ts = time.time()
+    bucket = _upload_buckets[ip]
+    while bucket and bucket[0] < ts - UPLOAD_LIMIT_WINDOW:
+        bucket.popleft()
+    if len(bucket) >= UPLOAD_LIMIT_COUNT:
+        retry_after = int(UPLOAD_LIMIT_WINDOW - (ts - bucket[0]))
+        raise HTTPException(
+            status_code=429,
+            detail=f"Too many uploads. Please retry in {max(retry_after, 1)} seconds.",
+            headers={"Retry-After": str(max(retry_after, 1))},
+        )
+    bucket.append(ts)
+
+
+async def _rate_limit_gc_loop():
+    """Periodically prune empty buckets to bound memory."""
+    while True:
+        try:
+            ts = time.time()
+            stale = [ip for ip, b in _upload_buckets.items() if not b or b[-1] < ts - UPLOAD_LIMIT_WINDOW]
+            for ip in stale:
+                _upload_buckets.pop(ip, None)
+        except Exception as e:
+            logger.error(f"rate-limit gc error: {e}")
+        await asyncio.sleep(600)
 
 
 # ---------- Email ----------
@@ -371,7 +415,8 @@ ALLOWED_EXT = {'pdf', 'ai', 'psd', 'png', 'jpg', 'jpeg', 'webp', 'zip', 'doc', '
 
 
 @api_router.post('/upload')
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(request: Request, file: UploadFile = File(...)):
+    check_upload_rate(request)
     data = await file.read()
     if len(data) > 10 * 1024 * 1024:
         raise HTTPException(413, 'File exceeds 10MB limit')
@@ -388,6 +433,7 @@ async def upload_file(file: UploadFile = File(...)):
             'content_type': file.content_type or 'application/octet-stream',
             'size': len(data),
             'created_at': iso(now()),
+            'uploader_ip': _client_ip(request),
         },
     )
     return {
@@ -406,9 +452,30 @@ async def download_file(file_id: str):
     if not docs:
         raise HTTPException(404, 'File not found')
     g = docs[0]
+    meta = g.get('metadata', {}) or {}
+    content_type = meta.get('content_type', 'application/octet-stream')
+    filename = meta.get('original_filename') or g.get('filename') or file_id
+    size = g.get('length') or meta.get('size')
+
     stream = await gridfs.open_download_stream(g['_id'])
-    data = await stream.read()
-    return Response(content=data, media_type=g.get('metadata', {}).get('content_type', 'application/octet-stream'))
+
+    async def iter_chunks():
+        try:
+            while True:
+                chunk = await stream.readchunk()
+                if not chunk:
+                    break
+                yield chunk
+        finally:
+            try:
+                await stream.close()
+            except Exception:
+                pass
+
+    headers = {'Content-Disposition': f'inline; filename="{filename}"'}
+    if size:
+        headers['Content-Length'] = str(size)
+    return StreamingResponse(iter_chunks(), media_type=content_type, headers=headers)
 
 
 # ---- Quote create ----
@@ -953,6 +1020,7 @@ async def startup():
         logger.info('Site settings seeded')
 
     asyncio.create_task(_scheduler_loop())
+    asyncio.create_task(_rate_limit_gc_loop())
 
 
 @app.on_event('shutdown')
