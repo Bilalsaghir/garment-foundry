@@ -397,7 +397,7 @@ ALLOWED_EXT = {'pdf', 'ai', 'psd', 'png', 'jpg', 'jpeg', 'webp', 'zip', 'doc', '
 
 @api_router.post('/upload')
 @limiter.limit("10/5 minutes")
-async def upload_file(request: Request, file: UploadFile = File(...)):
+async def upload_file(request: Request, response: Response, file: UploadFile = File(...)):
     data = await file.read()
     if len(data) > 10 * 1024 * 1024:
         raise HTTPException(413, 'File exceeds 10MB limit')
@@ -462,7 +462,7 @@ async def download_file(file_id: str):
 # ---- Quote create ----
 @api_router.post('/quote')
 @limiter.limit("5/hour")
-async def create_quote(request: Request, payload: QuoteIn, background: BackgroundTasks):
+async def create_quote(request: Request, response: Response, payload: QuoteIn, background: BackgroundTasks):
     ref = await next_quote_reference()
     record = {
         'id': str(uuid.uuid4()),
