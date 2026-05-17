@@ -15,6 +15,22 @@ import Quality from "@/pages/Quality";
 import Quote from "@/pages/Quote";
 import FAQs from "@/pages/FAQs";
 import Contact from "@/pages/Contact";
+import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
+import CaseStudies from "@/pages/CaseStudies";
+import Unsubscribe from "@/pages/Unsubscribe";
+
+import AdminLogin from "@/admin/AdminLogin";
+import AdminLayout from "@/admin/AdminLayout";
+import AdminDashboard from "@/admin/AdminDashboard";
+import AdminBlog from "@/admin/AdminBlog";
+import AdminCaseStudies from "@/admin/AdminCaseStudies";
+import { AdminQuotes, AdminQuoteDetail } from "@/admin/AdminQuotes";
+import AdminContacts from "@/admin/AdminContacts";
+import AdminFAQs from "@/admin/AdminFAQs";
+import AdminSubscribers from "@/admin/AdminSubscribers";
+import AdminCampaigns from "@/admin/AdminCampaigns";
+import AdminSettings from "@/admin/AdminSettings";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -22,27 +38,51 @@ function ScrollToTop() {
   return null;
 }
 
+function PublicLayout({ children }) {
+  return (<><Navbar /><main>{children}</main><Footer /></>);
+}
+
+function Public({ Page }) {
+  return <PublicLayout><Page /></PublicLayout>;
+}
+
 export default function App() {
   return (
     <div className="App bg-black min-h-screen">
       <BrowserRouter>
         <ScrollToTop />
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/capabilities" element={<Capabilities />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/process" element={<Process />} />
-            <Route path="/sourcing" element={<Sourcing />} />
-            <Route path="/quality" element={<Quality />} />
-            <Route path="/quote" element={<Quote />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
+        <Routes>
+          {/* Public */}
+          <Route path="/" element={<Public Page={Home} />} />
+          <Route path="/about" element={<Public Page={About} />} />
+          <Route path="/capabilities" element={<Public Page={Capabilities} />} />
+          <Route path="/categories" element={<Public Page={Categories} />} />
+          <Route path="/process" element={<Public Page={Process} />} />
+          <Route path="/sourcing" element={<Public Page={Sourcing} />} />
+          <Route path="/quality" element={<Public Page={Quality} />} />
+          <Route path="/quote" element={<Public Page={Quote} />} />
+          <Route path="/faqs" element={<Public Page={FAQs} />} />
+          <Route path="/contact" element={<Public Page={Contact} />} />
+          <Route path="/blog" element={<Public Page={Blog} />} />
+          <Route path="/blog/:slug" element={<Public Page={BlogPost} />} />
+          <Route path="/case-studies" element={<Public Page={CaseStudies} />} />
+          <Route path="/unsubscribe" element={<Public Page={Unsubscribe} />} />
+
+          {/* Admin */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="blog" element={<AdminBlog />} />
+            <Route path="case-studies" element={<AdminCaseStudies />} />
+            <Route path="quotes" element={<AdminQuotes />} />
+            <Route path="quotes/:ref" element={<AdminQuoteDetail />} />
+            <Route path="contacts" element={<AdminContacts />} />
+            <Route path="faqs" element={<AdminFAQs />} />
+            <Route path="subscribers" element={<AdminSubscribers />} />
+            <Route path="campaigns" element={<AdminCampaigns />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
       <Toaster theme="dark" position="top-center" />
     </div>

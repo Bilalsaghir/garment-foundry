@@ -11,6 +11,8 @@ const NAV_LINKS = [
   { to: "/process", label: "Process" },
   { to: "/sourcing", label: "Sourcing" },
   { to: "/quality", label: "Quality" },
+  { to: "/blog", label: "Blog" },
+  { to: "/case-studies", label: "Case Studies" },
   { to: "/faqs", label: "FAQs" },
   { to: "/contact", label: "Contact" },
 ];
@@ -27,6 +29,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [open]);
 
   return (
     <header
@@ -40,12 +43,12 @@ export default function Navbar() {
           <BrandLogo height={56} className="transition-opacity group-hover:opacity-90" />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8">
-          {NAV_LINKS.slice(1, 8).map((l) => (
+        <nav className="hidden xl:flex items-center gap-7">
+          {NAV_LINKS.slice(1, 10).map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
-              data-testid={`nav-link-${l.label.toLowerCase()}`}
+              data-testid={`nav-link-${l.label.replace(/\s+/g, '').toLowerCase()}`}
               className={({ isActive }) =>
                 `font-body text-[11px] tracking-precision uppercase transition-colors ${
                   isActive ? "text-[#F2F2F2]" : "text-[#999] hover:text-[#F2F2F2]"
@@ -57,18 +60,18 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <Link
             to="/quote"
             data-testid="nav-request-quote-btn"
-            className="hidden md:inline-flex gf-btn gf-btn-solid"
+            className="hidden md:inline-flex items-center justify-center h-10 px-8 bg-[#0A0A0A] hover:bg-[#1f1f1f] border border-[#1f1f1f] text-white font-body text-[11px] tracking-precision uppercase whitespace-nowrap transition-colors"
           >
             Request a Quote
           </Link>
           <button
             data-testid="nav-mobile-toggle"
             onClick={() => setOpen(!open)}
-            className="lg:hidden text-[#F2F2F2] p-2"
+            className="xl:hidden text-[#F2F2F2] p-2"
             aria-label="Toggle menu"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -76,27 +79,33 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu drawer */}
       {open && (
-        <div data-testid="mobile-menu" className="lg:hidden bg-black/95 border-t border-[#1f1f1f] backdrop-blur-xl">
-          <nav className="flex flex-col px-6 py-6 gap-4">
+        <div data-testid="mobile-menu" className="xl:hidden bg-black border-t border-[#1f1f1f] fixed inset-x-0 top-20 bottom-0 overflow-y-auto">
+          <nav className="flex flex-col py-8">
             {NAV_LINKS.map((l) => (
               <NavLink
                 key={l.to}
                 to={l.to}
-                data-testid={`mobile-nav-${l.label.toLowerCase()}`}
-                className="font-body text-[12px] tracking-precision uppercase text-[#ddd] hover:text-white py-2 border-b border-[#1a1a1a]"
+                data-testid={`mobile-nav-${l.label.replace(/\s+/g, '').toLowerCase()}`}
+                className={({ isActive }) =>
+                  `font-body font-light text-[22px] tracking-[0.1em] py-[22px] px-7 border-b border-[#161616] transition-colors ${
+                    isActive ? "text-white" : "text-[#ddd] hover:text-white"
+                  }`
+                }
               >
                 {l.label}
               </NavLink>
             ))}
-            <Link
-              to="/quote"
-              data-testid="mobile-nav-request-quote"
-              className="gf-btn gf-btn-solid mt-2"
-            >
-              Request a Quote
-            </Link>
+            <div className="px-7 pt-8 pb-12">
+              <Link
+                to="/quote"
+                data-testid="mobile-nav-request-quote"
+                className="flex items-center justify-center h-14 w-full bg-[#F5F4F0] text-black font-body text-[12px] tracking-[0.2em] uppercase"
+              >
+                Request a Quote
+              </Link>
+            </div>
           </nav>
         </div>
       )}

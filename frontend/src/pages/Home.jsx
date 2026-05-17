@@ -34,11 +34,11 @@ export default function Home() {
               <p className="mt-8 max-w-xl font-body text-[14px] leading-[1.9] text-[#cfcfcf] fade-up-d1">
                 A United Kingdom apparel manufacturing and sourcing partner for fashion labels, uniform programmes, private-label and wholesale brands. From brief to bulk — handled with quiet rigour.
               </p>
-              <div className="mt-10 flex flex-wrap gap-4 fade-up-d2">
-                <Link to="/quote" data-testid="hero-quote-btn" className="gf-btn gf-btn-solid">
+              <div className="mt-10 flex flex-col sm:flex-row gap-3 fade-up-d2">
+                <Link to="/quote" data-testid="hero-quote-btn" className="inline-flex items-center justify-center bg-white text-black font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[52px] w-full sm:w-auto hover:bg-[#e8e5de] transition-colors">
                   Request a Manufacturing Quote <ArrowRight size={14} className="ml-3" />
                 </Link>
-                <Link to="/capabilities" data-testid="hero-capabilities-btn" className="gf-btn gf-btn-light">
+                <Link to="/capabilities" data-testid="hero-capabilities-btn" className="inline-flex items-center justify-center border border-white text-white font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[48px] w-full sm:w-auto hover:bg-white/10 transition-colors">
                   Explore Capabilities
                 </Link>
               </div>
@@ -128,12 +128,16 @@ export default function Home() {
                 key={cat}
                 to="/categories"
                 data-testid={`category-${cat.replace(/[^a-z]/gi, '').toLowerCase()}`}
-                className="bg-black p-8 aspect-[5/4] flex flex-col justify-between hover:bg-[#0c0c0c] group relative overflow-hidden"
+                className="bg-black p-6 lg:p-8 min-h-[160px] lg:min-h-[200px] flex flex-col justify-between group relative overflow-hidden border border-transparent hover:border-white transition-all duration-300"
+                style={{
+                  backgroundImage: "repeating-linear-gradient(45deg, transparent 0, transparent 4px, rgba(255,255,255,0.03) 4px, rgba(255,255,255,0.03) 5px)",
+                }}
               >
-                <span className="eyebrow-number">{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2] leading-tight">{cat}</h3>
-                  <ArrowUpRight size={16} className="text-[#555] group-hover:text-white mt-3 transition-colors" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: "repeating-linear-gradient(45deg, transparent 0, transparent 4px, rgba(255,255,255,0.06) 4px, rgba(255,255,255,0.06) 5px)" }} />
+                <span className="relative font-body text-[10px] tracking-[0.2em] uppercase text-[#666]">{String(i + 1).padStart(2, "0")}</span>
+                <div className="relative flex items-end justify-between">
+                  <h3 className="font-display text-xl lg:text-2xl text-[#bbb] group-hover:text-white leading-tight transition-colors">{cat}</h3>
+                  <ArrowUpRight size={16} className="text-[#555] group-hover:text-white transition-colors" />
                 </div>
               </Link>
             ))}
@@ -152,15 +156,19 @@ export default function Home() {
           </div>
           <div className="col-span-12 lg:col-span-7">
             <SectionHeading eyebrow="THE PROCESS" number="— 005" title="A seven-step path from brief to delivered." />
-            <ul className="mt-12 space-y-0">
-              {PROCESS_STEPS.map((s) => (
-                <li key={s.num} data-testid={`process-step-${s.num}`} className="grid grid-cols-12 gap-4 py-6 border-t border-[#1a1a1a] last:border-b">
-                  <span className="col-span-2 font-display text-[#666] text-sm tracking-luxe pt-1">{s.num}</span>
-                  <h4 className="col-span-4 font-display text-lg text-[#F2F2F2]">{s.title}</h4>
-                  <p className="col-span-6 font-body text-[12.5px] leading-[1.8] text-[#999]">{s.body}</p>
+            <ol className="mt-12 relative pl-8">
+              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-[#333333]" aria-hidden />
+              {PROCESS_STEPS.map((s, i) => (
+                <li key={s.num} data-testid={`process-step-${s.num}`} className="relative pb-10 last:pb-0">
+                  <span className="absolute -left-[28px] top-2 w-[14px] h-[14px] flex items-center justify-center">
+                    <span className="w-[6px] h-[6px] bg-white rounded-full" />
+                  </span>
+                  <div className="font-body text-[10px] tracking-[0.2em] uppercase text-[#666]">STEP {s.num}</div>
+                  <h4 className="mt-2 font-display text-xl text-[#F5F4F0]">{s.title}</h4>
+                  <p className="mt-2 font-body text-[13px] leading-[1.9] text-[#999]">{s.body}</p>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       </section>
