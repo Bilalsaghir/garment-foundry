@@ -1,0 +1,94 @@
+{
+  "theme": "dark",
+  "archetype": "5 (Jewel & Luxury - Monochrome Edition)",
+  "brand_identity": {
+    "name": "Garment Foundry",
+    "aesthetic": "Black-and-white luxury aesthetic, refined serif typography, clean geometric sans-serif, quiet luxury, manufacturing-led.",
+    "colors": {
+      "primary_background": "#000000",
+      "secondary_background": "#111111",
+      "tertiary_background": "#333333",
+      "text_primary": "#F2F2F2",
+      "text_secondary": "#777777",
+      "accent": "#F2F2F2",
+      "border": "#333333"
+    },
+    "typography": {
+      "headings": {
+        "family": "Cinzel, serif",
+        "weights": ["400", "500", "600"],
+        "strategy": "Uppercase for overlines/labels. Tight tracking for massive headings. Use lighter weights for elegant feel."
+      },
+      "body": {
+        "family": "Montserrat, sans-serif",
+        "weights": ["300", "400", "500"],
+        "strategy": "Geometric clarity. High legibility. Moderate tracking for overlines."
+      }
+    }
+  },
+  "layout_and_spacing": {
+    "philosophy": "Generous spacing. Use `p-12` or `p-24` for sections. The bento grid mode A (Tetris) for product categories. Mode B (Control Room) for multi-step quote calculator.",
+    "borders": "1px sharp, solid borders with #333333. No soft neomorphic shadows. Use hard lines to emphasize precision and 'seam-lines'.",
+    "grids": "Pinstripe grid motifs in backgrounds. Use CSS repeating-linear-gradient to create subtle 1px pinstripes in section backgrounds (e.g., repeating-linear-gradient(90deg, transparent, transparent 100px, #333333 100px, #333333 101px))."
+  },
+  "components_strategy": {
+    "buttons": "Sharp edges, 0px border-radius. 1px solid white border, transparent background, text white. On hover: bg-white text-black transition-all duration-300.",
+    "cards": "Cardless or 0px radius cards with 1px border. Deep blacks. Use hover effects like subtle scale or border highlight (white).",
+    "inputs": "Flat, bottom-border only or 1px full border, 0px radius. Minimalist aesthetic. Shadcn customized.",
+    "navigation": "Premium sticky navigation. Glassmorphism using backdrop-blur-xl but keeping it dark (bg-black/80). Border bottom 1px solid #333333.",
+    "quote_calculator": "Multi-step flow. Use Shadcn forms and progress indicators. Layout in a dense, precise dashboard-style grid to look highly functional yet premium."
+  },
+  "visual_enhancers": {
+    "motifs": [
+      "GF monogram: Use as a decorative watermark in large, very faint typography or SVGs.",
+      "Stitched arc pattern: Use dashed SVG paths (e.g., stroke-dasharray='4 4') to simulate stitching lines dividing sections.",
+      "Pinstripe grid: Vertical 1px lines across the hero or background to simulate tailoring grid.",
+      "Seam-line motif: Instead of standard hr tags, use a 1px dashed line to represent a seam."
+    ],
+    "textures": [
+      "Paper texture: Apply the generated paper texture image with blend-mode-multiply or very low opacity overlay.",
+      "Fabric texture: Use as hero overlay or background for specific sections."
+    ]
+  },
+  "image_urls": {
+    "hero_background": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/ee82f6ada44c7488266554af5a01e253e83ca49c842f7780193f6dfdb0f47948.png",
+      "description": "Wide-angle photograph of dark moody apparel manufacturing, extreme close-up of dark fabric weave and a steel needle. Use for Hero Section."
+    },
+    "fabric_texture": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/768cd34c9eb10b45fa902ce106d0c54d89c29214e6ff8b3f56ef5b9e9f52c494.png",
+      "description": "Macro photography of raw cotton fabric texture. Use for 'About' or 'Capabilities' section backgrounds."
+    },
+    "stitching_hands": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/a37ad15092bbe267d99d40cd9d81d39943c1f3f0c46fdcc8ce25079ca267908c.png",
+      "description": "Close-up black and white photograph of an artisan's hands carefully stitching a bespoke garment. Use for 'Manufacturing Process' or 'Quality Control'."
+    },
+    "thread_spools": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/4a8ec29d97e0e09258ead7e9fb65db5aaf739024ed5a9f232d366847037ba06b.png",
+      "description": "Row of thread spools in deep shadow. Use for 'Product Categories' or 'Sourcing'."
+    },
+    "garment_construction": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/26130d1db9ad415ea9d457d56e3726dcf58fdc568bee6da95522cde41364f04b.png",
+      "description": "Black and white abstract shot of a suit pattern on a cutting table. Use for 'Why-us' or 'Design Support'."
+    },
+    "monochrome_texture_paper": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/f3b69af3019d60b0209c12b1fcd2da62b2ee949b21daad4597c9f0bc3d3828a0.png",
+      "description": "Thick luxury paper texture with subtle grain. Use as a global subtle overlay or background pattern."
+    }
+  },
+  "brand_assets": {
+    "brand_identity_sheet": "https://customer-assets.emergentagent.com/job_140831b8-52d2-4520-83b3-4b0a744ef559/artifacts/t282niz9_ChatGPT%20Image%20May%2017%2C%202026%2C%2003_33_15%20AM.png",
+    "brand_patterns": "https://customer-assets.emergentagent.com/job_140831b8-52d2-4520-83b3-4b0a744ef559/artifacts/q8rqmjr9_ChatGPT%20Image%20May%2017%2C%202026%2C%2003_54_24%20AM.png",
+    "primary_logo": "https://customer-assets.emergentagent.com/job_140831b8-52d2-4520-83b3-4b0a744ef559/artifacts/j0oqhvyf_ChatGPT%20Image%20May%2017%2C%202026%2C%2003_23_51%20AM.png"
+  },
+  "instructions_to_main_agent": [
+    "Strictly adhere to the #000000, #333333, #777777, #F2F2F2 monochrome palette. No colors.",
+    "Use 'Cinzel' for headings (h1, h2, h3) and 'Montserrat' for body text. Install these from Google Fonts.",
+    "Ensure all interactive elements and buttons use sharp 0px border-radius.",
+    "Implement the 'stitched arc pattern' and 'pinstripe grid' using CSS borders, dashed lines, and repeating linear gradients.",
+    "Use the provided image URLs as dark, moody backgrounds with appropriate black gradient overlays (e.g., from-black/80 to-black/30) to ensure text readability.",
+    "The multi-step quote calculator must look like a high-end application interface, not a generic form. Use dense layout, clear step indicators, and sharp Shadcn inputs.",
+    "Add data-testid attributes to all buttons, links, inputs, and interactive components.",
+    "Make heavy use of negative space, large typography, and asymmetric bento grids (grid-cols-12 with varied spans) to achieve the 'quiet luxury' look."
+  ]
+}
