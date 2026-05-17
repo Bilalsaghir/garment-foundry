@@ -23,6 +23,7 @@ from email.utils import formataddr
 
 import sendgrid
 from sendgrid.helpers.mail import Mail
+import bleach
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -111,6 +112,50 @@ def slugify(s: str) -> str:
     s = re.sub(r'\s+', '-', s)
     s = re.sub(r'-+', '-', s)
     return s.strip('-')[:80]
+
+
+# ---------- HTML sanitisation (stored-XSS hardening) ----------
+ALLOWED_TAGS = [
+    'p', 'br', 'hr', 'div', 'span',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'strong', 'b', 'em', 'i', 'u', 's', 'sub', 'sup', 'small', 'mark',
+    'a', 'img',
+    'ul', 'ol', 'li',
+    'blockquote', 'q', 'cite',
+    'code', 'pre', 'kbd', 'samp',
+    'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'caption',
+    'figure', 'figcaption',
+]
+ALLOWED_ATTRS = {
+    '*': ['class', 'style'],
+    'a': ['href', 'title', 'target', 'rel'],
+    'img': ['src', 'alt', 'title', 'width', 'height'],
+    'td': ['colspan', 'rowspan', 'align'],
+    'th': ['colspan', 'rowspan', 'align', 'scope'],
+}
+ALLOWED_PROTOCOLS = ['http', 'https', 'mailto', 'tel']
+
+
+def sanitize_html(value: Optional[str]) -> str:
+    """Strip dangerous tags/attrs/protocols while preserving marketing-safe markup and {{merge_tags}}."""
+    if not value:
+        return ''
+    cleaned = bleach.clean(
+        value,
+        tags=ALLOWED_TAGS,
+        attributes=ALLOWED_ATTRS,
+        protocols=ALLOWED_PROTOCOLS,
+        strip=True,
+        strip_comments=True,
+    )
+    return cleaned
+
+
+def sanitize_fields(d: dict, fields: List[str]) -> dict:
+    for f in fields:
+        if f in d and isinstance(d[f], str):
+            d[f] = sanitize_html(d[f])
+    return d
 
 
 # ---------- Email ----------
@@ -556,8 +601,9 @@ async def admin_create_blog(payload: BlogPostIn, _: dict = Depends(require_admin
     slug = payload.slug or slugify(payload.title)
     while await db.blog_posts.find_one({'slug': slug}):
         slug = f"{slug}-{secrets.token_hex(2)}"
+    data = sanitize_fields(payload.model_dump(exclude={'slug'}), ['body', 'excerpt'])
     rec = {
-        'id': str(uuid.uuid4()), 'slug': slug, **payload.model_dump(exclude={'slug'}),
+        'id': str(uuid.uuid4()), 'slug': slug, **data,
         'created_at': iso(now()), 'updated_at': iso(now()),
         'published_at': iso(now()) if payload.status == 'published' else None,
     }
@@ -571,7 +617,7 @@ async def admin_update_blog(post_id: str, payload: BlogPostIn, _: dict = Depends
     existing = await db.blog_posts.find_one({'id': post_id})
     if not existing:
         raise HTTPException(404, 'Not found')
-    update = payload.model_dump()
+    update = sanitize_fields(payload.model_dump(), ['body', 'excerpt'])
     if payload.slug:
         update['slug'] = payload.slug
     update['updated_at'] = iso(now())
@@ -595,7 +641,8 @@ async def admin_list_cs(_: dict = Depends(require_admin)):
 
 @admin_router.post('/case-studies')
 async def admin_create_cs(payload: CaseStudyIn, _: dict = Depends(require_admin)):
-    rec = {'id': str(uuid.uuid4()), **payload.model_dump(),
+    data = sanitize_fields(payload.model_dump(), ['challenge', 'solution', 'result'])
+    rec = {'id': str(uuid.uuid4()), **data,
            'created_at': iso(now()), 'updated_at': iso(now())}
     await db.case_studies.insert_one(rec)
     rec.pop('_id', None)
@@ -606,7 +653,8 @@ async def admin_create_cs(payload: CaseStudyIn, _: dict = Depends(require_admin)
 async def admin_update_cs(cs_id: str, payload: CaseStudyIn, _: dict = Depends(require_admin)):
     if not await db.case_studies.find_one({'id': cs_id}):
         raise HTTPException(404, 'Not found')
-    await db.case_studies.update_one({'id': cs_id}, {'$set': {**payload.model_dump(), 'updated_at': iso(now())}})
+    data = sanitize_fields(payload.model_dump(), ['challenge', 'solution', 'result'])
+    await db.case_studies.update_one({'id': cs_id}, {'$set': {**data, 'updated_at': iso(now())}})
     return {'ok': True}
 
 
@@ -674,7 +722,8 @@ async def admin_list_faqs(_: dict = Depends(require_admin)):
 
 @admin_router.post('/faqs')
 async def admin_create_faq(payload: FAQIn, _: dict = Depends(require_admin)):
-    rec = {'id': str(uuid.uuid4()), **payload.model_dump(),
+    data = sanitize_fields(payload.model_dump(), ['answer'])
+    rec = {'id': str(uuid.uuid4()), **data,
            'created_at': iso(now()), 'updated_at': iso(now())}
     await db.faqs.insert_one(rec)
     rec.pop('_id', None)
@@ -683,7 +732,8 @@ async def admin_create_faq(payload: FAQIn, _: dict = Depends(require_admin)):
 
 @admin_router.put('/faqs/{fid}')
 async def admin_update_faq(fid: str, payload: FAQIn, _: dict = Depends(require_admin)):
-    await db.faqs.update_one({'id': fid}, {'$set': {**payload.model_dump(), 'updated_at': iso(now())}})
+    data = sanitize_fields(payload.model_dump(), ['answer'])
+    await db.faqs.update_one({'id': fid}, {'$set': {**data, 'updated_at': iso(now())}})
     return {'ok': True}
 
 
@@ -740,7 +790,8 @@ async def admin_get_campaign(cid: str, _: dict = Depends(require_admin)):
 
 @admin_router.post('/campaigns')
 async def admin_create_campaign(payload: CampaignIn, _: dict = Depends(require_admin)):
-    rec = {'id': str(uuid.uuid4()), **payload.model_dump(),
+    data = sanitize_fields(payload.model_dump(), ['body'])
+    rec = {'id': str(uuid.uuid4()), **data,
            'status': 'draft', 'opens_count': 0, 'clicks_count': 0, 'recipients_count': 0,
            'sent_at': None,
            'created_at': iso(now()), 'updated_at': iso(now())}
@@ -751,7 +802,8 @@ async def admin_create_campaign(payload: CampaignIn, _: dict = Depends(require_a
 
 @admin_router.put('/campaigns/{cid}')
 async def admin_update_campaign(cid: str, payload: CampaignIn, _: dict = Depends(require_admin)):
-    await db.email_campaigns.update_one({'id': cid}, {'$set': {**payload.model_dump(), 'updated_at': iso(now())}})
+    data = sanitize_fields(payload.model_dump(), ['body'])
+    await db.email_campaigns.update_one({'id': cid}, {'$set': {**data, 'updated_at': iso(now())}})
     return {'ok': True}
 
 
@@ -824,7 +876,9 @@ async def admin_get_settings(_: dict = Depends(require_admin)):
 
 @admin_router.put('/settings')
 async def admin_update_settings(payload: SettingsIn, _: dict = Depends(require_admin)):
-    await db.site_settings.update_one({'_id': 'main'}, {'$set': {**payload.data, 'updated_at': iso(now())}}, upsert=True)
+    data = dict(payload.data)
+    sanitize_fields(data, ['quote_confirmation_body', 'admin_notification_body', 'hero_subheading'])
+    await db.site_settings.update_one({'_id': 'main'}, {'$set': {**data, 'updated_at': iso(now())}}, upsert=True)
     return {'ok': True}
 
 
