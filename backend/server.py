@@ -7,6 +7,7 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorGridFSBucket
 from bson import ObjectId
 import os
+import resend
 import io
 import time
 import asyncio
@@ -23,8 +24,7 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta, timezone
 from email.utils import formataddr
 
-import sendgrid
-from sendgrid.helpers.mail import Mail
+import resend
 import bleach
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -43,6 +43,8 @@ JWT_TTL_HOURS = 24
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', '')
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '').strip()
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '').strip()
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '').strip()
 SEND_FROM_EMAIL = os.environ.get('SEND_FROM_EMAIL', 'noreply@example.com')
 SEND_FROM_NAME = 'Garment Foundry'
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
@@ -183,38 +185,33 @@ def sanitize_fields(d: dict, fields: List[str]) -> dict:
     return d
 
 
-# ---------- Email ----------
-def render_template(tpl: str, vars_: dict) -> str:
-    out = tpl or ''
-    for k, v in vars_.items():
-        out = out.replace('{{' + k + '}}', str(v if v is not None else ''))
+def render_template(template: str, context: dict) -> str:
+    out = template
+    for k, v in context.items():
+        out = out.replace("{{" + k + "}}", str(v if v is not None else ""))
     return out
 
-
-def _send_via_sendgrid_sync(to_email: str, subject: str, html: str) -> bool:
-    if not SENDGRID_API_KEY:
-        logger.info(f"[email queued — no SENDGRID_API_KEY] to={to_email} subject={subject}")
+# ---------- Email ----------
+def _send_via_resend_sync(to_email: str, subject: str, html: str) -> bool:
+    if not RESEND_API_KEY:
+        logger.info(f"[email queued — no RESEND_API_KEY] to={to_email} subject={subject}")
         return False
     try:
-        sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
-        msg = Mail(
-            from_email=(SEND_FROM_EMAIL, SEND_FROM_NAME),
-            to_emails=to_email,
-            subject=subject,
-            html_content=html,
-        )
-        resp = sg.send(msg)
-        ok = 200 <= resp.status_code < 300
-        logger.info(f"sendgrid -> {to_email} status={resp.status_code}")
-        return ok
+        resend.api_key = RESEND_API_KEY
+        params = {
+            "from": f"{SEND_FROM_NAME} <{SEND_FROM_EMAIL}>",
+            "to": [to_email],
+            "subject": subject,
+            "html": html,
+        }
+        email = resend.Emails.send(params)
+        logger.info(f"resend -> {to_email} id={email.get('id')}")
+        return True
     except Exception as e:
-        logger.error(f"sendgrid send failed: {e}")
+        logger.error(f"resend send failed: {e}")
         return False
-
-
 async def send_email_async(to_email: str, subject: str, html: str) -> bool:
-    return await asyncio.to_thread(_send_via_sendgrid_sync, to_email, subject, html)
-
+    return await asyncio.to_thread(_send_via_resend_sync, to_email, subject, html)
 
 # ---------- Object storage helpers (kept for legacy uploads) ----------
 def init_storage() -> Optional[str]:
