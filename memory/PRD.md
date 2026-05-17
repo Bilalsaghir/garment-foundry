@@ -1,59 +1,55 @@
-# Garment Foundry — Product Requirements Document
-
-## Original Problem Statement
-Design and build a premium, modern, conversion-focused website for "Garment Foundry", a UK-based B2B apparel manufacturing and sourcing company. Black-and-white luxury aesthetic. Cinzel serif headings + Montserrat body. GF monogram + stitched arc + pinstripe grid motifs. Restrained monochrome palette (#000, #333, #777, #F2F2F2). Lead-generation and quote-request platform. Audience: clothing brand owners, startup fashion founders, boutique labels, uniform buyers, merch companies in UK & US.
-
-## User Personas
-- **Clothing brand founder** — needs reliable UK manufacturing for first collection
-- **Boutique label owner** — needs sourcing + production at low/mid volume
-- **Corporate uniform buyer** — needs workwear/uniforms in large quantity
-- **Private-label e-commerce brand** — needs end-to-end manufacturing partner
+# Garment Foundry — PRD
 
 ## Architecture
-- **Frontend**: React 19 + Tailwind + Shadcn UI + react-router-dom
-- **Backend**: FastAPI + Motor (MongoDB async)
-- **Storage**: Emergent Object Storage (file uploads)
-- **Email**: Resend (transactional)
-- **Routes** (all `/api` prefixed):
-  - `POST /api/quotes` — create quote
-  - `GET /api/quotes` — list quotes
-  - `POST /api/upload` — file upload (≤10MB, allow-listed types)
-  - `GET /api/files/{id}` — file download
-  - `POST /api/contact` — contact enquiry
+- Frontend: React 19, react-router, Tailwind, Shadcn UI, sonner
+- Backend: FastAPI + Motor (MongoDB)
+- Auth: JWT (24h, httpOnly cookie + Bearer header)
+- Storage: GridFS for quote uploads
+- Email: SendGrid Web API v3 (graceful queue when key empty)
+- Scheduled email cron: 5-minute interval
 
-## Core Requirements (Static)
-- All 10 pages: Home, About, Capabilities, Categories, Process, Sourcing, Quality, Quote, FAQs, Contact
-- Multi-step Quote Calculator (10 steps, file upload)
-- Monochrome luxury design, GF monogram + lockup logo
-- Mobile responsive, sticky nav, accessible
-- Resend email notifications (admin + customer)
-- Object storage uploads for tech packs
+## Implemented (Iteration 2)
+### Part A — UI/UX fixes (all 8 shipped)
+- Quote stepper: single-line "STEP NN / 10 — LABEL" + 2px progress bar + vertical sidebar on desktop (horizontal tab strip removed)
+- Inline validation on blur (red 2px underline + italic 11px message); no toast/banner for missing fields
+- Nav "REQUEST A QUOTE" button: black fill #0A0A0A, 40px height, single-line, white text
+- Category grid: 45° pinstripe CSS pattern + 1px white border on hover + min-height 160/200px
+- Form inputs: bg #111, label 10px 0.12em uppercase #888, bottom-border only, focus → white
+- Hero CTAs: full-width white primary (52px) + bordered secondary (48px) on mobile, 12px gap
+- Process timeline: vertical 1px #333 line + 6px white dot per step
+- Mobile nav drawer: 28px L padding, 22px Montserrat 300, 44px gap, pinned full-width #F5F4F0 CTA
 
-## What's Been Implemented (2026-02)
-- ✅ All 10 pages with editorial typography (Cinzel + Montserrat)
-- ✅ Premium hero with dark moody fabric imagery + GF monogram
-- ✅ Quote calculator: 10-step wizard with progress rail, file upload, review screen
-- ✅ Contact form with toast notifications
-- ✅ Object storage integration (Emergent)
-- ✅ Resend email integration (admin → garmentfoundry.uk@gmail.com + customer confirmation)
-- ✅ Brand logo lockup (user-provided asset) with mix-blend-mode for dark backgrounds
-- ✅ FAQ accordion, stitched dividers, pinstripe grid, monogram watermarks
-- ✅ Mobile responsive (mobile menu drawer)
-- ✅ data-testid attributes on all interactive elements
-- ✅ Backend: pytest 100% pass (root, upload, quote create/list, contact, validation)
-- ✅ Frontend: end-to-end testing passed (10-step wizard completes, success screen renders)
+### Part B — Admin CMS + Email System
+- `/admin/login` with JWT (cookie + Bearer)
+- Admin panel with 9 sections: Dashboard, Blog, Case Studies, Quote Inbox, Contact Inbox, FAQs, Subscribers, Campaigns, Settings
+- Blog: rich-text body, slug auto-gen, draft/publish toggle, cover image, tags, category — public `/blog`, `/blog/:slug`
+- Case Studies: industry enum, anonymise toggle (Leading UK Brand), challenge/solution/result — public `/case-studies`
+- Quote Inbox: GF-YYYY-NNNN refs (atomic counter), status workflow (New/In Review/Quoted/Closed), internal notes log, file download links
+- Contact Inbox: inbox UI with read flag, delete
+- FAQs: CRUD + drag-up/down reorder + active toggle (8 seeded)
+- Subscribers: search/filter, manual unsubscribe, CSV export
+- Campaigns: rich-text body, merge tags ({{first_name}}, {{unsubscribe_url}}), preview modal, duplicate, send now / schedule; SendGrid auto-queues when key empty
+- Settings: hero copy, contact info, social, email templates (quote confirmation + admin notification)
+- Public newsletter signup in footer
+- `/unsubscribe?token=...` page
 
-## Prioritized Backlog (P0/P1/P2)
-- **P1**: Admin dashboard at `/admin/quotes` to view incoming submissions
-- **P1**: Verify a custom domain in Resend (currently testing mode → emails only deliver to verified account address)
-- **P2**: Real case-study content with proof imagery
-- **P2**: SEO meta tags, sitemap.xml, robots.txt, Open Graph share image
-- **P2**: Cookie banner / privacy policy / T&Cs pages
-- **P2**: Newsletter/lead-magnet (PDF capabilities deck) for top-of-funnel capture
-- **P3**: Internationalisation (en-US vs en-GB copy switching)
-- **P3**: Multi-language (Spanish, French) for EU buyers
+### Backend
+- 25/25 pytest tests passing (auth, GridFS, CRUD, campaigns, subscribers CSV)
+- Indexes on slug, status+created_at, reference, email
+- Seed: 8 FAQs + default site settings on first startup
 
-## Next Tasks
-1. Admin dashboard for quote management
-2. Domain verification in Resend
-3. SEO + Open Graph setup
+## Pending / P1
+- Add SENDGRID_API_KEY (currently empty → emails queued)
+- Verify a SendGrid sender (currently placeholder onboarding@resend.dev)
+- (Security) Add stored-XSS sanitisation on admin-submitted HTML before save
+- (Security) Rate-limit /api/upload (currently unauthenticated)
+- (Perf) Switch GridFS download to StreamingResponse for large files
+- Split server.py (922 lines) into routers
+
+## Pending / P2
+- Open Graph + sitemap.xml + robots.txt
+- Privacy / T&Cs pages
+- Drag-and-drop reorder (currently up/down buttons) for FAQs
+
+## Credentials
+- Admin: garmentfoundry.uk@gmail.com / GFoundry@786 — stored in `/app/memory/test_credentials.md`
