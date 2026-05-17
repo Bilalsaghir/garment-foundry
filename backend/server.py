@@ -26,6 +26,9 @@ from email.utils import formataddr
 import sendgrid
 from sendgrid.helpers.mail import Mail
 import bleach
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -43,6 +46,7 @@ SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '').strip()
 SEND_FROM_EMAIL = os.environ.get('SEND_FROM_EMAIL', 'noreply@example.com')
 SEND_FROM_NAME = 'Garment Foundry'
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+RATELIMIT_STORAGE_URI = os.environ.get('RATELIMIT_STORAGE_URI', 'memory://')
 
 # Storage (object storage kept for legacy uploads; new uploads use GridFS)
 import requests
@@ -61,6 +65,25 @@ gridfs = AsyncIOMotorGridFSBucket(db, bucket_name='uploads')
 app = FastAPI(title='Garment Foundry API')
 api_router = APIRouter(prefix='/api')
 admin_router = APIRouter(prefix='/api/admin')
+
+
+# ---------- Rate Limiter (slowapi) ----------
+def _client_ip(request: Request) -> str:
+    """Prefer X-Forwarded-For (behind ingress); fall back to socket peer."""
+    fwd = request.headers.get('x-forwarded-for', '')
+    if fwd:
+        return fwd.split(',')[0].strip()
+    return get_remote_address(request)
+
+
+limiter = Limiter(
+    key_func=_client_ip,
+    storage_uri=RATELIMIT_STORAGE_URI,  # "memory://" (default) or "redis://host:6379/0" in prod
+    default_limits=[],
+    headers_enabled=True,
+)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 # ---------- Helpers ----------
@@ -158,48 +181,6 @@ def sanitize_fields(d: dict, fields: List[str]) -> dict:
         if f in d and isinstance(d[f], str):
             d[f] = sanitize_html(d[f])
     return d
-
-
-# ---------- Rate limiting (in-memory, per-IP sliding window) ----------
-UPLOAD_LIMIT_COUNT = 10           # max uploads
-UPLOAD_LIMIT_WINDOW = 300         # per 5 minutes
-_upload_buckets: Dict[str, deque] = defaultdict(deque)
-
-
-def _client_ip(request: Request) -> str:
-    fwd = request.headers.get('x-forwarded-for', '')
-    if fwd:
-        return fwd.split(',')[0].strip()
-    return request.client.host if request.client else 'unknown'
-
-
-def check_upload_rate(request: Request) -> None:
-    ip = _client_ip(request)
-    ts = time.time()
-    bucket = _upload_buckets[ip]
-    while bucket and bucket[0] < ts - UPLOAD_LIMIT_WINDOW:
-        bucket.popleft()
-    if len(bucket) >= UPLOAD_LIMIT_COUNT:
-        retry_after = int(UPLOAD_LIMIT_WINDOW - (ts - bucket[0]))
-        raise HTTPException(
-            status_code=429,
-            detail=f"Too many uploads. Please retry in {max(retry_after, 1)} seconds.",
-            headers={"Retry-After": str(max(retry_after, 1))},
-        )
-    bucket.append(ts)
-
-
-async def _rate_limit_gc_loop():
-    """Periodically prune empty buckets to bound memory."""
-    while True:
-        try:
-            ts = time.time()
-            stale = [ip for ip, b in _upload_buckets.items() if not b or b[-1] < ts - UPLOAD_LIMIT_WINDOW]
-            for ip in stale:
-                _upload_buckets.pop(ip, None)
-        except Exception as e:
-            logger.error(f"rate-limit gc error: {e}")
-        await asyncio.sleep(600)
 
 
 # ---------- Email ----------
@@ -415,8 +396,8 @@ ALLOWED_EXT = {'pdf', 'ai', 'psd', 'png', 'jpg', 'jpeg', 'webp', 'zip', 'doc', '
 
 
 @api_router.post('/upload')
+@limiter.limit("10/5 minutes")
 async def upload_file(request: Request, file: UploadFile = File(...)):
-    check_upload_rate(request)
     data = await file.read()
     if len(data) > 10 * 1024 * 1024:
         raise HTTPException(413, 'File exceeds 10MB limit')
@@ -480,7 +461,8 @@ async def download_file(file_id: str):
 
 # ---- Quote create ----
 @api_router.post('/quote')
-async def create_quote(payload: QuoteIn, background: BackgroundTasks):
+@limiter.limit("5/hour")
+async def create_quote(request: Request, payload: QuoteIn, background: BackgroundTasks):
     ref = await next_quote_reference()
     record = {
         'id': str(uuid.uuid4()),
@@ -566,7 +548,8 @@ def default_admin_html() -> str:
 
 # ---- Contact create ----
 @api_router.post('/contact')
-async def create_contact(payload: ContactIn, background: BackgroundTasks):
+@limiter.limit("10/hour")
+async def create_contact(request: Request, payload: ContactIn, background: BackgroundTasks):
     rec = {
         'id': str(uuid.uuid4()),
         **payload.model_dump(),
@@ -935,6 +918,30 @@ async def admin_send_campaign(cid: str, background: BackgroundTasks, _: dict = D
     return {'ok': True, 'sendgrid_configured': bool(SENDGRID_API_KEY)}
 
 
+@admin_router.post('/campaigns/{cid}/test')
+async def admin_send_test_campaign(cid: str, _: dict = Depends(require_admin)):
+    """Send a single proof email of this campaign to ADMIN_EMAIL. Does not flag campaign as 'sent'."""
+    c = await db.email_campaigns.find_one({'id': cid})
+    if not c:
+        raise HTTPException(404, 'Not found')
+    if not ADMIN_EMAIL:
+        raise HTTPException(400, 'ADMIN_EMAIL is not configured')
+    test_unsubscribe = f"{FRONTEND_URL}/unsubscribe?token=TEST_TOKEN"
+    html = render_template(c.get('body', ''), {
+        'first_name': 'Admin',
+        'unsubscribe_url': test_unsubscribe,
+    })
+    html += f"""<div style="margin-top:32px;font-size:11px;color:#777;font-family:Arial,sans-serif;text-align:center;border-top:1px solid #eee;padding-top:16px;">
+        <strong>[TEST EMAIL]</strong> — sent to admin only. Unsubscribe link is a placeholder for proofing.
+    </div>"""
+    subject = f"[TEST] {c.get('subject') or '(no subject)'}"
+    if not SENDGRID_API_KEY:
+        logger.info(f"test campaign {cid} → {ADMIN_EMAIL} skipped (no SENDGRID_API_KEY)")
+        return {'ok': False, 'sent': False, 'reason': 'SENDGRID_API_KEY not configured', 'target': ADMIN_EMAIL}
+    ok = await send_email_async(ADMIN_EMAIL, subject, html)
+    return {'ok': ok, 'sent': ok, 'target': ADMIN_EMAIL}
+
+
 # ---- Settings admin ----
 @admin_router.get('/settings')
 async def admin_get_settings(_: dict = Depends(require_admin)):
@@ -1020,7 +1027,6 @@ async def startup():
         logger.info('Site settings seeded')
 
     asyncio.create_task(_scheduler_loop())
-    asyncio.create_task(_rate_limit_gc_loop())
 
 
 @app.on_event('shutdown')
@@ -1042,3 +1048,4 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
