@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/Section";
-import { CATEGORIES, CATEGORY_IMAGES } from "@/lib/content";
+import { CATEGORIES, CATEGORY_IMAGES, CATEGORY_IMAGE_POSITION } from "@/lib/content";
+
+const objectPosClass = (cat) => {
+  const pos = CATEGORY_IMAGE_POSITION[cat];
+  return pos === "left" ? "object-left" : pos === "right" ? "object-right" : "object-center";
+};
 
 const FABRIC_WEIGHTS = [
   { category: "T-shirts", weight: "150–220 gsm", fabric: "single jersey" },
@@ -43,7 +48,7 @@ export default function Categories() {
                 data-testid={`cat-card-${cat.replace(/[^a-z]/gi, '').toLowerCase()}`}
                 className="bg-black group relative aspect-[5/6] overflow-hidden"
               >
-                <img src={CATEGORY_IMAGES[cat]} alt={`${cat} apparel manufactured by Garment Foundry`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-left grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700" />
+                <img src={CATEGORY_IMAGES[cat]} alt={`${cat} apparel manufactured by Garment Foundry`} loading="lazy" className={`absolute inset-0 w-full h-full object-cover ${objectPosClass(cat)} grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="relative h-full p-8 flex flex-col justify-between">
                   <span className="eyebrow-number">{String(i + 1).padStart(2, "0")}</span>
