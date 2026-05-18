@@ -56,15 +56,21 @@ export const CATEGORY_IMAGES = {
   "Accessories": "/categories/garment-foundry-accessories.jpg",
 };
 
-// object-position override per category — applied to the <img> on the home
-// bento and the /categories card. Default is `object-center`; only list a
-// category here when the subject sits noticeably off-centre and would get
-// cropped out otherwise. Acceptable values: left, center, right (Tailwind's
-// object-{left,center,right} utility class suffixes).
+// object-position override per category — applied inline to the <img> on
+// the home bento and the /categories card. Accepts any valid CSS
+// object-position value: keywords ("left", "center", "right"), percentages
+// ("25% center", "75% center"), or pixel pairs. Default when a category is
+// absent from this map is "center" (= 50% center).
 export const CATEGORY_IMAGE_POSITION = {
-  "Menswear": "left",
-  // Add per-category overrides here as you eyeball each image, e.g.:
-  // "Uniforms": "right",
+  "Menswear":             "left",        // suit, body in left half
+  "Streetwear":           "25% center",  // hooded figure — pull a little left
+  "Sportswear":           "25% center",  // runner — pull a little left
+  "Hoodies & Sweats":     "25% center",  // figure — pull a little left
+  "Trousers & Bottoms":   "25% center",  // figure — pull a little left
+  "Activewear":           "25% center",  // figure — pull a little left
+  "Accessories":          "25% center",  // pull a little left
+  // Womenswear, Childrenswear, Uniforms, Workwear, T-Shirts & Tops —
+  // subjects already read well at the default 50% center.
 };
 
 export const PROCESS_STEPS = [

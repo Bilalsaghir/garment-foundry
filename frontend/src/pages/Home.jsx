@@ -6,10 +6,9 @@ import { GFMonogram } from "@/components/GFMonogram";
 import { SectionHeading, StitchedDivider } from "@/components/Section";
 import { IMAGES, CAPABILITIES, CATEGORIES, CATEGORY_IMAGES, CATEGORY_IMAGE_POSITION, PROCESS_STEPS, PRINCIPLES } from "@/lib/content";
 
-const objectPosClass = (cat) => {
-  const pos = CATEGORY_IMAGE_POSITION[cat];
-  return pos === "left" ? "object-left" : pos === "right" ? "object-right" : "object-center";
-};
+// Returns the raw CSS object-position value (e.g. "left", "25% center").
+// Default is "center" (= 50% from left).
+const categoryObjectPosition = (cat) => CATEGORY_IMAGE_POSITION[cat] || "center";
 
 export default function Home() {
   return (
@@ -141,7 +140,8 @@ export default function Home() {
                   src={CATEGORY_IMAGES[cat]}
                   alt={`${cat} apparel manufactured by Garment Foundry`}
                   loading="lazy"
-                  className={`absolute inset-0 w-full h-full object-cover ${objectPosClass(cat)} grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700`}
+                  style={{ objectPosition: categoryObjectPosition(cat) }}
+                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="relative h-full p-6 lg:p-8 flex flex-col justify-between">
