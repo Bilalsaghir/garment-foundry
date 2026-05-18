@@ -58,13 +58,20 @@ export const CATEGORY_IMAGES = {
 
 // object-position override per category — applied to the <img> on the home
 // bento and the /categories card. Default is `object-center`; only list a
-// category here when the subject sits noticeably off-centre and would get
-// cropped out otherwise. Acceptable values: left, center, right (Tailwind's
-// object-{left,center,right} utility class suffixes).
+// category here when the subject sits noticeably off-centre. Acceptable
+// values: left, center, right (Tailwind's object-{left,center,right}
+// utility class suffixes). Tuned by eye against the supplied photos.
 export const CATEGORY_IMAGE_POSITION = {
-  "Menswear": "left",
-  // Add per-category overrides here as you eyeball each image, e.g.:
-  // "Uniforms": "right",
+  "Menswear": "left",            // suit, body in left half
+  "Womenswear": "right",         // figure on right side of frame
+  "Streetwear": "right",         // hooded figure on right
+  "Sportswear": "left",          // runner moving from left
+  "Hoodies & Sweats": "right",   // hooded figure on right
+  "T-Shirts & Tops": "left",     // profile facing right, head on left
+  "Trousers & Bottoms": "right", // figure on right
+  "Activewear": "right",         // figure on right
+  // Childrenswear, Uniforms, Workwear, Accessories — subjects are roughly
+  // centred so they fall through to the default object-center.
 };
 
 export const PROCESS_STEPS = [
