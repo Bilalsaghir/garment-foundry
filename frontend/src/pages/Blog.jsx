@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/Section";
@@ -16,6 +17,7 @@ export default function Blog() {
 
   return (
     <div data-testid="page-blog" className="bg-black">
+      <PageMeta path="/blog" title="Journal — Notes on Apparel Manufacturing | Garment Foundry" description="Notes from the studio on apparel manufacturing, fabric sourcing, MOQs and the realities of getting clothes made." noindex />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · JOURNAL</span>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
 import { SectionHeading } from "@/components/Section";
 
@@ -15,6 +16,7 @@ export default function CaseStudies() {
 
   return (
     <div data-testid="page-case-studies" className="bg-black">
+      <PageMeta path="/case-studies" title="Case Studies — Brands We Manufacture For | Garment Foundry" description="Selected work with apparel, uniform and merch brands manufactured by Garment Foundry." noindex />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · CASE STUDIES</span>

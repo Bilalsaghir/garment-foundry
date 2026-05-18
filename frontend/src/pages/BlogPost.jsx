@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PageMeta from "@/components/PageMeta";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
@@ -27,6 +28,8 @@ export default function BlogPost() {
 
   return (
     <article data-testid="page-blog-post" className="bg-black">
+      {/* TODO(BL-D): make this dynamic from post.title / post.excerpt once we know the data shape is stable */}
+      <PageMeta path={`/blog/${slug}`} title={post?.title ? `${post.title} | Garment Foundry Journal` : "Journal | Garment Foundry"} description={post?.excerpt || "Notes from the studio on apparel manufacturing, fabric sourcing and the realities of getting clothes made."} />
       <div className="max-w-3xl mx-auto px-6 lg:px-0 pt-32 pb-24">
         <Link to="/blog" className="inline-flex items-center gap-2 font-body text-[10px] tracking-[0.2em] uppercase text-[#888] hover:text-white mb-12">
           <ArrowLeft size={14} /> Back to Journal

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import { SectionHeading, StitchedDivider } from "@/components/Section";
 import { IMAGES } from "@/lib/content";
 
@@ -17,6 +18,7 @@ const CERTIFICATIONS = ["GOTS", "OEKO-TEX 100", "BCI Cotton", "GRS Recycled", "W
 export default function Sourcing() {
   return (
     <div data-testid="page-sourcing" className="bg-black">
+      <PageMeta path="/sourcing" title="Fabric Sourcing — UK, Europe & Asia | Garment Foundry" description="Fabric and trim sourcing across UK mills, European converters and vetted Asian partners — matched to the project, not the other way round." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a] relative overflow-hidden">
         <img src={IMAGES.fabric} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 grayscale" />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />

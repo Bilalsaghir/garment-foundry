@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import { SectionHeading } from "@/components/Section";
 import { CAPABILITIES, IMAGES } from "@/lib/content";
 
 export default function Capabilities() {
   return (
     <div data-testid="page-capabilities" className="bg-black">
+      <PageMeta path="/capabilities" title="Apparel Manufacturing Capabilities | Garment Foundry" description="Cut-and-sew, knitwear, jersey, tailoring and outerwear capabilities for production runs from samples through bulk." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a] relative overflow-hidden">
         <img src={IMAGES.threads} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GFMonogram } from "@/components/GFMonogram";
 import { SectionHeading, StitchedDivider } from "@/components/Section";
@@ -8,6 +9,7 @@ import { IMAGES, CAPABILITIES, CATEGORIES, PROCESS_STEPS, PRINCIPLES } from "@/l
 export default function Home() {
   return (
     <div data-testid="page-home" className="bg-black text-[#F2F2F2]">
+      <PageMeta path="/" title="Garment Foundry — UK Apparel Manufacturing & Sourcing" description="UK-based apparel manufacturing and sourcing for fashion, uniform, private-label and wholesale brands. From brief to bulk, handled with quiet rigour." />
 
       {/* HERO */}
       <section className="relative min-h-[100vh] flex items-end overflow-hidden">

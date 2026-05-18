@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import { SectionHeading } from "@/components/Section";
 import { IMAGES } from "@/lib/content";
 
@@ -15,6 +16,7 @@ const QC_STAGES = [
 export default function Quality() {
   return (
     <div data-testid="page-quality" className="bg-black">
+      <PageMeta path="/quality" title="Quality Control & AQL Inspections | Garment Foundry" description="AQL inspections, mid- and final-production checks, lab dips and fit approvals. Quality control built into every Garment Foundry order." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · QUALITY CONTROL</span>

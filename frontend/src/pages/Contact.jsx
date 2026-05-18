@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PageMeta from "@/components/PageMeta";
 import { toast } from "sonner";
 import { SectionHeading } from "@/components/Section";
 import { GFMonogram } from "@/components/GFMonogram";
@@ -52,6 +53,7 @@ export default function Contact() {
 
   return (
     <div data-testid="page-contact" className="bg-black">
+      <PageMeta path="/contact" title="Contact Garment Foundry — UK Apparel Manufacturing Studio" description="Speak to the Garment Foundry studio in Manchester. New project enquiries, partnerships and supplier relations — we reply within one business day." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · CONTACT</span>
@@ -69,7 +71,8 @@ export default function Contact() {
             <div className="mt-12 space-y-6">
               <div>
                 <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888]">EMAIL</div>
-                <a data-testid="contact-email" href="mailto:garmentfoundry.uk@gmail.com" className="block mt-2 font-display text-lg text-[#F5F4F0] hover:underline">garmentfoundry.uk@gmail.com</a>
+                {/* TODO(launch): provision hello@garmentfoundry.com inbox in Google Workspace before merge */}
+                <a data-testid="contact-email" href="mailto:hello@garmentfoundry.com" className="block mt-2 font-display text-lg text-[#F5F4F0] hover:underline">hello@garmentfoundry.com</a>
               </div>
               <div>
                 <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888]">TELEPHONE</div>
@@ -85,19 +88,19 @@ export default function Contact() {
           <form onSubmit={submit} className="col-span-12 lg:col-span-7 border border-[#1a1a1a] p-8 lg:p-12 bg-[#050505]">
             <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888] mb-8">NEW ENQUIRY · NO. 0001</div>
             <div className="space-y-7">
-              <Field label="Name" required error={touched.name && errors.name} testId="contact-name-field">
-                <TextInput data-testid="contact-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} onBlur={() => onBlur("name")} error={touched.name && !!errors.name} />
+              <Field id="contact-name" label="Name" required error={touched.name && errors.name} testId="contact-name-field">
+                <TextInput data-testid="contact-name" name="name" autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} onBlur={() => onBlur("name")} error={touched.name && !!errors.name} />
               </Field>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-                <Field label="Email" required error={touched.email && errors.email} testId="contact-email-field">
-                  <TextInput data-testid="contact-email-input" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} onBlur={() => onBlur("email")} error={touched.email && !!errors.email} />
+                <Field id="contact-email" label="Email" required error={touched.email && errors.email} testId="contact-email-field">
+                  <TextInput data-testid="contact-email-input" name="email" type="email" inputMode="email" autoComplete="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} onBlur={() => onBlur("email")} error={touched.email && !!errors.email} />
                 </Field>
-                <Field label="Company" testId="contact-company-field">
-                  <TextInput data-testid="contact-company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
+                <Field id="contact-company" label="Company" testId="contact-company-field">
+                  <TextInput data-testid="contact-company" name="company" autoComplete="organization" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
                 </Field>
               </div>
-              <Field label="Message" required error={touched.message && errors.message} testId="contact-message-field">
-                <TextArea data-testid="contact-message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} onBlur={() => onBlur("message")} error={touched.message && !!errors.message} rows={5} />
+              <Field id="contact-message" label="Message" required error={touched.message && errors.message} testId="contact-message-field">
+                <TextArea data-testid="contact-message" name="message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} onBlur={() => onBlur("message")} error={touched.message && !!errors.message} rows={5} />
               </Field>
               <button data-testid="contact-submit" type="submit" disabled={submitting} className="gf-btn gf-btn-solid disabled:opacity-50">
                 {submitting ? "Sending…" : "Send Enquiry"}

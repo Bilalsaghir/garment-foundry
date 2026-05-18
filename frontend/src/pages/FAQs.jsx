@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PageMeta from "@/components/PageMeta";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
 import { SectionHeading } from "@/components/Section";
@@ -15,6 +16,7 @@ export default function FAQs() {
 
   return (
     <div data-testid="page-faqs" className="bg-black">
+      <PageMeta path="/faqs" title="FAQs — MOQ, Lead Times, Tech Packs | Garment Foundry" description="Common questions on minimum order quantities, lead times, tech packs, sampling, fabric sourcing and how to start an apparel project with us." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · FREQUENTLY ASKED</span>

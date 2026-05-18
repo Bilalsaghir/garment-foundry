@@ -83,15 +83,15 @@ export default function Footer() {
               <li><Link data-testid="footer-link-process" to="/process" className="text-[#bbb] hover:text-white">Process</Link></li>
               <li><Link data-testid="footer-link-sourcing" to="/sourcing" className="text-[#bbb] hover:text-white">Sourcing</Link></li>
               <li><Link data-testid="footer-link-quality" to="/quality" className="text-[#bbb] hover:text-white">Quality Control</Link></li>
-              <li><Link data-testid="footer-link-blog" to="/blog" className="text-[#bbb] hover:text-white">Journal</Link></li>
-              <li><Link data-testid="footer-link-case-studies" to="/case-studies" className="text-[#bbb] hover:text-white">Case Studies</Link></li>
+              {/* BL-G: Journal and Case Studies hidden from the footer until their content lands. Routes remain live with a noindex meta. */}
             </ul>
           </div>
 
           <div className="md:col-span-4">
             <div className="overline mb-6">Contact</div>
             <ul className="space-y-4 font-body text-[12px] text-[#bbb]">
-              <li><a data-testid="footer-email" href="mailto:garmentfoundry.uk@gmail.com" className="hover:text-white">garmentfoundry.uk@gmail.com</a></li>
+              {/* TODO(launch): provision hello@garmentfoundry.com inbox in Google Workspace before merge */}
+              <li><a data-testid="footer-email" href="mailto:hello@garmentfoundry.com" className="hover:text-white">hello@garmentfoundry.com</a></li>
               <li><a data-testid="footer-phone" href="tel:+447575657531" className="hover:text-white">+44 7575 657 531</a></li>
               <li className="text-[#999]">Manchester, United Kingdom</li>
             </ul>
@@ -103,6 +103,11 @@ export default function Footer() {
           <p className="font-body text-[10px] tracking-luxe text-[#555]">© {new Date().getFullYear()} GARMENT FOUNDRY — APPAREL MANUFACTURING &amp; SOURCING</p>
           <p className="font-body text-[10px] tracking-luxe text-[#555]">UNITED KINGDOM · UNITED STATES · GLOBAL SOURCING</p>
         </div>
+
+        {/* BL-I: UK Companies Act s.82 disclosure. TODO(launch): replace each {{...}} placeholder with the registered values before merge. */}
+        <p data-testid="footer-legal-line" className="mt-4 font-body text-[10px] tracking-[0.1em] text-[#444]">
+          Garment Foundry Ltd · Company No. {"{{NUMBER}}"} · Registered office: {"{{ADDRESS}}"} · VAT: {"{{VAT}}"}
+        </p>
       </div>
     </footer>
   );

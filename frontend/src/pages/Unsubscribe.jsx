@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -18,6 +19,7 @@ export default function Unsubscribe() {
 
   return (
     <div data-testid="page-unsubscribe" className="bg-black min-h-screen pt-40 pb-32 px-6 text-center">
+      <PageMeta path="/unsubscribe" title="Unsubscribe | Garment Foundry" description="Unsubscribe from Garment Foundry communications." noindex />
       <div className="max-w-xl mx-auto">
         <h1 className="font-display text-3xl lg:text-4xl text-[#F5F4F0]">
           {status === "processing" && "Processing…"}

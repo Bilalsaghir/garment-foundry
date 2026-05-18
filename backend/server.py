@@ -981,7 +981,8 @@ SEED_FAQS = [
 ]
 
 DEFAULT_SETTINGS = {
-    'contact_email': 'garmentfoundry.uk@gmail.com',
+    # TODO(launch): provision hello@garmentfoundry.com inbox in Google Workspace before merge
+    'contact_email': 'hello@garmentfoundry.com',
     'contact_phone': '+44 7575 657 531',
     'contact_address': 'Manchester, United Kingdom',
     'hero_headline': 'Crafted with purpose. Delivered with precision.',

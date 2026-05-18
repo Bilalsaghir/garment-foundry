@@ -1,4 +1,5 @@
 import React from "react";
+import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
 import { SectionHeading } from "@/components/Section";
 import { PROCESS_STEPS, IMAGES } from "@/lib/content";
@@ -6,6 +7,7 @@ import { PROCESS_STEPS, IMAGES } from "@/lib/content";
 export default function Process() {
   return (
     <div data-testid="page-process" className="bg-black">
+      <PageMeta path="/process" title="Our 7-Step Manufacturing Process | Garment Foundry" description="From tech pack and sampling through bulk production, QC and shipping — the seven steps inside a Garment Foundry order." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · PROCESS</span>

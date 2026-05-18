@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PageMeta from "@/components/PageMeta";
 import axios from "axios";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, Check, Upload, X, FileText } from "lucide-react";
@@ -144,6 +145,7 @@ export default function Quote() {
 
   return (
     <div data-testid="page-quote" className="bg-black min-h-screen pt-28 pb-24">
+      <PageMeta path="/quote" title="Request a Manufacturing Quote | Garment Foundry" description="Request a manufacturing quote from Garment Foundry. UK-based, working with fashion, uniform and private-label brands. We reply in one business day." />
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between mb-10">
           <div>
@@ -193,23 +195,23 @@ export default function Quote() {
                 <div data-testid="step-business">
                   <h2 className="font-display text-3xl text-[#F5F4F0]">Tell us about your brand.</h2>
                   <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
-                    <Field label="Company / Brand Name" required error={touched.business_name && errors.business_name} testId="q-company-field">
-                      <TextInput data-testid="q-company" value={data.business_name} onChange={(e) => set({ business_name: e.target.value })} onBlur={() => onBlur("business_name")} error={touched.business_name && !!errors.business_name} />
+                    <Field id="q-business-name" label="Company / Brand Name" required error={touched.business_name && errors.business_name} testId="q-company-field">
+                      <TextInput data-testid="q-company" name="business_name" autoComplete="organization" value={data.business_name} onChange={(e) => set({ business_name: e.target.value })} onBlur={() => onBlur("business_name")} error={touched.business_name && !!errors.business_name} />
                     </Field>
-                    <Field label="Contact Name" required error={touched.contact_name && errors.contact_name} testId="q-contact-field">
-                      <TextInput data-testid="q-contact" value={data.contact_name} onChange={(e) => set({ contact_name: e.target.value })} onBlur={() => onBlur("contact_name")} error={touched.contact_name && !!errors.contact_name} />
+                    <Field id="q-contact-name" label="Contact Name" required error={touched.contact_name && errors.contact_name} testId="q-contact-field">
+                      <TextInput data-testid="q-contact" name="contact_name" autoComplete="name" value={data.contact_name} onChange={(e) => set({ contact_name: e.target.value })} onBlur={() => onBlur("contact_name")} error={touched.contact_name && !!errors.contact_name} />
                     </Field>
-                    <Field label="Email" required error={touched.email && errors.email} testId="q-email-field">
-                      <TextInput data-testid="q-email" type="email" value={data.email} onChange={(e) => set({ email: e.target.value })} onBlur={() => onBlur("email")} error={touched.email && !!errors.email} />
+                    <Field id="q-email" label="Email" required error={touched.email && errors.email} testId="q-email-field">
+                      <TextInput data-testid="q-email" name="email" type="email" inputMode="email" autoComplete="email" value={data.email} onChange={(e) => set({ email: e.target.value })} onBlur={() => onBlur("email")} error={touched.email && !!errors.email} />
                     </Field>
-                    <Field label="Phone" testId="q-phone-field">
-                      <TextInput data-testid="q-phone" value={data.phone} onChange={(e) => set({ phone: e.target.value })} />
+                    <Field id="q-phone" label="Phone" testId="q-phone-field">
+                      <TextInput data-testid="q-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" value={data.phone} onChange={(e) => set({ phone: e.target.value })} />
                     </Field>
-                    <Field label="Website / Instagram" testId="q-website-field">
-                      <TextInput data-testid="q-website" value={data.website_instagram} onChange={(e) => set({ website_instagram: e.target.value })} />
+                    <Field id="q-website" label="Website / Instagram" testId="q-website-field">
+                      <TextInput data-testid="q-website" name="website_instagram" type="url" inputMode="url" autoComplete="url" value={data.website_instagram} onChange={(e) => set({ website_instagram: e.target.value })} />
                     </Field>
-                    <Field label="Country" testId="q-country-field">
-                      <TextInput data-testid="q-country" value={data.country} onChange={(e) => set({ country: e.target.value })} />
+                    <Field id="q-country" label="Country" testId="q-country-field">
+                      <TextInput data-testid="q-country" name="country" autoComplete="country-name" value={data.country} onChange={(e) => set({ country: e.target.value })} />
                     </Field>
                   </div>
                 </div>
@@ -261,8 +263,8 @@ export default function Quote() {
                   </div>
                   {errors.fabric_preference && !data.fabric_preference && <p className="mt-3 italic text-[11px] text-[#8B1A1A]">{errors.fabric_preference}</p>}
                   <div className="mt-8">
-                    <Field label="Additional fabric details (optional)" testId="q-fabric-text-field">
-                      <TextInput data-testid="q-fabric-text" value={data.fabric_text} onChange={(e) => set({ fabric_text: e.target.value })} placeholder="e.g. Heavyweight 400gsm brushed back cotton" />
+                    <Field id="q-fabric-text" label="Additional fabric details (optional)" testId="q-fabric-text-field">
+                      <TextInput data-testid="q-fabric-text" name="fabric_text" value={data.fabric_text} onChange={(e) => set({ fabric_text: e.target.value })} placeholder="e.g. Heavyweight 400gsm brushed back cotton" />
                     </Field>
                   </div>
                 </div>
@@ -355,8 +357,8 @@ export default function Quote() {
                   )}
 
                   <div className="mt-8">
-                    <Field label="Additional Notes" testId="q-notes-field">
-                      <TextArea data-testid="q-notes" value={data.additional_notes} onChange={(e) => set({ additional_notes: e.target.value })} rows={4} placeholder="Specifications, references, fit details, deadlines…" />
+                    <Field id="q-notes" label="Additional Notes" testId="q-notes-field">
+                      <TextArea data-testid="q-notes" name="additional_notes" value={data.additional_notes} onChange={(e) => set({ additional_notes: e.target.value })} rows={4} placeholder="Specifications, references, fit details, deadlines…" />
                     </Field>
                   </div>
                 </div>

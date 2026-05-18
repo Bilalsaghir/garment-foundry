@@ -5,6 +5,7 @@ import "@/App.css";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SiteMeta from "@/components/SiteMeta";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Capabilities from "@/pages/Capabilities";
@@ -19,6 +20,7 @@ import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import CaseStudies from "@/pages/CaseStudies";
 import Unsubscribe from "@/pages/Unsubscribe";
+import NotFound from "@/pages/NotFound";
 
 import AdminLogin from "@/admin/AdminLogin";
 import AdminLayout from "@/admin/AdminLayout";
@@ -49,6 +51,7 @@ function Public({ Page }) {
 export default function App() {
   return (
     <div className="App bg-black min-h-screen">
+      <SiteMeta />
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
@@ -69,6 +72,7 @@ export default function App() {
           <Route path="/unsubscribe" element={<Public Page={Unsubscribe} />} />
 
           {/* Admin */}
+
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
@@ -82,6 +86,9 @@ export default function App() {
             <Route path="campaigns" element={<AdminCampaigns />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
+
+          {/* 404 catch-all — must be last */}
+          <Route path="*" element={<Public Page={NotFound} />} />
         </Routes>
       </BrowserRouter>
       <Toaster theme="dark" position="top-center" />
