@@ -51,6 +51,62 @@ export default function Categories() {
           </div>
         </div>
       </section>
+
+      {/* CR-G: expanded category detail. */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+        <div className="max-w-[1100px] mx-auto">
+          <SectionHeading eyebrow="HOW THE CATEGORIES GROUP" number="— 002" title="The categories above share a few underlying disciplines." subtitle="Most of what you see in the grid clusters around four manufacturing families. The category label is the front-end; the back-end is the fabric, the seam construction and the production scale." />
+
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-10">
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Knit versus woven — the fundamental split</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Almost every garment we make is either a knit (jersey, fleece, knitwear) or a woven (shirting, denim, outerwear). The split decides which mill, which sewing line, which finishing house and which lead time. T-shirts, hoodies, sweats and most activewear sit on the knit side; trousers, shirting, denim and most uniforms sit on the woven side.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Volume categories — basics that scale</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  T-shirts, hoodies, sweatshirts and printed basics scale efficiently from a few hundred units into the high thousands without changing the underlying production setup. This is where MOQ floors come down fastest and where lead times can compress when fabric is already in stock at the mill. {/* TODO(content): typical MOQ and lead time on a stock-fabric tee programme */}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Performance categories — activewear and workwear</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Activewear and workwear share construction characteristics — technical fabrics, taped seams, hardware, reinforcement — that demand different machinery and different operators from a standard cut-and-sew line. Lead times run longer; MOQs sit higher; testing requirements (abrasion, tensile, colour-fastness to perspiration) are more demanding.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Premium categories — tailoring and knitwear</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Tailored garments and full-fashioned knitwear are slower disciplines — hand-finished panels, set-in canvases, linking by stitch count. These sit naturally in our UK and Portuguese partner network where craft tradition lives. Volumes are lower, unit economics are different, and the sampling cycle takes longer.
+                </p>
+              </div>
+            </div>
+
+            <aside className="lg:col-span-5">
+              <div className="border border-[#1a1a1a] p-8 bg-black">
+                <div className="overline mb-6">TYPICAL FABRIC WEIGHTS BY CATEGORY</div>
+                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
+                  <li>· T-shirts &middot; 150–220 gsm single jersey</li>
+                  <li>· Hoodies &amp; sweats &middot; 280–450 gsm fleece-back</li>
+                  <li>· Activewear &middot; 180–260 gsm performance knits</li>
+                  <li>· Shirting &middot; 100–160 gsm cotton / linen poplin</li>
+                  <li>· Trousers &middot; 220–340 gsm twill or canvas</li>
+                  <li>· Denim &middot; 8–14 oz raw or finished</li>
+                  <li>· Outerwear &middot; 80–250 gsm shell with lining</li>
+                  <li>· Knitwear &middot; 7gg to 14gg, full fashioned</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link to="/quote" data-testid="categories-cta" className="gf-btn gf-btn-solid">Request a Quote</Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

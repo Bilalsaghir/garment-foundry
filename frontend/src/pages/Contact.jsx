@@ -9,7 +9,7 @@ import { Field, TextInput, TextArea } from "@/components/Field";
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", company: "", message: "", website_url: "" });
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -43,11 +43,14 @@ export default function Contact() {
     try {
       await axios.post(`${API}/contact`, form);
       toast.success("Thank you. We will respond within one business day.");
-      setForm({ name: "", email: "", company: "", message: "" });
+      setForm({ name: "", email: "", company: "", message: "", website_url: "" });
       setTouched({});
       setErrors({});
     } catch (err) {
-      toast.error("Something went wrong. Please try again.");
+      const msg = err?.response?.status === 429
+        ? "Too many submissions. Please wait a minute and try again."
+        : "Something went wrong. Please try again.";
+      toast.error(msg);
     } finally { setSubmitting(false); }
   };
 
@@ -85,8 +88,14 @@ export default function Contact() {
             </div>
           </div>
 
-          <form onSubmit={submit} className="col-span-12 lg:col-span-7 border border-[#1a1a1a] p-8 lg:p-12 bg-[#050505]">
+          <form onSubmit={submit} noValidate className="col-span-12 lg:col-span-7 border border-[#1a1a1a] p-8 lg:p-12 bg-[#050505]">
             <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888] mb-8">NEW ENQUIRY · NO. 0001</div>
+            {/* CR-B honeypot — visually hidden, off the tab order. */}
+            <div style={{ position: "absolute", left: "-10000px", width: "1px", height: "1px", overflow: "hidden" }} aria-hidden="true">
+              <label htmlFor="contact-website-url-hp">Your website (leave this blank)</label>
+              <input id="contact-website-url-hp" name="website_url" type="text" tabIndex={-1} autoComplete="off"
+                value={form.website_url} onChange={(e) => setForm({ ...form, website_url: e.target.value })} />
+            </div>
             <div className="space-y-7">
               <Field id="contact-name" label="Name" required error={touched.name && errors.name} testId="contact-name-field">
                 <TextInput data-testid="contact-name" name="name" autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} onBlur={() => onBlur("name")} error={touched.name && !!errors.name} />

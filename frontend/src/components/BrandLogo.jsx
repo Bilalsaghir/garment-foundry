@@ -1,10 +1,14 @@
 import React from "react";
 
-// Full Garment Foundry logo lockup (provided brand asset)
-export const BRAND_LOGO_URL =
-  "https://customer-assets.emergentagent.com/job_garment-foundry/artifacts/4rtaqra4_ChatGPT%20Image%20May%2017%2C%202026%2C%2004_38_57%20AM.png";
+// CR-D: Self-host the brand lockup. The previous URL pointed at Emergent's CDN
+// with a literal "ChatGPT Image May 17 2026" filename — visible in every
+// network panel and a credibility tell.
+// TODO(launch): verify that public/logo.png on the VPS is the full GF lockup
+// (not just the monogram). If it isn't, replace public/logo.png with the
+// correct asset — this code already references it.
+export const BRAND_LOGO_URL = "/logo.png";
 
-export const BrandLogo = ({ className = "", height = 44, alt = "Garment Foundry" }) => (
+export const BrandLogo = ({ className = "", height = 44, alt = "Garment Foundry — UK apparel manufacturing & sourcing" }) => (
   <img
     src={BRAND_LOGO_URL}
     alt={alt}

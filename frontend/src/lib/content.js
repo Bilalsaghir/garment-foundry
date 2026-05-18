@@ -1,6 +1,12 @@
 // Centralised brand & imagery constants
+// CR-D: hero swapped to the locally-hosted /hero-image.png that already lives
+// in public/ on the VPS (per the project brief). The previous CDN-hosted hero
+// was AI-generated and served with a non-descriptive hash filename.
+// TODO(images): fabric / stitching / threads / cutting / paper still live on
+// Emergent's CDN. They're decorative on most pages but should be replaced with
+// real factory photography (or self-hosted equivalents) when available.
 export const IMAGES = {
-  hero: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/ee82f6ada44c7488266554af5a01e253e83ca49c842f7780193f6dfdb0f47948.png",
+  hero: "/hero-image.png",
   fabric: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/768cd34c9eb10b45fa902ce106d0c54d89c29214e6ff8b3f56ef5b9e9f52c494.png",
   stitching: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/a37ad15092bbe267d99d40cd9d81d39943c1f3f0c46fdcc8ce25079ca267908c.png",
   threads: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/4a8ec29d97e0e09258ead7e9fb65db5aaf739024ed5a9f232d366847037ba06b.png",
@@ -46,13 +52,50 @@ export const PRINCIPLES = [
   { title: "Purpose", body: "Bringing your designs to life with care and commitment." },
 ];
 
+// CR-C: 10 FAQs covering the audit-recommended topics (MOQ, lead times, sample
+// costs, tech-pack contents, IP/NDA, payment terms, fabric sourcing,
+// sustainability, shipping, how to begin). These also drive the FAQPage
+// JSON-LD emitted from pages/FAQs.jsx — keep the wording factual and avoid
+// inventing specifics that aren't true elsewhere on the site.
 export const FAQS = [
-  { q: "What is the minimum order quantity?", a: "MOQs typically begin at 100 pieces per style per colour for cut and sew. Some product categories such as printed t-shirts can start lower. We tailor MOQs based on fabric, construction and finishing." },
-  { q: "How long does a typical project take?", a: "Sampling generally takes 3–4 weeks. Bulk production lead times range from 6 to 12 weeks depending on quantity, fabric availability and finishing. We confirm a clear timeline in your proposal." },
-  { q: "Do you ship to the United States?", a: "Yes. We ship DDP (Delivered Duty Paid) to the United Kingdom, the United States and globally. Customs, duties and last-mile delivery are handled by us." },
-  { q: "Can you work from sketches or do I need a tech pack?", a: "Both. Our design team can translate sketches, mood boards or reference images into manufacturing-ready tech packs. Existing tech packs are equally welcomed." },
-  { q: "Do you support sustainable and ethical sourcing?", a: "Yes. We work with audited mills offering GOTS, OEKO-TEX, BCI and recycled materials. All partner factories are audited for fair labour standards." },
-  { q: "How are you different from a typical clothing factory?", a: "Garment Foundry is a sourcing and manufacturing partner, not a single factory. We match each project to the correct production setup — from boutique ateliers to large-scale facilities — based on quality, capability and lead time." },
-  { q: "Can I visit the factory?", a: "Of course. We arrange factory visits and virtual walk-throughs for active clients. Transparency is a foundation of our partnership model." },
-  { q: "How do I begin?", a: "Submit a quote request with as much detail as you have. A member of our production team will respond within one business day." },
+  {
+    q: "What is the minimum order quantity?",
+    a: "MOQs typically begin at 100 pieces per style per colour for cut and sew. Some categories such as printed t-shirts can start lower; knitwear and uniforms usually start higher. We confirm a viable MOQ once we know the fabric, construction and finishing.",
+  },
+  {
+    q: "How long does a typical project take?",
+    a: "Sampling generally takes 3–4 weeks. Bulk production lead times range from 6 to 12 weeks depending on quantity, fabric availability and finishing. We confirm timelines in writing before production begins.",
+  },
+  {
+    q: "Do you charge for samples?",
+    a: "Yes. Sample fees cover pattern-making, fabric, trims and stitching, and are itemised on the proposal. They are typically credited against your bulk invoice when you proceed to production.",
+  },
+  {
+    q: "What needs to be in a tech pack?",
+    a: "At minimum: a technical drawing, a size grade, fabric and trim references with composition, construction notes, and any branding (labels, print, embroidery) you want. If you do not have all of that, our team can help develop it during sampling.",
+  },
+  {
+    q: "Do you sign NDAs and protect our IP?",
+    a: "Yes. We sign mutual NDAs before reviewing any tech pack, and we never share client work or imagery without written permission. Each project lives behind access controls on our side.",
+  },
+  {
+    q: "How are payment terms structured?",
+    a: "A typical breakdown is 30% deposit on order confirmation, 40% on production start, and the balance before despatch. We adjust for established clients and longer-term programmes.",
+  },
+  {
+    q: "Where do you source fabric?",
+    a: "From audited mills in the United Kingdom, Portugal, Türkiye, India, Bangladesh and China. We match each project to the right mill for the fibre, finish, MOQ and lead-time — not the other way round.",
+  },
+  {
+    q: "Do you support sustainable and ethical sourcing?",
+    a: "Yes. We work with mills offering GOTS, OEKO-TEX, BCI and recycled materials, and audit partner factories for fair-labour standards. We are happy to share certifications for any specific material on request.",
+  },
+  {
+    q: "Do you ship internationally?",
+    a: "Yes. We ship DDP (Delivered Duty Paid) to the United Kingdom and the United States, and on agreed terms globally. Customs, duties and last-mile delivery are handled by us.",
+  },
+  {
+    q: "How do I begin?",
+    a: "Submit a quote request with as much detail as you have. A member of our production team will respond within one business day.",
+  },
 ];

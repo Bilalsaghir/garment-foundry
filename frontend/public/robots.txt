@@ -1,7 +1,45 @@
+# Garment Foundry — robots policy
+# Default: index everything except /admin and the API.
 User-agent: *
 Allow: /
-
 Disallow: /admin
 Disallow: /api/
+
+# CR-E — AI search crawlers explicitly allowed. These power answers in
+# ChatGPT, Claude, Perplexity, and Google's AI Overviews. For a new B2B brand,
+# AI search visibility is increasingly an outsized share of qualified traffic.
+# NOTE: Cloudflare bot-control rules also apply. Make sure these crawlers are
+# allowed in the Cloudflare dashboard (Security → Bots) — robots.txt alone
+# won't unblock them if Cloudflare's verified-bot ruleset is challenging them.
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Training-data scrapers we do NOT want.
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
 
 Sitemap: https://garmentfoundry.com/sitemap.xml

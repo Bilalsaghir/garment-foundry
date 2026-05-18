@@ -20,7 +20,7 @@ export default function Process() {
       <section className="py-24 lg:py-32 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
-            <img src={IMAGES.stitching} alt="" className="w-full h-[640px] object-cover grayscale sticky top-32" />
+            <img src={IMAGES.stitching} alt="Atelier stitching detail at the production stage" className="w-full h-[640px] object-cover grayscale sticky top-32" />
           </div>
           <div className="col-span-12 lg:col-span-7">
             <SectionHeading eyebrow="THE WORKFLOW" number="— 001" title="A considered path to production." />
@@ -39,9 +39,67 @@ export default function Process() {
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-12 bg-[#070707] text-center">
+      {/* CR-G: expanded process detail — keep TODO markers for project-specific specifics. */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+        <div className="max-w-[1100px] mx-auto">
+          <SectionHeading eyebrow="HOW THE PROCESS RUNS" number="— 002" title="What each step looks like in practice." subtitle="The seven-step framework above is the headline. The detail is in the cadence — how often we revise samples, what arrives in your inbox, who signs off on what, and how we keep production transparent end-to-end." />
+
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-10">
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Before we open a brief</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Every new project starts with a mutual non-disclosure agreement before any specification leaves your side. We then run a short scoping call — typically thirty minutes — to align on the garment, the target unit economics, the timeline, and the markets you are shipping to. {/* TODO(content): mention any specific kick-off deliverables you provide */}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Sampling rhythm</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Most projects move through a proto sample, a fit sample, and a pre-production sample. Each iteration is photographed, measured against the spec sheet, and shared back with annotated notes. The cadence is roughly {/* TODO(content): typical sampling lead time per round, e.g. 7-10 days */} per round, depending on fabric availability and the complexity of construction.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Quotation transparency</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Every proposal itemises fabric, trims, labour, finishing, packaging and shipping separately, with no hidden margin loaded onto the cost-of-goods. {/* TODO(content): note your indicative MOQ floor and how that affects unit cost */} You receive a written quote with delivery terms (typically DDP to the UK and US) before any commitment.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Production cadence and status</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Once production starts, you receive weekly status notes — fabric receipt, cutting, sewing line progress, and in-line inspection summaries. Any deviation against the approved sample is flagged before it scales. Photo evidence accompanies each milestone.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Delivery and acceptance</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Final goods clear the AQL audit before any carton is sealed. We arrange DDP shipping for UK and US destinations, or hand off to your nominated freight forwarder if you prefer. The acceptance window after delivery is {/* TODO(content): your standard inspection window, e.g. 14 days */} — anything outside spec inside that window is resolved at our cost.
+                </p>
+              </div>
+            </div>
+
+            <aside className="lg:col-span-5">
+              <div className="border border-[#1a1a1a] p-8 bg-black">
+                <div className="overline mb-6">DELIVERABLES AT EACH STAGE</div>
+                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
+                  <li>· Signed mutual NDA and scoping notes</li>
+                  <li>· Annotated tech pack with our construction recommendations</li>
+                  <li>· Lab dips, fabric handlooms and trim samples</li>
+                  <li>· Proto, fit and pre-production samples with measurement reports</li>
+                  <li>· Itemised written quotation</li>
+                  <li>· Weekly in-production status photos and notes</li>
+                  <li>· Final AQL inspection report with defect logs</li>
+                  <li>· Shipping documentation and DDP customs handling</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 lg:px-12 bg-[#0a0a0a] text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Begin step one — share your brief.</h2>
-        <Link to="/quote" data-testid="process-cta" className="gf-btn gf-btn-solid mt-10">Request a Proposal</Link>
+        <Link to="/quote" data-testid="process-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>
     </div>
   );
