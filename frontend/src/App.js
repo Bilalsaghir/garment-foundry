@@ -19,6 +19,7 @@ import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import CaseStudies from "@/pages/CaseStudies";
 import Unsubscribe from "@/pages/Unsubscribe";
+import NotFound from "@/pages/NotFound";
 
 import AdminLogin from "@/admin/AdminLogin";
 import AdminLayout from "@/admin/AdminLayout";
@@ -69,6 +70,7 @@ export default function App() {
           <Route path="/unsubscribe" element={<Public Page={Unsubscribe} />} />
 
           {/* Admin */}
+
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
@@ -82,6 +84,9 @@ export default function App() {
             <Route path="campaigns" element={<AdminCampaigns />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
+
+          {/* 404 catch-all — must be last */}
+          <Route path="*" element={<Public Page={NotFound} />} />
         </Routes>
       </BrowserRouter>
       <Toaster theme="dark" position="top-center" />

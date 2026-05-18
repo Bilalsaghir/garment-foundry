@@ -1,0 +1,87 @@
+# Garment Foundry — nginx server-block example
+#
+# This file is documentation only. The live config lives on the Hostinger VPS
+# and is not version-controlled in this repo. Copy/adapt this snippet into your
+# server block at /etc/nginx/sites-available/garmentfoundry.conf (or wherever
+# your existing config lives), then `nginx -t && systemctl reload nginx`.
+#
+# The goal here is twofold:
+#   1. SPA routing — serve frontend/build/index.html for any in-app route so
+#      react-router-dom can take over on the client.
+#   2. True 404 status — for paths that are NOT a built React route and NOT a
+#      static file, return HTTP 404 (not 200). This kills the soft-404 problem
+#      flagged in the pre-launch audit and prevents Google from quality-
+#      penalising the whole site.
+#
+# Phase 1 approach (this file): enumerate the known SPA routes explicitly so
+# nginx can distinguish "valid SPA route, serve index.html with 200" from
+# "unknown URL, serve index.html with 404". This is the interim solution
+# while the site is still a client-rendered SPA.
+#
+# Phase 3 follow-up: once react-snap pre-renders the routes at build time,
+# each known route becomes a real .html file on disk, the regex below can be
+# replaced by a single `try_files $uri $uri/index.html =404;`, and the 404
+# response can serve the pre-rendered build/404.html.
+
+server {
+    listen 443 ssl http2;
+    server_name garmentfoundry.com www.garmentfoundry.com;
+
+    # TLS — keep your existing cert paths
+    # ssl_certificate     /etc/letsencrypt/live/garmentfoundry.com/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/garmentfoundry.com/privkey.pem;
+
+    root /var/www/garmentfoundry/frontend/build;
+    index index.html;
+
+    # Long-cache hashed build assets
+    location /static/ {
+        try_files $uri =404;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Static assets at the root (favicons, sitemap, robots, og image, etc).
+    # If the file exists, serve it. If not, fall through to the SPA handler.
+    location ~* \.(?:ico|png|jpg|jpeg|gif|svg|webp|avif|woff2?|ttf|eot|css|js|map|txt|xml|webmanifest|pdf|zip)$ {
+        try_files $uri =404;
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+
+    # Backend API — adjust upstream to wherever FastAPI is listening
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Known SPA routes — serve index.html with 200 so React Router takes over.
+    # Update this list when new routes are added in frontend/src/App.js.
+    location ~ ^/(about|capabilities|categories|process|sourcing|quality|quote|faqs|contact|blog|case-studies|unsubscribe|admin)(/.*)?$ {
+        try_files $uri /index.html;
+    }
+
+    # Homepage
+    location = / {
+        try_files /index.html =404;
+    }
+
+    # Everything else — unknown URL. Serve the SPA shell (so React renders the
+    # NotFound component) but with HTTP 404 status. The `=404` modifier on
+    # error_page forces the status code; without it, nginx would rewrite to 200.
+    location / {
+        try_files /__never_exists__ =404;
+    }
+    error_page 404 =404 /index.html;
+}
+
+# HTTP -> HTTPS redirect (optional; keep your current setup if already present)
+server {
+    listen 80;
+    server_name garmentfoundry.com www.garmentfoundry.com;
+    return 301 https://$host$request_uri;
+}
