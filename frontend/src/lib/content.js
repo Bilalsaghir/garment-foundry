@@ -1,6 +1,12 @@
 // Centralised brand & imagery constants
+// CR-D: hero swapped to the locally-hosted /hero-image.png that already lives
+// in public/ on the VPS (per the project brief). The previous CDN-hosted hero
+// was AI-generated and served with a non-descriptive hash filename.
+// TODO(images): fabric / stitching / threads / cutting / paper still live on
+// Emergent's CDN. They're decorative on most pages but should be replaced with
+// real factory photography (or self-hosted equivalents) when available.
 export const IMAGES = {
-  hero: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/ee82f6ada44c7488266554af5a01e253e83ca49c842f7780193f6dfdb0f47948.png",
+  hero: "/hero-image.png",
   fabric: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/768cd34c9eb10b45fa902ce106d0c54d89c29214e6ff8b3f56ef5b9e9f52c494.png",
   stitching: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/a37ad15092bbe267d99d40cd9d81d39943c1f3f0c46fdcc8ce25079ca267908c.png",
   threads: "https://static.prod-images.emergentagent.com/jobs/140831b8-52d2-4520-83b3-4b0a744ef559/images/4a8ec29d97e0e09258ead7e9fb65db5aaf739024ed5a9f232d366847037ba06b.png",

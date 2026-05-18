@@ -29,7 +29,7 @@ export default function Quality() {
       <section className="py-24 lg:py-32 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
-            <img src={IMAGES.stitching} alt="" className="w-full h-[640px] object-cover grayscale" />
+            <img src={IMAGES.stitching} alt="Close-up of stitch construction under quality inspection" className="w-full h-[640px] object-cover grayscale" />
           </div>
           <div className="col-span-12 lg:col-span-7">
             <SectionHeading eyebrow="QC PROTOCOL" number="— 001" title="Quality is built in — not inspected at the end." subtitle="Every garment passes through six independent stages of inspection. The result: consistent, brand-grade product delivered ready for sale." />
