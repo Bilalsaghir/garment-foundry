@@ -103,6 +103,11 @@ export default function Footer() {
           <p className="font-body text-[10px] tracking-luxe text-[#555]">© {new Date().getFullYear()} GARMENT FOUNDRY — APPAREL MANUFACTURING &amp; SOURCING</p>
           <p className="font-body text-[10px] tracking-luxe text-[#555]">UNITED KINGDOM · UNITED STATES · GLOBAL SOURCING</p>
         </div>
+
+        {/* BL-I: UK Companies Act s.82 disclosure. TODO(launch): replace each {{...}} placeholder with the registered values before merge. */}
+        <p data-testid="footer-legal-line" className="mt-4 font-body text-[10px] tracking-[0.1em] text-[#444]">
+          Garment Foundry Ltd · Company No. {"{{NUMBER}}"} · Registered office: {"{{ADDRESS}}"} · VAT: {"{{VAT}}"}
+        </p>
       </div>
     </footer>
   );
