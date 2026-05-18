@@ -13,6 +13,17 @@ const QC_STAGES = [
   { num: "06", title: "Pre-shipment", body: "Carton inspection, packing audit and shipping documentation review." },
 ];
 
+const DEFECT_CATEGORIES = [
+  { name: "Fabric flaws", detail: "slubs, holes, weave deviation" },
+  { name: "Colour deviation", detail: "shade, fastness, batch mismatch" },
+  { name: "Seam construction", detail: "stitch density, skipped stitches, pucker" },
+  { name: "Measurement", detail: "out-of-tolerance against the grade" },
+  { name: "Labelling", detail: "care content, position, durability" },
+  { name: "Print & embroidery", detail: "registration, durability" },
+  { name: "Hardware", detail: "corrosion, function, sharp edges" },
+  { name: "Packaging", detail: "folding, polybag, carton labelling" },
+];
+
 export default function Quality() {
   return (
     <div data-testid="page-quality" className="bg-black">
@@ -80,18 +91,17 @@ export default function Quality() {
             </div>
 
             <aside className="lg:col-span-5">
-              <div className="border border-[#1a1a1a] p-8 bg-black">
-                <div className="overline mb-6">DEFECT CATEGORIES WE LOG</div>
-                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
-                  <li>· Fabric flaws — slubs, holes, weave deviation</li>
-                  <li>· Colour deviation — shade, fastness, batch mismatch</li>
-                  <li>· Seam construction — stitch density, skipped stitches, pucker</li>
-                  <li>· Measurement — out-of-tolerance against the grade</li>
-                  <li>· Labelling and care content</li>
-                  <li>· Print and embroidery — registration, durability</li>
-                  <li>· Hardware — corrosion, function, sharp edges</li>
-                  <li>· Packaging — folding, polybag, carton labelling</li>
-                </ul>
+              <div className="border border-[#1a1a1a] p-8 lg:p-10 bg-black">
+                <div className="overline mb-2">DEFECT CATEGORIES WE LOG</div>
+                <p className="font-body text-[12px] leading-[1.7] text-[#777] mb-8">Every order ships with a defect log against these categories &mdash; counted, photographed and signed off.</p>
+                <dl className="divide-y divide-[#181818]">
+                  {DEFECT_CATEGORIES.map((row) => (
+                    <div key={row.name} className="py-4 first:pt-0 last:pb-0 grid grid-cols-12 gap-3 items-baseline">
+                      <dt className="col-span-12 sm:col-span-5 font-display text-[15px] text-[#F2F2F2] leading-snug">{row.name}</dt>
+                      <dd className="col-span-12 sm:col-span-7 font-body text-[13.5px] leading-[1.6] text-[#ccc]">{row.detail}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </aside>
           </div>

@@ -15,6 +15,16 @@ const REGIONS = [
 
 const CERTIFICATIONS = ["GOTS", "OEKO-TEX 100", "BCI Cotton", "GRS Recycled", "WRAP", "SA8000", "BSCI", "Sedex"];
 
+const FABRIC_FAMILIES = [
+  { name: "Jersey", detail: "single, double, interlock, French terry, fleece" },
+  { name: "Woven", detail: "poplin, twill, oxford, sateen, canvas" },
+  { name: "Denim", detail: "8 to 14 oz, raw or finished" },
+  { name: "Knitwear", detail: "fine to chunky gauge, intarsia, jacquard" },
+  { name: "Performance", detail: "recycled poly, nylon shell, technical knits" },
+  { name: "Outerwear", detail: "coated, laminated and quilted constructions" },
+  { name: "Trims", detail: "woven labels, hardware, drawcords, custom prints" },
+];
+
 export default function Sourcing() {
   return (
     <div data-testid="page-sourcing" className="bg-black">
@@ -99,17 +109,17 @@ export default function Sourcing() {
             </div>
 
             <aside className="lg:col-span-5">
-              <div className="border border-[#1a1a1a] p-8 bg-[#070707]">
-                <div className="overline mb-6">FABRIC FAMILIES WE WORK IN</div>
-                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
-                  <li>· Jersey — single, double, interlock, French terry, fleece</li>
-                  <li>· Woven — poplin, twill, oxford, sateen, canvas</li>
-                  <li>· Denim — 8 to 14 oz, raw or finished</li>
-                  <li>· Knitwear — fine to chunky gauge, intarsia, jacquard</li>
-                  <li>· Performance — recycled poly, nylon shell, technical knits</li>
-                  <li>· Outerwear — coated, laminated and quilted constructions</li>
-                  <li>· Trims — woven labels, hardware, drawcords, custom prints</li>
-                </ul>
+              <div className="border border-[#1a1a1a] p-8 lg:p-10 bg-[#070707]">
+                <div className="overline mb-2">FABRIC FAMILIES WE WORK IN</div>
+                <p className="font-body text-[12px] leading-[1.7] text-[#777] mb-8">The fabric families we routinely produce in &mdash; not the full list, but the bulk of our output.</p>
+                <dl className="divide-y divide-[#181818]">
+                  {FABRIC_FAMILIES.map((row) => (
+                    <div key={row.name} className="py-4 first:pt-0 last:pb-0 grid grid-cols-12 gap-3 items-baseline">
+                      <dt className="col-span-12 sm:col-span-4 font-display text-[15px] text-[#F2F2F2] leading-snug">{row.name}</dt>
+                      <dd className="col-span-12 sm:col-span-8 font-body text-[13.5px] leading-[1.6] text-[#ccc]">{row.detail}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </aside>
           </div>

@@ -4,6 +4,17 @@ import PageMeta from "@/components/PageMeta";
 import { SectionHeading } from "@/components/Section";
 import { CAPABILITIES, IMAGES } from "@/lib/content";
 
+// TODO(content): fill the MOQ floor for boutique cut-and-sew and the upper bound for high-volume runs.
+const RUN_SIZES = [
+  { name: "Sampling", detail: "Proto / fit / PP at any quantity" },
+  { name: "Boutique cut-and-sew", detail: "From a few hundred units per style per colour" },
+  { name: "Mid-volume programmes", detail: "500 to 5,000 units" },
+  { name: "High-volume", detail: "Uniform and merch programmes at scale" },
+  { name: "Test drops", detail: "Small first runs to validate fit and demand" },
+  { name: "Repeat programmes", detail: "Recurring SKUs with locked fabric" },
+  { name: "Capsule launches", detail: "Multiple SKUs against one delivery date" },
+];
+
 export default function Capabilities() {
   return (
     <div data-testid="page-capabilities" className="bg-black">
@@ -78,17 +89,17 @@ export default function Capabilities() {
             </div>
 
             <aside className="lg:col-span-5">
-              <div className="border border-[#1a1a1a] p-8 bg-black">
-                <div className="overline mb-6">RUN SIZES WE COMFORTABLY HANDLE</div>
-                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
-                  <li>· Sampling — proto / fit / PP at any quantity</li>
-                  <li>· Boutique cut-and-sew from {/* TODO: e.g. 100 units */} per style per colour</li>
-                  <li>· Mid-volume programmes from 500 to 5,000 units</li>
-                  <li>· High-volume — uniform and merch programmes scaling to {/* TODO: e.g. 100,000+ */}</li>
-                  <li>· Test drops — small first runs to validate fit and demand</li>
-                  <li>· Repeat programmes — recurring SKUs with locked fabric</li>
-                  <li>· Capsule launches — multiple SKUs against one delivery date</li>
-                </ul>
+              <div className="border border-[#1a1a1a] p-8 lg:p-10 bg-black">
+                <div className="overline mb-2">RUN SIZES WE COMFORTABLY HANDLE</div>
+                <p className="font-body text-[12px] leading-[1.7] text-[#777] mb-8">The shapes of orders that run cleanly through our production network.</p>
+                <dl className="divide-y divide-[#181818]">
+                  {RUN_SIZES.map((row) => (
+                    <div key={row.name} className="py-4 first:pt-0 last:pb-0 grid grid-cols-12 gap-3 items-baseline">
+                      <dt className="col-span-12 sm:col-span-5 font-display text-[15px] text-[#F2F2F2] leading-snug">{row.name}</dt>
+                      <dd className="col-span-12 sm:col-span-7 font-body text-[13.5px] leading-[1.6] text-[#ccc]">{row.detail}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </aside>
           </div>
