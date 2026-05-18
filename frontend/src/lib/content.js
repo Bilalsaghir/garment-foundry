@@ -27,10 +27,15 @@ export const CAPABILITIES = [
   { num: "10", title: "Logistics", body: "Door-to-door freight, customs clearance and DDP shipping to UK & US." },
 ];
 
+// 12 categories — divides cleanly into the 3- and 4-column grids on
+// /categories and the home page. Outerwear was dropped because the audit-
+// expanded Capabilities/Categories copy already covers shell/quilted pieces
+// under the "Performance" and "Knit vs woven" sections, and Outerwear has
+// the heaviest overlap with Hoodies & Sweats / Activewear in our actual mix.
 export const CATEGORIES = [
   "Menswear", "Womenswear", "Childrenswear", "Streetwear", "Sportswear",
   "Uniforms", "Workwear", "Hoodies & Sweats", "T-Shirts & Tops",
-  "Trousers & Bottoms", "Outerwear", "Activewear", "Accessories",
+  "Trousers & Bottoms", "Activewear", "Accessories",
 ];
 
 // HP-B: per-category photography. Each path resolves to a file in
@@ -47,7 +52,6 @@ export const CATEGORY_IMAGES = {
   "Hoodies & Sweats": "/categories/garment-foundry-hoodies-sweats.jpg",
   "T-Shirts & Tops": "/categories/garment-foundry-tshirts-tops.jpg",
   "Trousers & Bottoms": "/categories/garment-foundry-trousers-bottoms.jpg",
-  "Outerwear": "/categories/garment-foundry-outerwear.jpg",
   "Activewear": "/categories/garment-foundry-activewear.jpg",
   "Accessories": "/categories/garment-foundry-accessories.jpg",
 };

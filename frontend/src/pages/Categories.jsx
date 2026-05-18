@@ -43,7 +43,7 @@ export default function Categories() {
                 data-testid={`cat-card-${cat.replace(/[^a-z]/gi, '').toLowerCase()}`}
                 className="bg-black group relative aspect-[5/6] overflow-hidden"
               >
-                <img src={CATEGORY_IMAGES[cat]} alt={`${cat} apparel manufactured by Garment Foundry`} loading="lazy" className="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700" />
+                <img src={CATEGORY_IMAGES[cat]} alt={`${cat} apparel manufactured by Garment Foundry`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-left grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="relative h-full p-8 flex flex-col justify-between">
                   <span className="eyebrow-number">{String(i + 1).padStart(2, "0")}</span>

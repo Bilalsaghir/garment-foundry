@@ -4,7 +4,7 @@ import PageMeta from "@/components/PageMeta";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GFMonogram } from "@/components/GFMonogram";
 import { SectionHeading, StitchedDivider } from "@/components/Section";
-import { IMAGES, CAPABILITIES, CATEGORIES, PROCESS_STEPS, PRINCIPLES } from "@/lib/content";
+import { IMAGES, CAPABILITIES, CATEGORIES, CATEGORY_IMAGES, PROCESS_STEPS, PRINCIPLES } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -130,16 +130,24 @@ export default function Home() {
                 key={cat}
                 to="/categories"
                 data-testid={`category-${cat.replace(/[^a-z]/gi, '').toLowerCase()}`}
-                className="bg-black p-6 lg:p-8 min-h-[160px] lg:min-h-[200px] flex flex-col justify-between group relative overflow-hidden border border-transparent hover:border-white transition-all duration-300"
-                style={{
-                  backgroundImage: "repeating-linear-gradient(45deg, transparent 0, transparent 4px, rgba(255,255,255,0.03) 4px, rgba(255,255,255,0.03) 5px)",
-                }}
+                className="bg-black group relative aspect-[4/5] overflow-hidden"
               >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundImage: "repeating-linear-gradient(45deg, transparent 0, transparent 4px, rgba(255,255,255,0.06) 4px, rgba(255,255,255,0.06) 5px)" }} />
-                <span className="relative font-body text-[10px] tracking-[0.2em] uppercase text-[#666]">{String(i + 1).padStart(2, "0")}</span>
-                <div className="relative flex items-end justify-between">
-                  <h3 className="font-display text-xl lg:text-2xl text-[#bbb] group-hover:text-white leading-tight transition-colors">{cat}</h3>
-                  <ArrowUpRight size={16} className="text-[#555] group-hover:text-white transition-colors" />
+                <img
+                  src={CATEGORY_IMAGES[cat]}
+                  alt={`${cat} apparel manufactured by Garment Foundry`}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover object-left grayscale opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div className="relative h-full p-6 lg:p-8 flex flex-col justify-between">
+                  <span className="font-body text-[10px] tracking-[0.2em] uppercase text-[#888]">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2] leading-tight">{cat}</h3>
+                    <div className="mt-3 flex items-center justify-between">
+                      <span className="overline text-[#888]">VIEW CATEGORY</span>
+                      <ArrowUpRight size={16} className="text-[#999] group-hover:text-white transition-colors" />
+                    </div>
+                  </div>
                 </div>
               </Link>
             ))}
