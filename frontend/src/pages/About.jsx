@@ -64,7 +64,7 @@ export default function About() {
       <section className="py-24 lg:py-32 px-6 lg:px-12 text-center">
         <GFMonogram size={50} className="mx-auto" color="#F2F2F2" />
         <h2 className="mt-10 font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Let's build something that lasts.</h2>
-        <Link to="/quote" data-testid="about-cta" className="gf-btn gf-btn-solid mt-10">Request a Proposal</Link>
+        <Link to="/quote" data-testid="about-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>
     </div>
   );

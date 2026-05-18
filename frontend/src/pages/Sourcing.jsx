@@ -67,7 +67,7 @@ export default function Sourcing() {
 
       <section className="py-24 px-6 lg:px-12 text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">A sourcing partner that does the diligence.</h2>
-        <Link to="/quote" data-testid="sourcing-cta" className="gf-btn gf-btn-solid mt-10">Begin a Quote</Link>
+        <Link to="/quote" data-testid="sourcing-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>
     </div>
   );

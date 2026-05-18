@@ -38,7 +38,7 @@ export default function Home() {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-3 fade-up-d2">
                 <Link to="/quote" data-testid="hero-quote-btn" className="inline-flex items-center justify-center bg-white text-black font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[52px] w-full sm:w-auto hover:bg-[#e8e5de] transition-colors">
-                  Request a Manufacturing Quote <ArrowRight size={14} className="ml-3" />
+                  Request a Quote <ArrowRight size={14} className="ml-3" />
                 </Link>
                 <Link to="/capabilities" data-testid="hero-capabilities-btn" className="inline-flex items-center justify-center border border-white text-white font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[48px] w-full sm:w-auto hover:bg-white/10 transition-colors">
                   Explore Capabilities
@@ -208,7 +208,7 @@ export default function Home() {
               A guided enquiry — designed for clarity, not friction. Upload your tech pack, share your specification, and receive an indicative quote within one business day.
             </p>
             <Link to="/quote" data-testid="home-quote-preview-btn" className="gf-btn gf-btn-solid mt-10">
-              Begin a Quote <ArrowRight size={14} className="ml-3" />
+              Request a Quote <ArrowRight size={14} className="ml-3" />
             </Link>
           </div>
           <div className="col-span-12 lg:col-span-6">
@@ -267,7 +267,7 @@ export default function Home() {
             Submit a brief or a tech pack. We will reply with an indicative proposal within one business day — transparent, all-inclusive and built for production.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Proposal</Link>
+            <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Quote</Link>
             <Link to="/contact" data-testid="final-cta-contact" className="gf-btn gf-btn-light">Speak to a Production Manager</Link>
           </div>
         </div>

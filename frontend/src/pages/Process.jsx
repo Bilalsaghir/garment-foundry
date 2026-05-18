@@ -41,7 +41,7 @@ export default function Process() {
 
       <section className="py-24 px-6 lg:px-12 bg-[#070707] text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Begin step one — share your brief.</h2>
-        <Link to="/quote" data-testid="process-cta" className="gf-btn gf-btn-solid mt-10">Request a Proposal</Link>
+        <Link to="/quote" data-testid="process-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>
     </div>
   );

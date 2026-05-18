@@ -95,7 +95,7 @@ export default function Footer() {
               <li><a data-testid="footer-phone" href="tel:+447575657531" className="hover:text-white">+44 7575 657 531</a></li>
               <li className="text-[#999]">Manchester, United Kingdom</li>
             </ul>
-            <Link to="/quote" data-testid="footer-quote-cta" className="gf-btn gf-btn-light mt-8">Request a Proposal</Link>
+            <Link to="/quote" data-testid="footer-quote-cta" className="gf-btn gf-btn-light mt-8">Request a Quote</Link>
           </div>
         </div>
 
