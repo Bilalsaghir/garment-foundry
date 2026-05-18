@@ -56,6 +56,17 @@ export const CATEGORY_IMAGES = {
   "Accessories": "/categories/garment-foundry-accessories.jpg",
 };
 
+// object-position override per category — applied to the <img> on the home
+// bento and the /categories card. Default is `object-center`; only list a
+// category here when the subject sits noticeably off-centre and would get
+// cropped out otherwise. Acceptable values: left, center, right (Tailwind's
+// object-{left,center,right} utility class suffixes).
+export const CATEGORY_IMAGE_POSITION = {
+  "Menswear": "left",
+  // Add per-category overrides here as you eyeball each image, e.g.:
+  // "Uniforms": "right",
+};
+
 export const PROCESS_STEPS = [
   { num: "01", title: "Brief", body: "We listen first. Share your concept, tech pack or sketches." },
   { num: "02", title: "Consultation", body: "We advise on fabric, construction, MOQ and lead time." },
