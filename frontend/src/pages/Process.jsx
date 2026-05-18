@@ -4,6 +4,17 @@ import { Link } from "react-router-dom";
 import { SectionHeading } from "@/components/Section";
 import { PROCESS_STEPS, IMAGES } from "@/lib/content";
 
+const DELIVERABLES = [
+  "Signed mutual NDA and scoping notes",
+  "Annotated tech pack with our construction recommendations",
+  "Lab dips, fabric handlooms and trim samples",
+  "Proto, fit and pre-production samples with measurement reports",
+  "Itemised written quotation",
+  "Weekly in-production status photos and notes",
+  "Final AQL inspection report with defect logs",
+  "Shipping documentation and DDP customs handling",
+];
+
 export default function Process() {
   return (
     <div data-testid="page-process" className="bg-black">
@@ -79,18 +90,17 @@ export default function Process() {
             </div>
 
             <aside className="lg:col-span-5">
-              <div className="border border-[#1a1a1a] p-8 bg-black">
-                <div className="overline mb-6">DELIVERABLES AT EACH STAGE</div>
-                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
-                  <li>· Signed mutual NDA and scoping notes</li>
-                  <li>· Annotated tech pack with our construction recommendations</li>
-                  <li>· Lab dips, fabric handlooms and trim samples</li>
-                  <li>· Proto, fit and pre-production samples with measurement reports</li>
-                  <li>· Itemised written quotation</li>
-                  <li>· Weekly in-production status photos and notes</li>
-                  <li>· Final AQL inspection report with defect logs</li>
-                  <li>· Shipping documentation and DDP customs handling</li>
-                </ul>
+              <div className="border border-[#1a1a1a] p-8 lg:p-10 bg-black">
+                <div className="overline mb-2">DELIVERABLES AT EACH STAGE</div>
+                <p className="font-body text-[12px] leading-[1.7] text-[#777] mb-8">What arrives in your inbox as the project moves from brief to delivered shipment.</p>
+                <ol className="divide-y divide-[#181818]">
+                  {DELIVERABLES.map((item, i) => (
+                    <li key={i} className="py-4 first:pt-0 last:pb-0 grid grid-cols-12 gap-3 items-baseline">
+                      <span className="col-span-2 font-display text-[12px] tracking-luxe text-[#777]">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="col-span-10 font-body text-[14px] leading-[1.55] text-[#e5e5e5]">{item}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </aside>
           </div>
