@@ -3,6 +3,9 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 
+// BL-G: Blog and Case Studies are temporarily removed from the nav until their
+// content lands. Their /blog and /case-studies routes stay live (so sitemap
+// URLs and direct links continue to work) but they emit a noindex meta tag.
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
@@ -11,8 +14,6 @@ const NAV_LINKS = [
   { to: "/process", label: "Process" },
   { to: "/sourcing", label: "Sourcing" },
   { to: "/quality", label: "Quality" },
-  { to: "/blog", label: "Blog" },
-  { to: "/case-studies", label: "Case Studies" },
   { to: "/faqs", label: "FAQs" },
   { to: "/contact", label: "Contact" },
 ];

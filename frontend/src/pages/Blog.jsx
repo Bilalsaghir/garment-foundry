@@ -17,7 +17,7 @@ export default function Blog() {
 
   return (
     <div data-testid="page-blog" className="bg-black">
-      <PageMeta path="/blog" title="Journal — Notes on Apparel Manufacturing | Garment Foundry" description="Notes from the studio on apparel manufacturing, fabric sourcing, MOQs and the realities of getting clothes made." />
+      <PageMeta path="/blog" title="Journal — Notes on Apparel Manufacturing | Garment Foundry" description="Notes from the studio on apparel manufacturing, fabric sourcing, MOQs and the realities of getting clothes made." noindex />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · JOURNAL</span>

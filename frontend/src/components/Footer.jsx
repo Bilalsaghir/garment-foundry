@@ -83,8 +83,7 @@ export default function Footer() {
               <li><Link data-testid="footer-link-process" to="/process" className="text-[#bbb] hover:text-white">Process</Link></li>
               <li><Link data-testid="footer-link-sourcing" to="/sourcing" className="text-[#bbb] hover:text-white">Sourcing</Link></li>
               <li><Link data-testid="footer-link-quality" to="/quality" className="text-[#bbb] hover:text-white">Quality Control</Link></li>
-              <li><Link data-testid="footer-link-blog" to="/blog" className="text-[#bbb] hover:text-white">Journal</Link></li>
-              <li><Link data-testid="footer-link-case-studies" to="/case-studies" className="text-[#bbb] hover:text-white">Case Studies</Link></li>
+              {/* BL-G: Journal and Case Studies hidden from the footer until their content lands. Routes remain live with a noindex meta. */}
             </ul>
           </div>
 
