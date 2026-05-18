@@ -1,19 +1,33 @@
 import React from "react";
 
-export const Field = ({ label, required, error, hint, children, testId }) => (
-  <div data-testid={testId} className="space-y-2">
-    <label className="block font-body text-[10px] tracking-[0.12em] uppercase text-[#888]">
-      {label}{required && <span className="text-[#888] ml-1">*</span>}
-    </label>
-    {children}
-    {error && (
-      <p data-testid={`${testId}-error`} className="font-body italic text-[11px] text-[#8B1A1A]">
-        {error}
-      </p>
-    )}
-    {hint && !error && <p className="font-body text-[11px] text-[#666]">{hint}</p>}
-  </div>
-);
+// BL-H: `id` props the htmlFor link between <label> and the inner control, and
+// is propagated to the child input via cloneElement so callers only declare it
+// once. `required` is similarly propagated so the native HTML attribute is set
+// on the actual <input>, not just rendered as a visual "*" decoration.
+export const Field = ({ id, label, required, error, hint, children, testId }) => {
+  const child = React.Children.only(children);
+  const inputId = id || child.props.id;
+  const cloned = React.cloneElement(child, {
+    id: inputId,
+    required: required || child.props.required,
+    "aria-invalid": child.props["aria-invalid"] ?? (error ? true : undefined),
+    "aria-describedby": error && testId ? `${testId}-error` : child.props["aria-describedby"],
+  });
+  return (
+    <div data-testid={testId} className="space-y-2">
+      <label htmlFor={inputId} className="block font-body text-[10px] tracking-[0.12em] uppercase text-[#888]">
+        {label}{required && <span className="text-[#888] ml-1" aria-hidden="true">*</span>}
+      </label>
+      {cloned}
+      {error && (
+        <p id={testId ? `${testId}-error` : undefined} data-testid={`${testId}-error`} className="font-body italic text-[11px] text-[#8B1A1A]">
+          {error}
+        </p>
+      )}
+      {hint && !error && <p className="font-body text-[11px] text-[#666]">{hint}</p>}
+    </div>
+  );
+};
 
 export const TextInput = React.forwardRef(({ error, ...props }, ref) => (
   <input
