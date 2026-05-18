@@ -61,16 +61,25 @@ export const CATEGORY_IMAGES = {
 // object-position value: keywords ("left", "center", "right"), percentages
 // ("25% center", "75% center"), or pixel pairs. Default when a category is
 // absent from this map is "center" (= 50% center).
+//
+// IMPORTANT — what "object-position" actually does:
+// object-cover scales the image to fill the container and crops the rest.
+// object-position controls *which part of the original image stays in view*.
+// "0%/left"   = keep the LEFT edge of the image — useful when subject is
+//                on the LEFT of the source photo (e.g. Menswear).
+// "100%/right" = keep the RIGHT edge of the image — useful when subject is
+//                on the RIGHT of the source photo.
+// Going the wrong way will hide the subject and the card will look black.
 export const CATEGORY_IMAGE_POSITION = {
-  "Menswear":             "left",        // suit, body in left half
-  "Streetwear":           "25% center",  // hooded figure — pull a little left
-  "Sportswear":           "25% center",  // runner — pull a little left
-  "Hoodies & Sweats":     "25% center",  // figure — pull a little left
-  "Trousers & Bottoms":   "25% center",  // figure — pull a little left
-  "Activewear":           "25% center",  // figure — pull a little left
-  "Accessories":          "25% center",  // pull a little left
+  "Menswear":           "left",         // subject on LEFT of source
+  "Streetwear":         "right",        // subject on RIGHT of source
+  "Sportswear":         "right",        // subject on RIGHT of source
+  "Hoodies & Sweats":   "right",        // subject on RIGHT of source
+  "Trousers & Bottoms": "right",        // subject on RIGHT of source
+  "Activewear":         "right",        // subject on RIGHT of source
+  "Accessories":        "right",        // subject on RIGHT of source
   // Womenswear, Childrenswear, Uniforms, Workwear, T-Shirts & Tops —
-  // subjects already read well at the default 50% center.
+  // subjects roughly centred in the source, fall through to "center".
 };
 
 export const PROCESS_STEPS = [
