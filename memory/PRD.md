@@ -52,4 +52,4 @@
 - Drag-and-drop reorder (currently up/down buttons) for FAQs
 
 ## Credentials
-- Admin: garmentfoundry.uk@gmail.com / GFoundry@786 — stored in `/app/memory/test_credentials.md`
+- Admin: hello@garmentfoundry.com / GFoundry@786 — stored in `/app/memory/test_credentials.md` (TODO(launch): provision mailbox in Google Workspace and rotate password before merge).

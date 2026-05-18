@@ -91,7 +91,8 @@ export default function Footer() {
           <div className="md:col-span-4">
             <div className="overline mb-6">Contact</div>
             <ul className="space-y-4 font-body text-[12px] text-[#bbb]">
-              <li><a data-testid="footer-email" href="mailto:garmentfoundry.uk@gmail.com" className="hover:text-white">garmentfoundry.uk@gmail.com</a></li>
+              {/* TODO(launch): provision hello@garmentfoundry.com inbox in Google Workspace before merge */}
+              <li><a data-testid="footer-email" href="mailto:hello@garmentfoundry.com" className="hover:text-white">hello@garmentfoundry.com</a></li>
               <li><a data-testid="footer-phone" href="tel:+447575657531" className="hover:text-white">+44 7575 657 531</a></li>
               <li className="text-[#999]">Manchester, United Kingdom</li>
             </ul>

@@ -69,7 +69,8 @@ export default function Contact() {
             <div className="mt-12 space-y-6">
               <div>
                 <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888]">EMAIL</div>
-                <a data-testid="contact-email" href="mailto:garmentfoundry.uk@gmail.com" className="block mt-2 font-display text-lg text-[#F5F4F0] hover:underline">garmentfoundry.uk@gmail.com</a>
+                {/* TODO(launch): provision hello@garmentfoundry.com inbox in Google Workspace before merge */}
+                <a data-testid="contact-email" href="mailto:hello@garmentfoundry.com" className="block mt-2 font-display text-lg text-[#F5F4F0] hover:underline">hello@garmentfoundry.com</a>
               </div>
               <div>
                 <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888]">TELEPHONE</div>

@@ -8,7 +8,8 @@ import requests
 BASE_URL = os.environ['REACT_APP_BACKEND_URL'].rstrip('/')
 API = f"{BASE_URL}/api"
 
-ADMIN_EMAIL = "garmentfoundry.uk@gmail.com"
+# TODO(launch): keep in sync with backend/.env ADMIN_EMAIL after the new mailbox is provisioned.
+ADMIN_EMAIL = "hello@garmentfoundry.com"
 ADMIN_PASSWORD = "GFoundry@786"
 
 PNG_BYTES = (
