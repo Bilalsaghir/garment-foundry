@@ -464,7 +464,10 @@ async def download_file(file_id: str):
 
 # ---- Quote create ----
 @api_router.post('/quote')
-@limiter.limit("1/minute;5/hour")
+# Honeypot filters bots; per-minute layer just protects against rapid
+# double-tap resubmits. Generous enough that an impatient real user can
+# always retry. Hourly cap is the real anti-abuse ceiling.
+@limiter.limit("3/minute;15/hour")
 async def create_quote(request: Request, response: Response, payload: QuoteIn, background: BackgroundTasks):
     # CR-B honeypot — silently accept and discard if a bot filled the hidden field.
     if payload.website_url:
@@ -555,7 +558,7 @@ def default_admin_html() -> str:
 
 # ---- Contact create ----
 @api_router.post('/contact')
-@limiter.limit("1/minute;10/hour")
+@limiter.limit("5/minute;20/hour")
 async def create_contact(request: Request, payload: ContactIn, background: BackgroundTasks):
     # CR-B honeypot
     if payload.website_url:
@@ -577,7 +580,7 @@ async def create_contact(request: Request, payload: ContactIn, background: Backg
 
 # ---- Subscribe ----
 @api_router.post('/subscribe')
-@limiter.limit("3/minute;20/hour")
+@limiter.limit("5/minute;30/hour")
 async def subscribe(request: Request, payload: SubscribeIn):
     # CR-B honeypot
     if payload.website_url:
