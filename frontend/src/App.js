@@ -5,6 +5,7 @@ import "@/App.css";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SiteMeta from "@/components/SiteMeta";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Capabilities from "@/pages/Capabilities";
@@ -50,6 +51,7 @@ function Public({ Page }) {
 export default function App() {
   return (
     <div className="App bg-black min-h-screen">
+      <SiteMeta />
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
