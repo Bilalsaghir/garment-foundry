@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PageMeta from "@/components/PageMeta";
 import axios from "axios";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, Check, Upload, X, FileText } from "lucide-react";
@@ -144,6 +145,7 @@ export default function Quote() {
 
   return (
     <div data-testid="page-quote" className="bg-black min-h-screen pt-28 pb-24">
+      <PageMeta path="/quote" title="Request a Manufacturing Quote | Garment Foundry" description="Request a manufacturing quote from Garment Foundry. UK-based, working with fashion, uniform and private-label brands. We reply in one business day." />
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between mb-10">
           <div>

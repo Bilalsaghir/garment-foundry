@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 
 export default function NotFound() {
   return (
     <div data-testid="page-not-found" className="bg-black min-h-screen pt-40 pb-32 px-6 text-center">
+      <PageMeta path="/404" title="Page not found | Garment Foundry" description="The page you were looking for is not here. Browse our categories or request a manufacturing quote." noindex />
       <div className="max-w-xl mx-auto">
         <span className="eyebrow-number">404</span>
         <h1 className="mt-6 font-display text-3xl lg:text-5xl leading-[1.1] tracking-tight text-[#F2F2F2]">

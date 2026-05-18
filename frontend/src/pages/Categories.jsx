@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/Section";
 import { CATEGORIES, IMAGES } from "@/lib/content";
@@ -9,6 +10,7 @@ const IMG_MAP = [IMAGES.cutting, IMAGES.fabric, IMAGES.threads, IMAGES.stitching
 export default function Categories() {
   return (
     <div data-testid="page-categories" className="bg-black">
+      <PageMeta path="/categories" title="Garment Categories We Manufacture | Garment Foundry" description="Menswear, womenswear, streetwear, activewear, uniforms and merch — the garment categories we manufacture for UK and global brands." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · CATEGORIES</span>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PageMeta from "@/components/PageMeta";
 import { toast } from "sonner";
 import { SectionHeading } from "@/components/Section";
 import { GFMonogram } from "@/components/GFMonogram";
@@ -52,6 +53,7 @@ export default function Contact() {
 
   return (
     <div data-testid="page-contact" className="bg-black">
+      <PageMeta path="/contact" title="Contact Garment Foundry — UK Apparel Manufacturing Studio" description="Speak to the Garment Foundry studio in Manchester. New project enquiries, partnerships and supplier relations — we reply within one business day." />
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · CONTACT</span>

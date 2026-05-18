@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PageMeta from "@/components/PageMeta";
 import { SectionHeading, StitchedDivider } from "@/components/Section";
 import { GFMonogram } from "@/components/GFMonogram";
 import { IMAGES, PRINCIPLES } from "@/lib/content";
@@ -7,6 +8,7 @@ import { IMAGES, PRINCIPLES } from "@/lib/content";
 export default function About() {
   return (
     <div data-testid="page-about" className="bg-black">
+      <PageMeta path="/about" title="About Garment Foundry | UK Apparel Manufacturing Partner" description="Manchester-based apparel manufacturing partner working with fashion, uniform and private-label brands across the UK and beyond." />
       {/* Page header */}
       <section className="pt-40 pb-16 px-6 lg:px-12 border-b border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto">
