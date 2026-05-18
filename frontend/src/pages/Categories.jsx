@@ -5,6 +5,17 @@ import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/Section";
 import { CATEGORIES, CATEGORY_IMAGES } from "@/lib/content";
 
+const FABRIC_WEIGHTS = [
+  { category: "T-shirts", weight: "150–220 gsm", fabric: "single jersey" },
+  { category: "Hoodies & sweats", weight: "280–450 gsm", fabric: "fleece-back" },
+  { category: "Activewear", weight: "180–260 gsm", fabric: "performance knits" },
+  { category: "Shirting", weight: "100–160 gsm", fabric: "cotton / linen poplin" },
+  { category: "Trousers", weight: "220–340 gsm", fabric: "twill or canvas" },
+  { category: "Denim", weight: "8–14 oz", fabric: "raw or finished" },
+  { category: "Outerwear", weight: "80–250 gsm", fabric: "shell with lining" },
+  { category: "Knitwear", weight: "7gg–14gg", fabric: "full-fashioned" },
+];
+
 export default function Categories() {
   return (
     <div data-testid="page-categories" className="bg-black">
@@ -84,18 +95,23 @@ export default function Categories() {
             </div>
 
             <aside className="lg:col-span-5">
-              <div className="border border-[#1a1a1a] p-8 bg-black">
-                <div className="overline mb-6">TYPICAL FABRIC WEIGHTS BY CATEGORY</div>
-                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
-                  <li>· T-shirts &middot; 150–220 gsm single jersey</li>
-                  <li>· Hoodies &amp; sweats &middot; 280–450 gsm fleece-back</li>
-                  <li>· Activewear &middot; 180–260 gsm performance knits</li>
-                  <li>· Shirting &middot; 100–160 gsm cotton / linen poplin</li>
-                  <li>· Trousers &middot; 220–340 gsm twill or canvas</li>
-                  <li>· Denim &middot; 8–14 oz raw or finished</li>
-                  <li>· Outerwear &middot; 80–250 gsm shell with lining</li>
-                  <li>· Knitwear &middot; 7gg to 14gg, full fashioned</li>
-                </ul>
+              <div className="border border-[#1a1a1a] p-8 lg:p-10 bg-black">
+                <div className="overline mb-2">FABRIC WEIGHTS</div>
+                <p className="font-body text-[12px] leading-[1.7] text-[#777] mb-8">Typical ranges by category &mdash; not a price list, just the kind of cloth most projects in each family land on.</p>
+                <dl className="divide-y divide-[#181818]">
+                  {FABRIC_WEIGHTS.map((row) => (
+                    <div key={row.category} className="py-4 first:pt-0 last:pb-0 grid grid-cols-12 gap-3 items-baseline">
+                      <dt className="col-span-12 sm:col-span-4 font-display text-[15px] text-[#F2F2F2] leading-snug">
+                        {row.category}
+                      </dt>
+                      <dd className="col-span-12 sm:col-span-8 font-body text-[13.5px] leading-[1.6] text-[#ccc]">
+                        <span className="text-[#F5F4F0] font-medium">{row.weight}</span>
+                        <span className="text-[#666]"> &middot; </span>
+                        <span>{row.fabric}</span>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </aside>
           </div>
