@@ -65,6 +65,57 @@ export default function Sourcing() {
         </div>
       </section>
 
+      {/* CR-G: expanded sourcing detail. */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 border-t border-[#1a1a1a]">
+        <div className="max-w-[1100px] mx-auto">
+          <SectionHeading eyebrow="HOW WE SOURCE" number="— 003" title="Matched to the project, not the other way round." subtitle="No single country is right for every garment. We map your specification — fibre, finish, MOQ, lead time, ethics — to the partner that can deliver it without compromise." />
+
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-10">
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Mill selection criteria</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  We score every potential partner on four dimensions: technical capability for the fibre, ethical-audit status, lead-time predictability, and minimum quantity fit. Mills that score well on three but fail on the fourth do not enter the shortlist. {/* TODO(content): list any preferred-supplier programmes you operate */}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Raw material traceability</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  For fabric, we ask for yarn-level origin information wherever the mill can provide it — useful when you need to substantiate origin claims to retailers or to your own customers. Recycled and certified materials carry their certification number on the lot record.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Audit cadence</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Partner facilities are audited annually against social and quality standards (Sedex, BSCI or equivalent, depending on the country). We supplement scheduled audits with unannounced spot visits {/* TODO(content): frequency or programme name */} so the formal audit isn't the only signal we trust.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Sustainable yarn options</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Where the project allows it, we offer GOTS-certified organic cotton, BCI cotton, GRS recycled polyester, and OEKO-TEX-tested fabrics with verifiable certification documentation. We can quote any specification in both a conventional and a sustainable variant so you can compare directly.
+                </p>
+              </div>
+            </div>
+
+            <aside className="lg:col-span-5">
+              <div className="border border-[#1a1a1a] p-8 bg-[#070707]">
+                <div className="overline mb-6">FABRIC FAMILIES WE WORK IN</div>
+                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
+                  <li>· Jersey — single, double, interlock, French terry, fleece</li>
+                  <li>· Woven — poplin, twill, oxford, sateen, canvas</li>
+                  <li>· Denim — 8 to 14 oz, raw or finished</li>
+                  <li>· Knitwear — fine to chunky gauge, intarsia, jacquard</li>
+                  <li>· Performance — recycled poly, nylon shell, technical knits</li>
+                  <li>· Outerwear — coated, laminated and quilted constructions</li>
+                  <li>· Trims — woven labels, hardware, drawcords, custom prints</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-6 lg:px-12 text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">A sourcing partner that does the diligence.</h2>
         <Link to="/quote" data-testid="sourcing-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>

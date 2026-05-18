@@ -46,7 +46,59 @@ export default function Quality() {
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-12 bg-[#070707] text-center">
+      {/* CR-G: expanded quality detail. */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+        <div className="max-w-[1100px] mx-auto">
+          <SectionHeading eyebrow="HOW QC IS BUILT IN" number="— 002" title="What our inspections actually catch — and how." subtitle="Quality is the product of a documented process, not a final-stage hope. Each inspection has a written standard, a sampling plan and a defect log that travels with the order from cutting through despatch." />
+
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-10">
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Fabric and trim testing</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Before any roll is cut, fabric is tested for GSM, shrinkage, colourfastness to wash and rub, and pilling resistance against the agreed standard. Trims — labels, zips, drawcords, snaps — are checked for breaking strength and corrosion. {/* TODO(content): list any specific test methods you reference, e.g. ISO 105-B02, AATCC 8 */}
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">In-line inspections</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Sewing lines are audited at the 30% and 70% production milestones. We sample by random selection across operators, looking for stitch density, seam alignment, label placement and any deviation from the approved pre-production sample. Findings feed back into the line within hours, not at the end of the run.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">End-line and final AQL</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Every finished garment passes a 100% visual inspection. A separate statistical AQL audit then samples the lot against an agreed acceptance quality limit — typically AQL 2.5 for major defects and AQL 4.0 for minor, stricter on request. If the lot fails, it is reworked or rejected before despatch.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Documentation</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Every order ships with a final inspection report — sampling plan, defect counts by category, photo evidence and a signed sign-off. The same documentation is retained on our side for {/* TODO(content): your retention period, e.g. 24 months */} so you can refer back if a question surfaces after delivery.
+                </p>
+              </div>
+            </div>
+
+            <aside className="lg:col-span-5">
+              <div className="border border-[#1a1a1a] p-8 bg-black">
+                <div className="overline mb-6">DEFECT CATEGORIES WE LOG</div>
+                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
+                  <li>· Fabric flaws — slubs, holes, weave deviation</li>
+                  <li>· Colour deviation — shade, fastness, batch mismatch</li>
+                  <li>· Seam construction — stitch density, skipped stitches, pucker</li>
+                  <li>· Measurement — out-of-tolerance against the grade</li>
+                  <li>· Labelling and care content</li>
+                  <li>· Print and embroidery — registration, durability</li>
+                  <li>· Hardware — corrosion, function, sharp edges</li>
+                  <li>· Packaging — folding, polybag, carton labelling</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 lg:px-12 bg-[#0a0a0a] text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Manufacture with confidence.</h2>
         <Link to="/quote" data-testid="quality-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>

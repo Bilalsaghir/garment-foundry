@@ -38,7 +38,64 @@ export default function Capabilities() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] text-center">
+      {/* CR-G: expanded capabilities detail. */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+        <div className="max-w-[1100px] mx-auto">
+          <SectionHeading eyebrow="WHAT WE COMFORTABLY HANDLE" number="— 002" title="Production realities, not just headline capabilities." subtitle="Capability lists are easy to write. The harder question is what we are good at at production scale, where the constraints are real, and how that maps to your project's specification." />
+
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-10">
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Design and tech-pack support</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  If you have a sketch and a reference garment, we can build the tech pack with you — pattern, grading, fabric callouts, stitching specs and a points-of-measure sheet. If you already have a tech pack, we review it for manufacturability and flag anything that will cause cost or quality issues at scale.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Sampling pipeline</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Sampling is treated as its own discipline, not a side-effect of production. Proto, fit and pre-production samples are produced on the line that will run bulk, by the operators who will do the actual sewing. That continuity matters more than any single metric.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Bulk production scale</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  We comfortably manage runs from {/* TODO(content): your minimum, e.g. 100 units per style per colour */} up to {/* TODO(content): your upper bound on a single PO */}. Above that, we split the order across two facilities running the same approved sample to maintain lead time without compromising consistency.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Finishing — print, embroidery, labels</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Screen, DTG, sublimation and discharge print are all in-house or with audited partners. Embroidery includes flat, 3D and applique. Labels — woven, printed, leather, jacquard — are sourced direct from accredited mills. Hangtags and care content are finished to retail-ready standard.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-[#F2F2F2]">Quality control and shipping</h3>
+                <p className="mt-3 font-body text-[13.5px] leading-[1.95] text-[#aaa]">
+                  Inspections run pre-production, in-line and end-line, with a final AQL audit before despatch. We ship DDP (Delivered Duty Paid) to the United Kingdom and the United States — customs, duty and last-mile included — or hand off to your nominated freight forwarder if you prefer.
+                </p>
+              </div>
+            </div>
+
+            <aside className="lg:col-span-5">
+              <div className="border border-[#1a1a1a] p-8 bg-black">
+                <div className="overline mb-6">RUN SIZES WE COMFORTABLY HANDLE</div>
+                <ul className="space-y-3 font-body text-[13px] leading-[1.9] text-[#aaa] list-none">
+                  <li>· Sampling — proto / fit / PP at any quantity</li>
+                  <li>· Boutique cut-and-sew from {/* TODO: e.g. 100 units */} per style per colour</li>
+                  <li>· Mid-volume programmes from 500 to 5,000 units</li>
+                  <li>· High-volume — uniform and merch programmes scaling to {/* TODO: e.g. 100,000+ */}</li>
+                  <li>· Test drops — small first runs to validate fit and demand</li>
+                  <li>· Repeat programmes — recurring SKUs with locked fabric</li>
+                  <li>· Capsule launches — multiple SKUs against one delivery date</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#0a0a0a] text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Tell us what you are building.</h2>
         <Link to="/quote" data-testid="cap-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>
