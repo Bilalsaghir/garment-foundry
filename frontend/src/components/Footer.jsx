@@ -9,6 +9,7 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState(""); // CR-B honeypot
   const [busy, setBusy] = useState(false);
 
   const subscribe = async (e) => {
@@ -19,11 +20,14 @@ export default function Footer() {
     }
     setBusy(true);
     try {
-      await axios.post(`${API}/subscribe`, { email, name });
+      await axios.post(`${API}/subscribe`, { email, name, website_url: websiteUrl });
       toast.success("Subscribed — thank you.");
-      setEmail(""); setName("");
-    } catch {
-      toast.error("Something went wrong.");
+      setEmail(""); setName(""); setWebsiteUrl("");
+    } catch (err) {
+      const msg = err?.response?.status === 429
+        ? "Too many submissions. Please wait a minute and try again."
+        : "Something went wrong.";
+      toast.error(msg);
     } finally { setBusy(false); }
   };
 
@@ -39,6 +43,12 @@ export default function Footer() {
             <p className="mt-3 font-body text-[13px] text-[#999] max-w-md">Fabric trends, capability launches and selected case studies. No noise.</p>
           </div>
           <form onSubmit={subscribe} className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-3 self-end" data-testid="footer-subscribe-form">
+            {/* CR-B honeypot */}
+            <div style={{ position: "absolute", left: "-10000px", width: "1px", height: "1px", overflow: "hidden" }} aria-hidden="true">
+              <label htmlFor="footer-subscribe-website-hp">Your website (leave this blank)</label>
+              <input id="footer-subscribe-website-hp" name="website_url" type="text" tabIndex={-1} autoComplete="off"
+                value={websiteUrl} onChange={(e) => setWebsiteUrl(e.target.value)} />
+            </div>
             <input
               type="text"
               placeholder="First name (optional)"

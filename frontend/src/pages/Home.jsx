@@ -200,12 +200,12 @@ export default function Home() {
       <section className="py-24 lg:py-32 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 items-center">
           <div className="col-span-12 lg:col-span-6">
-            <span className="eyebrow-number">— 007 / PROPOSAL</span>
+            <span className="eyebrow-number">— 007 / ENQUIRY</span>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-[1.1] text-[#F2F2F2]">
-              Request a proposal in nine considered steps.
+              Request a quote in five quick fields.
             </h2>
             <p className="mt-6 font-body text-[14px] leading-[1.9] text-[#bbb] max-w-xl">
-              A guided enquiry — designed for clarity, not friction. Upload your tech pack, share your specification, and receive an indicative quote within one business day.
+              A short first-touch form — five required fields, an optional tech-pack upload, and a reply within one business day. If you already have a full specification, the optional full brief is one click away.
             </p>
             <Link to="/quote" data-testid="home-quote-preview-btn" className="gf-btn gf-btn-solid mt-10">
               Request a Quote <ArrowRight size={14} className="ml-3" />
@@ -218,13 +218,14 @@ export default function Home() {
                 <GFMonogram size={28} color="#777" />
               </div>
               <div className="space-y-5">
-                {["Business details", "Garment type", "Quantity", "Fabric preference", "Branding & finishing", "Packaging", "Delivery country", "Timeline", "Tech pack upload"].map((s, i) => (
+                {["Company / brand name", "Your name + role", "Work email", "Garment category", "Approximate quantity"].map((s, i) => (
                   <div key={s} className="flex items-center gap-4 py-3 border-b border-[#161616]">
                     <span className="font-display text-[#666] text-xs w-10">{String(i + 1).padStart(2, "0")}</span>
                     <span className="font-body text-[13px] text-[#ddd] flex-1">{s}</span>
                     <ArrowRight size={12} className="text-[#444]" />
                   </div>
                 ))}
+                <div className="pt-3 font-body text-[11px] tracking-[0.15em] uppercase text-[#666]">+ Optional: tech pack upload &middot; full brief</div>
               </div>
             </div>
           </div>

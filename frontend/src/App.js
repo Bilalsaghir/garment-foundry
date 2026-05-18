@@ -14,6 +14,7 @@ import Process from "@/pages/Process";
 import Sourcing from "@/pages/Sourcing";
 import Quality from "@/pages/Quality";
 import Quote from "@/pages/Quote";
+import QuoteFullBrief from "@/pages/QuoteFullBrief";
 import FAQs from "@/pages/FAQs";
 import Contact from "@/pages/Contact";
 import Blog from "@/pages/Blog";
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/sourcing" element={<Public Page={Sourcing} />} />
           <Route path="/quality" element={<Public Page={Quality} />} />
           <Route path="/quote" element={<Public Page={Quote} />} />
+          <Route path="/quote/full-brief" element={<Public Page={QuoteFullBrief} />} />
           <Route path="/faqs" element={<Public Page={FAQs} />} />
           <Route path="/contact" element={<Public Page={Contact} />} />
           <Route path="/blog" element={<Public Page={Blog} />} />

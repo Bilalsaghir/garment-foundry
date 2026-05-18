@@ -282,6 +282,8 @@ class QuoteIn(BaseModel):
     timeline: Optional[str] = ''
     uploaded_files: List[Dict[str, Any]] = []
     additional_notes: Optional[str] = ''
+    # CR-B honeypot. Hidden in the UI; if a bot fills it, we silently accept and drop.
+    website_url: Optional[str] = ''
 
 
 class ContactIn(BaseModel):
@@ -289,11 +291,15 @@ class ContactIn(BaseModel):
     email: EmailStr
     company: Optional[str] = ''
     message: str
+    # CR-B honeypot
+    website_url: Optional[str] = ''
 
 
 class SubscribeIn(BaseModel):
     email: EmailStr
     name: Optional[str] = ''
+    # CR-B honeypot
+    website_url: Optional[str] = ''
 
 
 class CampaignIn(BaseModel):
@@ -458,8 +464,12 @@ async def download_file(file_id: str):
 
 # ---- Quote create ----
 @api_router.post('/quote')
-@limiter.limit("5/hour")
+@limiter.limit("1/minute;5/hour")
 async def create_quote(request: Request, response: Response, payload: QuoteIn, background: BackgroundTasks):
+    # CR-B honeypot — silently accept and discard if a bot filled the hidden field.
+    if payload.website_url:
+        logger.info(f'honeypot triggered on /quote from {_client_ip(request)}')
+        return {'reference': 'GF-FILTERED', 'id': 'filtered'}
     ref = await next_quote_reference()
     record = {
         'id': str(uuid.uuid4()),
@@ -545,8 +555,12 @@ def default_admin_html() -> str:
 
 # ---- Contact create ----
 @api_router.post('/contact')
-@limiter.limit("10/hour")
+@limiter.limit("1/minute;10/hour")
 async def create_contact(request: Request, payload: ContactIn, background: BackgroundTasks):
+    # CR-B honeypot
+    if payload.website_url:
+        logger.info(f'honeypot triggered on /contact from {_client_ip(request)}')
+        return {'id': 'filtered', 'status': 'received'}
     rec = {
         'id': str(uuid.uuid4()),
         **payload.model_dump(),
@@ -563,7 +577,12 @@ async def create_contact(request: Request, payload: ContactIn, background: Backg
 
 # ---- Subscribe ----
 @api_router.post('/subscribe')
-async def subscribe(payload: SubscribeIn):
+@limiter.limit("3/minute;20/hour")
+async def subscribe(request: Request, payload: SubscribeIn):
+    # CR-B honeypot
+    if payload.website_url:
+        logger.info(f'honeypot triggered on /subscribe from {_client_ip(request)}')
+        return {'status': 'success'}
     existing = await db.subscribers.find_one({'email': payload.email.lower()})
     if existing:
         return {'status': 'success'}  # silent duplicate
