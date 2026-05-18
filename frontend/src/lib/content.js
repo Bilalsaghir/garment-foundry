@@ -33,6 +33,25 @@ export const CATEGORIES = [
   "Trousers & Bottoms", "Outerwear", "Activewear", "Accessories",
 ];
 
+// HP-B: per-category photography. Each path resolves to a file in
+// frontend/public/categories/, served by nginx as a static asset under
+// /categories/*. Keep the slug map in sync if a category name is renamed.
+export const CATEGORY_IMAGES = {
+  "Menswear": "/categories/garment-foundry-menswear.jpg",
+  "Womenswear": "/categories/garment-foundry-womenswear.jpg",
+  "Childrenswear": "/categories/garment-foundry-childrenswear.jpg",
+  "Streetwear": "/categories/garment-foundry-streetwear.jpg",
+  "Sportswear": "/categories/garment-foundry-sportswear.jpg",
+  "Uniforms": "/categories/garment-foundry-uniforms.jpg",
+  "Workwear": "/categories/garment-foundry-workwear.jpg",
+  "Hoodies & Sweats": "/categories/garment-foundry-hoodies-sweats.jpg",
+  "T-Shirts & Tops": "/categories/garment-foundry-tshirts-tops.jpg",
+  "Trousers & Bottoms": "/categories/garment-foundry-trousers-bottoms.jpg",
+  "Outerwear": "/categories/garment-foundry-outerwear.jpg",
+  "Activewear": "/categories/garment-foundry-activewear.jpg",
+  "Accessories": "/categories/garment-foundry-accessories.jpg",
+};
+
 export const PROCESS_STEPS = [
   { num: "01", title: "Brief", body: "We listen first. Share your concept, tech pack or sketches." },
   { num: "02", title: "Consultation", body: "We advise on fabric, construction, MOQ and lead time." },
