@@ -116,7 +116,10 @@ export default function Home() {
                   <span className="eyebrow-number">{c.num}</span>
                   <ArrowUpRight size={16} className="text-[#555] group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="mt-6 font-display text-xl text-[#F2F2F2]">{c.title}</h3>
+                {c.icon && (
+                  <img src={c.icon} alt="" aria-hidden="true" className="mt-6 w-12 h-12 opacity-40 group-hover:opacity-60 transition-opacity" />
+                )}
+                <h3 className="mt-4 font-display text-xl text-[#F2F2F2]">{c.title}</h3>
                 <p className="mt-3 font-body text-[12.5px] leading-[1.8] text-[#999]">{c.body}</p>
               </div>
             ))}

@@ -15,16 +15,16 @@ export const IMAGES = {
 };
 
 export const CAPABILITIES = [
-  { num: "01", title: "Design Support", body: "Tech pack development, pattern engineering and concept refinement." },
-  { num: "02", title: "Sampling", body: "Prototype, fit and pre-production samples with iterative refinement." },
-  { num: "03", title: "Fabric Sourcing", body: "Curated mills across UK, Europe and Asia for performance and hand-feel." },
-  { num: "04", title: "Cut & Sew", body: "Precision construction across knits, wovens, technical and tailored." },
-  { num: "05", title: "Print & Embroidery", body: "Screen, DTG, sublimation, digital embroidery and applique." },
-  { num: "06", title: "Labels & Trims", body: "Woven labels, hang tags, care labels, hardware and finishings." },
-  { num: "07", title: "Packaging", body: "Branded tissue, custom mailers, retail-ready folding and polybagging." },
-  { num: "08", title: "Bulk Production", body: "Runs from 100 to 100,000 units with confirmed lead times in writing." },
-  { num: "09", title: "Quality Control", body: "Multi-stage inspections — fabric, in-line, end-line and AQL audits." },
-  { num: "10", title: "Logistics", body: "Door-to-door freight, customs clearance and DDP shipping to UK & US." },
+  { num: "01", title: "Design Support",    icon: "/icons/Design_Support.svg",    body: "Tech pack development, pattern engineering and concept refinement." },
+  { num: "02", title: "Sampling",          icon: "/icons/Sampling.svg",           body: "Prototype, fit and pre-production samples with iterative refinement." },
+  { num: "03", title: "Fabric Sourcing",   icon: "/icons/Fabric_Sourcing.svg",    body: "Curated mills across UK, Europe and Asia for performance and hand-feel." },
+  { num: "04", title: "Cut & Sew",         icon: "/icons/Cut_and_Sew.svg",        body: "Precision construction across knits, wovens, technical and tailored." },
+  { num: "05", title: "Print & Embroidery",icon: "/icons/Print_and_Embroidery.svg",body: "Screen, DTG, sublimation, digital embroidery and applique." },
+  { num: "06", title: "Labels & Trims",    icon: "/icons/Labels_and_Trims.svg",   body: "Woven labels, hang tags, care labels, hardware and finishings." },
+  { num: "07", title: "Packaging",         icon: "/icons/Packaging.svg",          body: "Branded tissue, custom mailers, retail-ready folding and polybagging." },
+  { num: "08", title: "Bulk Production",   icon: "/icons/Bulk_Production.svg",    body: "Runs from 100 to 100,000 units with confirmed lead times in writing." },
+  { num: "09", title: "Quality Control",   icon: "/icons/Quality_Control.svg",    body: "Multi-stage inspections — fabric, in-line, end-line and AQL audits." },
+  { num: "10", title: "Logistics",         icon: "/icons/Logistics.svg",          body: "Door-to-door freight, customs clearance and DDP shipping to UK & US." },
 ];
 
 // 12 categories — divides cleanly into the 3- and 4-column grids on

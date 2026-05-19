@@ -42,9 +42,12 @@ export default function Capabilities() {
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-[#1a1a1a]">
             {CAPABILITIES.map((c, i) => (
               <Reveal key={c.num} delay={Math.min(i * 60, 360)}>
-                <div data-testid={`cap-${c.num}`} className="bg-black p-10 hover:bg-[#0a0a0a] transition-colors duration-[180ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+                <div data-testid={`cap-${c.num}`} className="bg-black p-10 hover:bg-[#0a0a0a] transition-colors duration-[180ms] ease-[cubic-bezier(0.16,1,0.3,1)] group">
                   <span className="eyebrow-number">{c.num}</span>
-                  <h3 className="mt-6 font-display text-2xl text-[#F2F2F2]">{c.title}</h3>
+                  {c.icon && (
+                    <img src={c.icon} alt="" aria-hidden="true" className="mt-6 w-14 h-14 opacity-40 group-hover:opacity-60 transition-opacity" />
+                  )}
+                  <h3 className="mt-4 font-display text-2xl text-[#F2F2F2]">{c.title}</h3>
                   <div className="dashed-rule mt-4 text-[#333] w-12" />
                   <p className="mt-6 font-body text-[13px] leading-[1.9] text-[#999]">{c.body}</p>
                 </div>
