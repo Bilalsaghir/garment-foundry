@@ -138,7 +138,7 @@ export default function Quote() {
         <div className="flex items-center justify-between mb-10">
           <div>
             <div className="font-body text-[10px] tracking-[0.2em] uppercase text-[#888]">QUICK ENQUIRY</div>
-            <h1 className="mt-3 font-display text-3xl lg:text-4xl text-[#F5F4F0] leading-tight">Request a Manufacturing Quote</h1>
+            <h1 className="mt-3 font-display text-4xl lg:text-5xl text-[#F5F4F0] leading-tight">Request a Manufacturing Quote</h1>
           </div>
           <GFMonogram size={48} color="#F2F2F2" className="hidden md:block" />
         </div>

@@ -28,7 +28,7 @@ export default function Process() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
             <img src={IMAGES.stitching} alt="Atelier stitching detail at the production stage" className="w-full h-[640px] object-cover grayscale sticky top-32" />
@@ -52,7 +52,7 @@ export default function Process() {
       </section>
 
       {/* CR-G: expanded process detail — keep TODO markers for project-specific specifics. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="HOW THE PROCESS RUNS" number="— 002" title="What each step looks like in practice." subtitle="The seven-step framework above is the headline. The detail is in the cadence — how often we revise samples, what arrives in your inbox, who signs off on what, and how we keep production transparent end-to-end." />
 

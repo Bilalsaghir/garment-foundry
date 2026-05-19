@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
-import { SectionHeading, StitchedDivider } from "@/components/Section";
+import { SectionHeading } from "@/components/Section";
 import { GFMonogram } from "@/components/GFMonogram";
 import { IMAGES, PRINCIPLES } from "@/lib/content";
 
@@ -19,7 +19,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-6">
             <img src={IMAGES.cutting} alt="Pattern cutting" className="w-full h-[640px] object-cover grayscale" />
@@ -45,9 +45,7 @@ export default function About() {
         </div>
       </section>
 
-      <StitchedDivider />
-
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="PRINCIPLES" number="— 002" title="What we hold to, in every project." />
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
@@ -62,7 +60,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12 text-center">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 text-center">
         <GFMonogram size={50} className="mx-auto" color="#F2F2F2" />
         <h2 className="mt-10 font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Let's build something that lasts.</h2>
         <Link to="/quote" data-testid="about-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>

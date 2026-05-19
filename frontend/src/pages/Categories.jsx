@@ -34,7 +34,7 @@ export default function Categories() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="CATEGORIES" number="— 001" title="Specifications for every brief." />
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
@@ -64,7 +64,7 @@ export default function Categories() {
       </section>
 
       {/* CR-G: expanded category detail. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="HOW THE CATEGORIES GROUP" number="— 002" title="The categories above share a few underlying disciplines." subtitle="Most of what you see in the grid clusters around four manufacturing families. The category label is the front-end; the back-end is the fabric, the seam construction and the production scale." />
 
