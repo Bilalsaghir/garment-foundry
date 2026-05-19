@@ -45,7 +45,7 @@ export default function Capabilities() {
                 <div data-testid={`cap-${c.num}`} className="bg-black p-10 hover:bg-[#0a0a0a] transition-colors duration-[180ms] ease-[cubic-bezier(0.16,1,0.3,1)] group">
                   <span className="eyebrow-number">{c.num}</span>
                   {c.icon && (
-                    <img src={c.icon} alt="" aria-hidden="true" className="mt-6 w-14 h-14 opacity-40 group-hover:opacity-60 transition-opacity" />
+                    <img src={c.icon} alt="" aria-hidden="true" className="mt-6 w-20 h-20 opacity-70 group-hover:opacity-90 transition-opacity" />
                   )}
                   <h3 className="mt-4 font-display text-2xl text-[#F2F2F2]">{c.title}</h3>
                   <div className="dashed-rule mt-4 text-[#333] w-12" />
