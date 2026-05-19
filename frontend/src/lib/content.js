@@ -22,7 +22,7 @@ export const CAPABILITIES = [
   { num: "05", title: "Print & Embroidery", body: "Screen, DTG, sublimation, digital embroidery and applique." },
   { num: "06", title: "Labels & Trims", body: "Woven labels, hang tags, care labels, hardware and finishings." },
   { num: "07", title: "Packaging", body: "Branded tissue, custom mailers, retail-ready folding and polybagging." },
-  { num: "08", title: "Bulk Production", body: "Scalable runs from 100 to 100,000 units with controlled lead times." },
+  { num: "08", title: "Bulk Production", body: "Runs from 100 to 100,000 units with confirmed lead times in writing." },
   { num: "09", title: "Quality Control", body: "Multi-stage inspections — fabric, in-line, end-line and AQL audits." },
   { num: "10", title: "Logistics", body: "Door-to-door freight, customs clearance and DDP shipping to UK & US." },
 ];
@@ -85,10 +85,11 @@ export const CATEGORY_IMAGE_POSITION = {
 export const PROCESS_STEPS = [
   { num: "01", title: "Brief", body: "We listen first. Share your concept, tech pack or sketches." },
   { num: "02", title: "Consultation", body: "We advise on fabric, construction, MOQ and lead time." },
-  { num: "03", title: "Sampling", body: "Prototype and fit samples until specifications are met." },
+  // TODO(content): replace "typically X–Y days per round" with the real cadence.
+  { num: "03", title: "Sampling", body: "Prototype and fit samples — typically [FILL IN: X–Y] days per round — until the spec is met." },
   { num: "04", title: "Quotation", body: "Transparent, all-inclusive costings — no hidden margins." },
-  { num: "05", title: "Production", body: "Bulk manufacturing in monitored, audited facilities." },
-  { num: "06", title: "Quality Control", body: "Multi-stage inspection against agreed AQL standards." },
+  { num: "05", title: "Production", body: "Bulk manufacturing in SMETA-audited facilities with weekly status notes." },
+  { num: "06", title: "Quality Control", body: "Multi-stage inspection against AQL 2.5 (or stricter, by agreement)." },
   { num: "07", title: "Delivery", body: "DDP shipping to your warehouse or third-party logistics." },
 ];
 

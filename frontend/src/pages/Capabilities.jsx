@@ -27,8 +27,9 @@ export default function Capabilities() {
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
             Every stage of apparel manufacturing — handled.
           </h1>
+          {/* TODO(content): swap the [FILL IN] for the named partner-cert programme(s) you can substantiate. */}
           <p className="mt-8 max-w-2xl font-body text-[14px] leading-[1.95] text-[#bbb]">
-            From the first sketch to the final shipment, our capabilities span the entire production journey. Audited facilities, considered partners, exacting standards.
+            From the first sketch to the final shipment. SMETA-audited facilities, [FILL IN: e.g. BSCI / ISO 9001] partners, AQL-graded output.
           </p>
         </div>
       </section>

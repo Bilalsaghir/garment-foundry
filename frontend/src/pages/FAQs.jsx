@@ -49,7 +49,7 @@ export default function FAQs() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · FREQUENTLY ASKED</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F5F4F0] leading-[1.05] max-w-4xl">
-            Answers — quietly considered.
+            Answers we get most often.
           </h1>
         </div>
       </section>
