@@ -39,7 +39,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16 border-b border-[#1a1a1a]">
           <div className="lg:col-span-5">
             <div className="font-body text-[10px] tracking-[0.2em] uppercase text-[#888]">NEWSLETTER</div>
-            <h3 className="mt-3 font-display text-2xl lg:text-3xl text-[#F5F4F0] leading-tight">Quiet quarterly updates from the studio.</h3>
+            <h3 className="mt-3 font-display text-2xl lg:text-3xl text-[#F5F4F0] leading-tight">Quarterly updates from the studio.</h3>
             <p className="mt-3 font-body text-[13px] text-[#999] max-w-md">Fabric trends, capability launches and selected case studies. No noise.</p>
           </div>
           <form onSubmit={subscribe} className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-3 self-end" data-testid="footer-subscribe-form">

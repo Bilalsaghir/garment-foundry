@@ -34,7 +34,8 @@ export default function Process() {
             <img src={IMAGES.stitching} alt="Atelier stitching detail at the production stage" className="w-full h-[640px] object-cover grayscale sticky top-32" />
           </div>
           <div className="col-span-12 lg:col-span-7">
-            <SectionHeading eyebrow="THE WORKFLOW" number="— 001" title="A considered path to production." />
+            {/* TODO(content): replace [FILL IN: 8-14] with the real typical span. */}
+            <SectionHeading eyebrow="THE WORKFLOW" number="— 001" title="A considered path to production." subtitle="Typically [FILL IN: e.g. 8–14] weeks from approved brief to bulk despatch." />
             <ol className="mt-16 space-y-0">
               {PROCESS_STEPS.map((s) => (
                 <li key={s.num} data-testid={`process-${s.num}`} className="py-10 border-t border-[#1a1a1a] last:border-b">

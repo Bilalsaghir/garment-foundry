@@ -26,7 +26,7 @@ export default function Categories() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · CATEGORIES</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
-            Built across the entire apparel spectrum.
+            Twelve apparel categories. One production setup.
           </h1>
           <p className="mt-8 max-w-2xl font-body text-[14px] leading-[1.95] text-[#bbb]">
             From streetwear hoodies to tailored uniforms, technical activewear to children's basics — we manufacture across every major category.
@@ -52,7 +52,7 @@ export default function Categories() {
                   <div>
                     <h3 className="font-display text-2xl lg:text-3xl text-[#F2F2F2] leading-tight">{cat}</h3>
                     <div className="mt-3 flex items-center justify-between">
-                      <span className="overline text-[#888]">REQUEST QUOTE</span>
+                      <span className="overline text-[#888]">VIEW CATEGORY</span>
                       <ArrowUpRight size={16} className="text-[#999] group-hover:text-white" />
                     </div>
                   </div>
