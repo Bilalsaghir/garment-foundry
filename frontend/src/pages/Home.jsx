@@ -117,7 +117,7 @@ export default function Home() {
                   <ArrowUpRight size={16} className="text-[#555] group-hover:text-white transition-colors" />
                 </div>
                 {c.icon && (
-                  <img src={c.icon} alt="" aria-hidden="true" className="mt-6 w-20 h-20 opacity-70 group-hover:opacity-90 transition-opacity" />
+                  <img src={c.icon} alt="" aria-hidden="true" className="mt-6 w-28 h-28 opacity-85 group-hover:opacity-100 transition-opacity" />
                 )}
                 <h3 className="mt-4 font-display text-xl text-[#F2F2F2]">{c.title}</h3>
                 <p className="mt-3 font-body text-[12.5px] leading-[1.8] text-[#999]">{c.body}</p>
