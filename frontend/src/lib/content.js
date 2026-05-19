@@ -133,7 +133,7 @@ export const FAQS = [
   },
   {
     q: "Where do you source fabric?",
-    a: "From audited mills in the United Kingdom, Portugal, Türkiye, India, Bangladesh and China. We match each project to the right mill for the fibre, finish, MOQ and lead-time — not the other way round.",
+    a: "From audited mills in the United Kingdom, Portugal, Türkiye, Pakistan, Bangladesh and China — with our own manufacturing base in Pakistan. We match each project to the right mill for the fibre, finish, MOQ and lead-time — not the other way round.",
   },
   {
     q: "Do you support sustainable and ethical sourcing?",
