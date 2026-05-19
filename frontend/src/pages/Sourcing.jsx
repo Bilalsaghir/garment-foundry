@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
-import { SectionHeading, StitchedDivider } from "@/components/Section";
+import { SectionHeading } from "@/components/Section";
 import { IMAGES } from "@/lib/content";
 
 const REGIONS = [
@@ -43,7 +43,7 @@ export default function Sourcing() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="THE NETWORK" number="— 001" title="Six countries. One standard." />
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
@@ -58,12 +58,11 @@ export default function Sourcing() {
         </div>
       </section>
 
-      <StitchedDivider />
-
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16 items-center">
           <div className="col-span-12 lg:col-span-6">
-            <SectionHeading eyebrow="COMPLIANCE" number="— 002" title="Audited mills. Ethical labour. Verified materials." subtitle="Every partner facility undergoes social and quality audits. Materials are traceable from yarn to finished garment." />
+            {/* TODO(content): trim CERTIFICATIONS to the ones we can substantiate on request — audit-blocker B2 flagged the full grid as an unsubstantiated claim. */}
+            <SectionHeading eyebrow="COMPLIANCE" number="— 002" title="Standards available through partner mills." subtitle="The standards below are available across our partner mill network on request. Specify the certification(s) you need at brief stage and we will scope only the mills that hold them." />
           </div>
           <div className="col-span-12 lg:col-span-6 grid grid-cols-2 gap-px bg-[#1a1a1a]">
             {CERTIFICATIONS.map((c, i) => (
@@ -76,7 +75,7 @@ export default function Sourcing() {
       </section>
 
       {/* CR-G: expanded sourcing detail. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="HOW WE SOURCE" number="— 003" title="Matched to the project, not the other way round." subtitle="No single country is right for every garment. We map your specification — fibre, finish, MOQ, lead time, ethics — to the partner that can deliver it without compromise." />
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GFMonogram } from "@/components/GFMonogram";
-import { SectionHeading, StitchedDivider } from "@/components/Section";
+import { SectionHeading } from "@/components/Section";
 import { IMAGES, CAPABILITIES, CATEGORIES, CATEGORY_IMAGES, CATEGORY_IMAGE_POSITION, PROCESS_STEPS, PRINCIPLES } from "@/lib/content";
 
 // Returns the raw CSS object-position value (e.g. "left", "25% center").
@@ -16,9 +16,9 @@ export default function Home() {
       <PageMeta path="/" title="Garment Foundry — UK Apparel Manufacturing & Sourcing" description="UK-based apparel manufacturing and sourcing for fashion, uniform, private-label and wholesale brands. From brief to bulk, handled with quiet rigour." />
 
       {/* HERO */}
-      <section className="relative min-h-[100vh] flex items-end overflow-hidden">
-        <img src={IMAGES.hero} alt="Manufacturing atelier" className="absolute inset-0 w-full h-full object-cover opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
+      <section className="relative min-h-[80vh] lg:min-h-[88vh] flex items-end overflow-hidden">
+        <img src={IMAGES.hero} alt="Manufacturing atelier" className="absolute inset-0 w-full h-full object-cover opacity-65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black" />
         <div className="absolute inset-0 bg-pinstripe opacity-50" />
 
         {/* Top brand row */}
@@ -40,20 +40,20 @@ export default function Home() {
               <p className="mt-8 max-w-xl font-body text-[14px] leading-[1.9] text-[#cfcfcf] fade-up-d1">
                 A United Kingdom apparel manufacturing and sourcing partner for fashion labels, uniform programmes, private-label and wholesale brands. From brief to bulk — handled with quiet rigour.
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row gap-3 fade-up-d2">
+              <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5 fade-up-d2">
                 <Link to="/quote" data-testid="hero-quote-btn" className="inline-flex items-center justify-center bg-white text-black font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[52px] w-full sm:w-auto hover:bg-[#e8e5de] transition-colors">
                   Request a Quote <ArrowRight size={14} className="ml-3" />
                 </Link>
-                <Link to="/capabilities" data-testid="hero-capabilities-btn" className="inline-flex items-center justify-center border border-white text-white font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[48px] w-full sm:w-auto hover:bg-white/10 transition-colors">
-                  Explore Capabilities
+                <Link to="/capabilities" data-testid="hero-capabilities-btn" className="inline-flex items-center text-white/80 hover:text-white font-body text-[11px] tracking-[0.22em] uppercase font-medium transition-colors">
+                  Explore capabilities <ArrowRight size={12} className="ml-2" />
                 </Link>
               </div>
             </div>
             <div className="hidden lg:flex col-span-4 flex-col items-end gap-6 fade-up-d3">
               <GFMonogram size={88} color="#F2F2F2" />
               <div className="text-right">
-                <div className="overline text-[#888]">SINCE</div>
-                <div className="font-display text-3xl text-[#F2F2F2] mt-2">MMXVI</div>
+                <div className="overline text-[#888]">EST.</div>
+                <div className="font-display text-3xl text-[#F2F2F2] mt-2">MMXVI <span className="text-[#888] text-xl">· 2016</span></div>
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
       <section className="border-y border-[#1a1a1a] bg-black py-6 overflow-hidden">
         <div className="marquee-track">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-16">
+            <div key={i} className="flex gap-8 md:gap-16">
               {["GOTS Certified Partners", "OEKO-TEX® Standard 100", "BCI Cotton", "Audited Facilities", "Ethical Sourcing", "AQL Quality Inspections", "DDP Shipping UK · US"].map((t) => (
                 <span key={t} className="overline text-[#666] whitespace-nowrap">◆ {t}</span>
               ))}
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* TRUST STATEMENT */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 relative">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 relative">
         <span className="monogram-watermark text-[300px] right-0 -top-12 leading-none">GF</span>
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 relative">
           <div className="col-span-12 lg:col-span-5">
@@ -94,10 +94,9 @@ export default function Home() {
         </div>
       </section>
 
-      <StitchedDivider />
 
       {/* CAPABILITIES */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="CAPABILITIES" number="— 003" title="Full-spectrum apparel manufacturing." subtitle="From concept refinement to delivered shipment — every stage is handled in-house or by audited partners under our supervision." />
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
@@ -122,7 +121,7 @@ export default function Home() {
       </section>
 
       {/* CATEGORIES BENTO */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
         <div className="max-w-[1440px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <SectionHeading eyebrow="PRODUCT CATEGORIES" number="— 004" title="Built across the entire apparel spectrum." />
@@ -134,7 +133,7 @@ export default function Home() {
                 key={cat}
                 to="/categories"
                 data-testid={`category-${cat.replace(/[^a-z]/gi, '').toLowerCase()}`}
-                className="bg-black group relative aspect-[4/5] overflow-hidden"
+                className="bg-black group relative aspect-[5/6] overflow-hidden"
               >
                 <img
                   src={CATEGORY_IMAGES[cat]}
@@ -161,7 +160,7 @@ export default function Home() {
       </section>
 
       {/* PROCESS TIMELINE with image */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
             <div className="zoom-on-hover">
@@ -189,7 +188,7 @@ export default function Home() {
       </section>
 
       {/* WHY GF */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] relative overflow-hidden">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] relative overflow-hidden">
         <span className="monogram-watermark text-[420px] -left-12 -top-32 leading-none">GF</span>
         <div className="max-w-[1440px] mx-auto relative">
           <SectionHeading eyebrow="WHY GARMENT FOUNDRY" number="— 006" title="Six principles. One standard." />
@@ -210,7 +209,7 @@ export default function Home() {
       </section>
 
       {/* QUOTE CALCULATOR PREVIEW */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 items-center">
           <div className="col-span-12 lg:col-span-6">
             <span className="eyebrow-number">— 007 / ENQUIRY</span>
@@ -246,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* TRUST BLOCKS */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="CASE STUDIES" number="— 008" title="Partnering with brands of every scale." />
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -269,7 +268,7 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative py-32 lg:py-40 px-6 lg:px-12 overflow-hidden">
+      <section className="relative py-24 lg:py-32 px-6 lg:px-12 overflow-hidden">
         <img src={IMAGES.fabric} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
         <div className="relative max-w-3xl mx-auto text-center">

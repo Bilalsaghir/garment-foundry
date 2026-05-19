@@ -87,6 +87,8 @@ html, body {
 .gf-btn-dark:hover { background: #000; color: #F2F2F2; }
 .gf-btn-solid { background: #F2F2F2; color: #000; border-color: #F2F2F2; }
 .gf-btn-solid:hover { background: transparent; color: #F2F2F2; }
+.gf-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.gf-btn-dark:focus-visible { outline-color: #000; }
 
 /* Overline label */
 .overline {

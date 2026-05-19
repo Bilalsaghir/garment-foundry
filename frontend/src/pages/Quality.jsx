@@ -37,7 +37,7 @@ export default function Quality() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
             <img src={IMAGES.stitching} alt="Close-up of stitch construction under quality inspection" className="w-full h-[640px] object-cover grayscale" />
@@ -58,7 +58,7 @@ export default function Quality() {
       </section>
 
       {/* CR-G: expanded quality detail. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="HOW QC IS BUILT IN" number="— 002" title="What our inspections actually catch — and how." subtitle="Quality is the product of a documented process, not a final-stage hope. Each inspection has a written standard, a sampling plan and a defect log that travels with the order from cutting through despatch." />
 
