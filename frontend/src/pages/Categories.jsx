@@ -26,7 +26,7 @@ export default function Categories() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · CATEGORIES</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
-            Built across the entire apparel spectrum.
+            Twelve apparel categories. One production setup.
           </h1>
           <p className="mt-8 max-w-2xl font-body text-[14px] leading-[1.95] text-[#bbb]">
             From streetwear hoodies to tailored uniforms, technical activewear to children's basics — we manufacture across every major category.
@@ -34,7 +34,7 @@ export default function Categories() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="CATEGORIES" number="— 001" title="Specifications for every brief." />
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
@@ -52,7 +52,7 @@ export default function Categories() {
                   <div>
                     <h3 className="font-display text-2xl lg:text-3xl text-[#F2F2F2] leading-tight">{cat}</h3>
                     <div className="mt-3 flex items-center justify-between">
-                      <span className="overline text-[#888]">REQUEST QUOTE</span>
+                      <span className="overline text-[#888]">VIEW CATEGORY</span>
                       <ArrowUpRight size={16} className="text-[#999] group-hover:text-white" />
                     </div>
                   </div>
@@ -64,7 +64,7 @@ export default function Categories() {
       </section>
 
       {/* CR-G: expanded category detail. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="HOW THE CATEGORIES GROUP" number="— 002" title="The categories above share a few underlying disciplines." subtitle="Most of what you see in the grid clusters around four manufacturing families. The category label is the front-end; the back-end is the fabric, the seam construction and the production scale." />
 

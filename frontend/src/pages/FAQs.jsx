@@ -49,12 +49,12 @@ export default function FAQs() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · FREQUENTLY ASKED</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F5F4F0] leading-[1.05] max-w-4xl">
-            Answers — quietly considered.
+            Answers we get most often.
           </h1>
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
           <SectionHeading eyebrow="QUESTIONS" number="— 001" title="What clients usually ask." />
           <Accordion type="single" collapsible className="mt-16 w-full">

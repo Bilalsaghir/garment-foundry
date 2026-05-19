@@ -28,16 +28,18 @@ export default function Capabilities() {
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
             Every stage of apparel manufacturing — handled.
           </h1>
+          {/* TODO(content): swap the [FILL IN] for the named partner-cert programme(s) you can substantiate. */}
           <p className="mt-8 max-w-2xl font-body text-[14px] leading-[1.95] text-[#bbb]">
-            From the first sketch to the final shipment, our capabilities span the entire production journey. Audited facilities, considered partners, exacting standards.
+            From the first sketch to the final shipment. SMETA-audited facilities, [FILL IN: e.g. BSCI / ISO 9001] partners, AQL-graded output.
           </p>
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="THE FULL STACK" number="— 001" title="Ten disciplines. One workflow." />
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
+          {/* H2: 10 items, skip 3-col entirely — 1 → 2 → 5 produces clean rows at every breakpoint. */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-[#1a1a1a]">
             {CAPABILITIES.map((c, i) => (
               <Reveal key={c.num} delay={Math.min(i * 60, 360)}>
                 <div data-testid={`cap-${c.num}`} className="bg-black p-10 hover:bg-[#0a0a0a] transition-colors duration-[180ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
@@ -53,7 +55,7 @@ export default function Capabilities() {
       </section>
 
       {/* CR-G: expanded capabilities detail. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="WHAT WE COMFORTABLY HANDLE" number="— 002" title="Production realities, not just headline capabilities." subtitle="Capability lists are easy to write. The harder question is what we are good at at production scale, where the constraints are real, and how that maps to your project's specification." />
 
@@ -109,7 +111,7 @@ export default function Capabilities() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#0a0a0a] text-center">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#0a0a0a] text-center">
         <h2 className="font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Tell us what you are building.</h2>
         <Link to="/quote" data-testid="cap-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>
       </section>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
-import { SectionHeading, StitchedDivider } from "@/components/Section";
+import { SectionHeading } from "@/components/Section";
 import { GFMonogram } from "@/components/GFMonogram";
 import CountUp from "@/components/CountUp";
 import { IMAGES, PRINCIPLES } from "@/lib/content";
@@ -15,12 +15,12 @@ export default function About() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · ABOUT</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
-            A quiet, considered manufacturing house — built in the United Kingdom.
+            A UK manufacturing house, built for serious brands.
           </h1>
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-6">
             <img src={IMAGES.cutting} alt="Pattern cutting" className="w-full h-[640px] object-cover grayscale" />
@@ -28,14 +28,15 @@ export default function About() {
           <div className="col-span-12 lg:col-span-6 flex flex-col justify-center">
             <span className="eyebrow-number">— 001 / ORIGIN</span>
             <h2 className="mt-6 font-display text-3xl lg:text-4xl text-[#F2F2F2] leading-[1.15]">
-              Built for brand owners who refuse to compromise on quality.
+              Built for brand owners who treat manufacturing as part of the product.
             </h2>
             <p className="mt-6 font-body text-[14px] leading-[1.95] text-[#bbb]">
-              Garment Foundry was founded with one ambition — to give clothing brands an apparel manufacturing partner that operates with the same standards of detail, transparency and craft that they expect of themselves.
+              Garment Foundry was founded to give clothing brands a manufacturing partner that operates with the same standards of detail and transparency they expect of themselves.
             </p>
             <p className="mt-4 font-body text-[14px] leading-[1.95] text-[#bbb]">
-              We bridge British design discipline with a vetted global production network — selecting the right facility, mill and finishing house for every project. We exist for the brands that consider every stitch, every label and every gram of fabric.
+              We pair UK production oversight with a vetted global mill network — selecting the right facility, mill and finishing house for each project. For brand owners who care about every stitch, label and gram of fabric.
             </p>
+            {/* TODO(content): verify these figures (100+ brands / 14 countries / 2M+ units) are substantiated before keeping. Audit-critical: every public claim must be defensible. */}
             <div className="mt-10 grid grid-cols-3 gap-6 border-y border-[#1a1a1a] py-8">
               <div><div className="font-display text-3xl text-[#F2F2F2]"><CountUp to={100} suffix="+" /></div><div className="overline mt-2">BRANDS SERVED</div></div>
               <div><div className="font-display text-3xl text-[#F2F2F2]"><CountUp to={14} /></div><div className="overline mt-2">COUNTRIES SHIPPED</div></div>
@@ -45,9 +46,7 @@ export default function About() {
         </div>
       </section>
 
-      <StitchedDivider />
-
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="PRINCIPLES" number="— 002" title="What we hold to, in every project." />
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
@@ -62,7 +61,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12 text-center">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 text-center">
         <GFMonogram size={50} className="mx-auto" color="#F2F2F2" />
         <h2 className="mt-10 font-display text-3xl lg:text-5xl text-[#F2F2F2] max-w-3xl mx-auto leading-tight">Let's build something that lasts.</h2>
         <Link to="/quote" data-testid="about-cta" className="gf-btn gf-btn-solid mt-10">Request a Quote</Link>

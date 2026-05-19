@@ -3,17 +3,15 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 
-// BL-G: Blog and Case Studies are temporarily removed from the nav until their
-// content lands. Their /blog and /case-studies routes stay live (so sitemap
-// URLs and direct links continue to work) but they emit a noindex meta tag.
+// HP-A: nav consolidated. Process, Sourcing and Quality are sub-stories of
+// Capabilities and live on as anchored sections from there (and as standalone
+// routes for canonical SEO). Blog and Case Studies remain hidden via BL-G
+// until content lands.
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/capabilities", label: "Capabilities" },
   { to: "/categories", label: "Categories" },
-  { to: "/process", label: "Process" },
-  { to: "/sourcing", label: "Sourcing" },
-  { to: "/quality", label: "Quality" },
   { to: "/faqs", label: "FAQs" },
   { to: "/contact", label: "Contact" },
 ];

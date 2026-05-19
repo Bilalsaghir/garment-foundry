@@ -32,18 +32,18 @@ export default function Quality() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · QUALITY CONTROL</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
-            Six checkpoints. Zero compromise.
+            Six checkpoints. Documented at every stage.
           </h1>
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
             <img src={IMAGES.stitching} alt="Close-up of stitch construction under quality inspection" className="w-full h-[640px] object-cover grayscale" />
           </div>
           <div className="col-span-12 lg:col-span-7">
-            <SectionHeading eyebrow="QC PROTOCOL" number="— 001" title="Quality is built in — not inspected at the end." subtitle="Every garment passes through six independent stages of inspection. The result: consistent, brand-grade product delivered ready for sale." />
+            <SectionHeading eyebrow="QC PROTOCOL" number="— 001" title="Quality is built in — not inspected at the end." subtitle="Every garment passes six independent stages of inspection. The result: a final lot you can put on shelves without re-checking." />
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#1a1a1a]">
               {QC_STAGES.map((s) => (
                 <div key={s.num} data-testid={`qc-${s.num}`} className="bg-black p-8">
@@ -58,7 +58,7 @@ export default function Quality() {
       </section>
 
       {/* CR-G: expanded quality detail. */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
+      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
         <div className="max-w-[1100px] mx-auto">
           <SectionHeading eyebrow="HOW QC IS BUILT IN" number="— 002" title="What our inspections actually catch — and how." subtitle="Quality is the product of a documented process, not a final-stage hope. Each inspection has a written standard, a sampling plan and a defect log that travels with the order from cutting through despatch." />
 

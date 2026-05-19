@@ -42,7 +42,20 @@ function ScrollToTop() {
 }
 
 function PublicLayout({ children }) {
-  return (<><Navbar /><main>{children}</main><Footer /></>);
+  return (
+    <>
+      {/* M8: Skip-to-content for keyboard users. sr-only by default; visible on focus. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[60] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:font-body focus:text-[11px] focus:tracking-[0.2em] focus:uppercase"
+      >
+        Skip to content
+      </a>
+      <Navbar />
+      <main id="main-content">{children}</main>
+      <Footer />
+    </>
+  );
 }
 
 function Public({ Page }) {

@@ -49,7 +49,7 @@ export default function Contact() {
     } catch (err) {
       const msg = err?.response?.status === 429
         ? "Too many submissions. Please wait a minute and try again."
-        : "Something went wrong. Please try again.";
+        : "Something went wrong. Try again, or email us at hello@garmentfoundry.com.";
       toast.error(msg);
     } finally { setSubmitting(false); }
   };
@@ -66,7 +66,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-24 lg:py-32 px-6 lg:px-12">
+      <section className="py-16 lg:py-24 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto grid grid-cols-12 gap-8 lg:gap-16">
           <div className="col-span-12 lg:col-span-5">
             <GFMonogram size={56} color="#F2F2F2" />
