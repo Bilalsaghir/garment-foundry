@@ -35,10 +35,10 @@ export default function Sourcing() {
         <div className="relative max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · SOURCING</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
-            Global sourcing. Trusted partnerships.
+            Fabric sourcing across the UK, Europe and Asia.
           </h1>
           <p className="mt-8 max-w-2xl font-body text-[14px] leading-[1.95] text-[#bbb]">
-            We work with audited mills, dye houses and manufacturing partners across six countries — each selected for craft, capability and compliance.
+            We work with audited mills, dye houses and manufacturing partners across six countries — each selected for technical fit, ethical-audit status, and lead-time reliability.
           </p>
         </div>
       </section>

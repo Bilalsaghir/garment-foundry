@@ -48,7 +48,7 @@ export default function Quote() {
 
   const validate = (name, value) => {
     if (name === "business_name" && !value?.trim()) return "Company / brand name is required";
-    if (name === "contact_name_role" && !value?.trim()) return "Your name (and role, if any) is required";
+    if (name === "contact_name_role" && !value?.trim()) return "Your name is required (role optional)";
     if (name === "email") {
       if (!value?.trim()) return "Work email is required";
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a valid work email address";
@@ -137,7 +137,7 @@ export default function Quote() {
       <div className="max-w-[920px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between mb-10">
           <div>
-            <div className="font-body text-[10px] tracking-[0.2em] uppercase text-[#888]">FIRST-TOUCH ENQUIRY</div>
+            <div className="font-body text-[10px] tracking-[0.2em] uppercase text-[#888]">QUICK ENQUIRY</div>
             <h1 className="mt-3 font-display text-4xl lg:text-5xl text-[#F5F4F0] leading-tight">Request a Manufacturing Quote</h1>
           </div>
           <GFMonogram size={48} color="#F2F2F2" className="hidden md:block" />

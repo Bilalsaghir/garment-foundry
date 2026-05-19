@@ -14,7 +14,7 @@ export default function About() {
         <div className="max-w-[1440px] mx-auto">
           <span className="overline">CHAPTER · ABOUT</span>
           <h1 className="mt-6 font-display text-5xl lg:text-7xl text-[#F2F2F2] leading-[1.05] max-w-4xl">
-            A quiet, considered manufacturing house — built in the United Kingdom.
+            A UK manufacturing house, built for serious brands.
           </h1>
         </div>
       </section>
@@ -27,14 +27,15 @@ export default function About() {
           <div className="col-span-12 lg:col-span-6 flex flex-col justify-center">
             <span className="eyebrow-number">— 001 / ORIGIN</span>
             <h2 className="mt-6 font-display text-3xl lg:text-4xl text-[#F2F2F2] leading-[1.15]">
-              Built for brand owners who refuse to compromise on quality.
+              Built for brand owners who treat manufacturing as part of the product.
             </h2>
             <p className="mt-6 font-body text-[14px] leading-[1.95] text-[#bbb]">
-              Garment Foundry was founded with one ambition — to give clothing brands an apparel manufacturing partner that operates with the same standards of detail, transparency and craft that they expect of themselves.
+              Garment Foundry was founded to give clothing brands a manufacturing partner that operates with the same standards of detail and transparency they expect of themselves.
             </p>
             <p className="mt-4 font-body text-[14px] leading-[1.95] text-[#bbb]">
-              We bridge British design discipline with a vetted global production network — selecting the right facility, mill and finishing house for every project. We exist for the brands that consider every stitch, every label and every gram of fabric.
+              We pair UK production oversight with a vetted global mill network — selecting the right facility, mill and finishing house for each project. For brand owners who care about every stitch, label and gram of fabric.
             </p>
+            {/* TODO(content): verify these figures (100+ brands / 14 countries / 2M+ units) are substantiated before keeping. Audit-critical: every public claim must be defensible. */}
             <div className="mt-10 grid grid-cols-3 gap-6 border-y border-[#1a1a1a] py-8">
               <div><div className="font-display text-3xl text-[#F2F2F2]">100+</div><div className="overline mt-2">BRANDS SERVED</div></div>
               <div><div className="font-display text-3xl text-[#F2F2F2]">14</div><div className="overline mt-2">COUNTRIES SHIPPED</div></div>

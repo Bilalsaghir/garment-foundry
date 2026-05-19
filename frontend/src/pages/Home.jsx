@@ -37,8 +37,9 @@ export default function Home() {
               <h1 className="mt-6 font-display text-[44px] sm:text-[68px] lg:text-[96px] leading-[0.95] tracking-tight text-[#F2F2F2]">
                 Crafted with<br /><em className="not-italic font-display text-[#cfcfcf]">purpose.</em> Delivered<br />with precision.
               </h1>
+              {/* TODO(content): swap the [FILL IN] for the real typical lead time range. */}
               <p className="mt-8 max-w-xl font-body text-[14px] leading-[1.9] text-[#cfcfcf] fade-up-d1">
-                A United Kingdom apparel manufacturing and sourcing partner for fashion labels, uniform programmes, private-label and wholesale brands. From brief to bulk — handled with quiet rigour.
+                A UK apparel manufacturing and sourcing partner for fashion, uniform and private-label brands. From brief to bulk in [FILL IN: e.g. 8–14] weeks, shipped DDP to the UK and US.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-5 fade-up-d2">
                 <Link to="/quote" data-testid="hero-quote-btn" className="inline-flex items-center justify-center bg-white text-black font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[52px] w-full sm:w-auto hover:bg-[#e8e5de] transition-colors">
@@ -65,7 +66,7 @@ export default function Home() {
         <div className="marquee-track">
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-8 md:gap-16">
-              {["GOTS Certified Partners", "OEKO-TEX® Standard 100", "BCI Cotton", "Audited Facilities", "Ethical Sourcing", "AQL Quality Inspections", "DDP Shipping UK · US"].map((t) => (
+              {["GOTS", "OEKO-TEX® STANDARD 100", "BCI COTTON", "SMETA AUDITED", "AQL 2.5", "DDP UK", "DDP US"].map((t) => (
                 <span key={t} className="overline text-[#666] whitespace-nowrap">◆ {t}</span>
               ))}
             </div>
@@ -124,7 +125,7 @@ export default function Home() {
       <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
         <div className="max-w-[1440px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <SectionHeading eyebrow="PRODUCT CATEGORIES" number="— 004" title="Built across the entire apparel spectrum." />
+            <SectionHeading eyebrow="PRODUCT CATEGORIES" number="— 004" title="Twelve product categories. One production network." />
             <Link to="/categories" data-testid="home-categories-link" className="gf-btn gf-btn-light self-start lg:self-auto">All Categories</Link>
           </div>
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
@@ -244,28 +245,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TRUST BLOCKS */}
-      <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
-        <div className="max-w-[1440px] mx-auto">
-          <SectionHeading eyebrow="CASE STUDIES" number="— 008" title="Partnering with brands of every scale." />
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { img: IMAGES.cutting, eyebrow: "STREETWEAR LABEL · LONDON", h: "From 200 to 12,000 units in three seasons.", body: "Built a complete production line for a streetwear brand — fabric sourcing, fit refinement and scaled bulk runs." },
-              { img: IMAGES.threads, eyebrow: "PRIVATE LABEL · NEW YORK", h: "Premium knitwear, delivered DDP.", body: "End-to-end manufacturing for an American boutique label with mill-direct yarn sourcing and quayside QC." },
-              { img: IMAGES.fabric, eyebrow: "CORPORATE UNIFORMS · UK", h: "Workwear programme for a national operator.", body: "Sourced technical fabrics, engineered patterns and managed roll-out across 14 locations." },
-            ].map((c, i) => (
-              <article key={i} data-testid={`case-${i}`} className="group">
-                <div className="zoom-on-hover">
-                  <img src={c.img} alt={c.h} className="w-full h-72 object-cover grayscale" />
-                </div>
-                <div className="overline mt-6 text-[#777]">{c.eyebrow}</div>
-                <h3 className="mt-3 font-display text-xl text-[#F2F2F2] leading-snug">{c.h}</h3>
-                <p className="mt-3 font-body text-[12.5px] leading-[1.85] text-[#999]">{c.body}</p>
-              </article>
-            ))}
+      {/* TRUST BLOCKS — invented placeholder case studies removed (audit B3).
+          Re-enable this section once 2-3 real case studies are signed off; use the
+          placeholder shape below as the data template. */}
+      {false && (
+        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707]">
+          <div className="max-w-[1440px] mx-auto">
+            <SectionHeading eyebrow="CASE STUDIES" number="— 008" title="Partnering with brands of every scale." />
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { img: IMAGES.cutting, eyebrow: "[FILL IN: STREETWEAR LABEL · CITY]", h: "[FILL IN: 1-sentence outcome with two numbers.]", body: "[FILL IN: 2-sentence problem + what you did.]" },
+                { img: IMAGES.threads, eyebrow: "[FILL IN: PRIVATE LABEL · CITY]", h: "[FILL IN: outcome headline.]", body: "[FILL IN: problem + work.]" },
+                { img: IMAGES.fabric, eyebrow: "[FILL IN: UNIFORM PROGRAMME · CITY]", h: "[FILL IN: outcome headline.]", body: "[FILL IN: problem + work.]" },
+              ].map((c, i) => (
+                <article key={i} data-testid={`case-${i}`} className="group">
+                  <div className="zoom-on-hover">
+                    <img src={c.img} alt={c.h} className="w-full h-72 object-cover grayscale" />
+                  </div>
+                  <div className="overline mt-6 text-[#777]">{c.eyebrow}</div>
+                  <h3 className="mt-3 font-display text-xl text-[#F2F2F2] leading-snug">{c.h}</h3>
+                  <p className="mt-3 font-body text-[12.5px] leading-[1.85] text-[#999]">{c.body}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* FINAL CTA */}
       <section className="relative py-24 lg:py-32 px-6 lg:px-12 overflow-hidden">
@@ -277,11 +282,11 @@ export default function Home() {
             Your next collection<br />deserves a manufacturing partner.
           </h2>
           <p className="mt-8 font-body text-[14px] leading-[1.9] text-[#bbb] max-w-xl mx-auto">
-            Submit a brief or a tech pack. We will reply with an indicative proposal within one business day — transparent, all-inclusive and built for production.
+            Submit a brief or a tech pack. We reply with an indicative quote within one business day — transparent, all-inclusive and built for production.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Quote</Link>
-            <Link to="/contact" data-testid="final-cta-contact" className="gf-btn gf-btn-light">Speak to a Production Manager</Link>
+            <Link to="/contact" data-testid="final-cta-contact" className="gf-btn gf-btn-light">Talk to the studio</Link>
           </div>
         </div>
       </section>

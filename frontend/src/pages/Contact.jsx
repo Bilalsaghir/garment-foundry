@@ -49,7 +49,7 @@ export default function Contact() {
     } catch (err) {
       const msg = err?.response?.status === 429
         ? "Too many submissions. Please wait a minute and try again."
-        : "Something went wrong. Please try again.";
+        : "Something went wrong. Try again, or email us at hello@garmentfoundry.com.";
       toast.error(msg);
     } finally { setSubmitting(false); }
   };
