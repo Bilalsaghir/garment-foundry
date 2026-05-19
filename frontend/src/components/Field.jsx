@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-// BL-H: `id` props the htmlFor link between <label> and the inner control, and
-// is propagated to the child input via cloneElement so callers only declare it
-// once. `required` is similarly propagated so the native HTML attribute is set
-// on the actual <input>, not just rendered as a visual "*" decoration.
+// BL-H + motion: `id` props the htmlFor link between <label> and the inner
+// control, and is propagated to the child input via cloneElement so callers
+// only declare it once. `required` is similarly propagated so the native HTML
+// attribute is set on the actual <input>, not just rendered as a visual "*"
+// decoration. A one-shot horizontal shake fires on the rising edge of an
+// error (handled by the .gf-shake class — see index.css for the keyframe).
 export const Field = ({ id, label, required, error, hint, children, testId }) => {
   const child = React.Children.only(children);
   const inputId = id || child.props.id;
@@ -13,8 +15,17 @@ export const Field = ({ id, label, required, error, hint, children, testId }) =>
     "aria-invalid": child.props["aria-invalid"] ?? (error ? true : undefined),
     "aria-describedby": error && testId ? `${testId}-error` : child.props["aria-describedby"],
   });
+
+  const [shaking, setShaking] = useState(false);
+  useEffect(() => {
+    if (!error) return;
+    setShaking(true);
+    const t = setTimeout(() => setShaking(false), 360);
+    return () => clearTimeout(t);
+  }, [error]);
+
   return (
-    <div data-testid={testId} className="space-y-2">
+    <div data-testid={testId} className={`space-y-2 ${shaking ? "gf-shake" : ""}`}>
       <label htmlFor={inputId} className="block font-body text-[10px] tracking-[0.12em] uppercase text-[#888]">
         {label}{required && <span className="text-[#888] ml-1" aria-hidden="true">*</span>}
       </label>

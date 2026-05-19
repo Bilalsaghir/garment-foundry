@@ -63,7 +63,7 @@ export default function FAQs() {
                 <AccordionTrigger className="font-display text-lg lg:text-xl text-[#F5F4F0] py-6 hover:no-underline text-left">
                   <span className="flex items-baseline gap-6"><span className="font-display text-xs text-[#666] tracking-luxe">{String(i + 1).padStart(2, "0")}</span>{f.q}</span>
                 </AccordionTrigger>
-                <AccordionContent className="font-body text-[14px] leading-[1.9] text-[#aaa] pb-6 pl-14">
+                <AccordionContent className="accordion-content overflow-hidden font-body text-[14px] leading-[1.9] text-[#aaa] pb-6 pl-14">
                   <div dangerouslySetInnerHTML={{ __html: f.a }} />
                 </AccordionContent>
               </AccordionItem>

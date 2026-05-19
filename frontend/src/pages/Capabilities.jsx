@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
 import { SectionHeading } from "@/components/Section";
+import Reveal from "@/components/Reveal";
 import { CAPABILITIES, IMAGES } from "@/lib/content";
 
 // TODO(content): fill the MOQ floor for boutique cut-and-sew and the upper bound for high-volume runs.
@@ -37,13 +38,15 @@ export default function Capabilities() {
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="THE FULL STACK" number="— 001" title="Ten disciplines. One workflow." />
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
-            {CAPABILITIES.map((c) => (
-              <div key={c.num} data-testid={`cap-${c.num}`} className="bg-black p-10 hover:bg-[#0a0a0a] transition-colors">
-                <span className="eyebrow-number">{c.num}</span>
-                <h3 className="mt-6 font-display text-2xl text-[#F2F2F2]">{c.title}</h3>
-                <div className="dashed-rule mt-4 text-[#333] w-12" />
-                <p className="mt-6 font-body text-[13px] leading-[1.9] text-[#999]">{c.body}</p>
-              </div>
+            {CAPABILITIES.map((c, i) => (
+              <Reveal key={c.num} delay={Math.min(i * 60, 360)}>
+                <div data-testid={`cap-${c.num}`} className="bg-black p-10 hover:bg-[#0a0a0a] transition-colors duration-[180ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+                  <span className="eyebrow-number">{c.num}</span>
+                  <h3 className="mt-6 font-display text-2xl text-[#F2F2F2]">{c.title}</h3>
+                  <div className="dashed-rule mt-4 text-[#333] w-12" />
+                  <p className="mt-6 font-body text-[13px] leading-[1.9] text-[#999]">{c.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>

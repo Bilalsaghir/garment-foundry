@@ -32,15 +32,17 @@ export default function Home() {
 
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12 pb-24 lg:pb-32 w-full">
           <div className="grid grid-cols-12 gap-6 items-end">
-            <div className="col-span-12 lg:col-span-8 fade-up">
+            {/* Hero choreography — eyebrow, h1, body, CTAs each enter on a staggered delay.
+                See docs/motion-handoff.md (or the in-conversation spec) for timings. */}
+            <div className="col-span-12 lg:col-span-8 gf-fade-up">
               <span className="eyebrow-number">— 001 / INTRODUCTION</span>
               <h1 className="mt-6 font-display text-[44px] sm:text-[68px] lg:text-[96px] leading-[0.95] tracking-tight text-[#F2F2F2]">
                 Crafted with<br /><em className="not-italic font-display text-[#cfcfcf]">purpose.</em> Delivered<br />with precision.
               </h1>
-              <p className="mt-8 max-w-xl font-body text-[14px] leading-[1.9] text-[#cfcfcf] fade-up-d1">
+              <p className="mt-8 max-w-xl font-body text-[14px] leading-[1.9] text-[#cfcfcf] gf-fade-up gf-delay-300">
                 A United Kingdom apparel manufacturing and sourcing partner for fashion labels, uniform programmes, private-label and wholesale brands. From brief to bulk — handled with quiet rigour.
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row gap-3 fade-up-d2">
+              <div className="mt-10 flex flex-col sm:flex-row gap-3 gf-fade-up gf-delay-500">
                 <Link to="/quote" data-testid="hero-quote-btn" className="inline-flex items-center justify-center bg-white text-black font-body text-[11px] tracking-[0.22em] uppercase font-medium px-8 h-[52px] w-full sm:w-auto hover:bg-[#e8e5de] transition-colors">
                   Request a Quote <ArrowRight size={14} className="ml-3" />
                 </Link>
@@ -49,7 +51,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="hidden lg:flex col-span-4 flex-col items-end gap-6 fade-up-d3">
+            <div className="hidden lg:flex col-span-4 flex-col items-end gap-6 gf-fade-up gf-delay-700">
               <GFMonogram size={88} color="#F2F2F2" />
               <div className="text-right">
                 <div className="overline text-[#888]">SINCE</div>

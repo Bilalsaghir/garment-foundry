@@ -109,16 +109,23 @@ export default function Quote() {
       <div data-testid="quote-success" className="bg-black min-h-screen pt-40 pb-32 px-6 lg:px-12">
         <PageMeta path="/quote" title="Quote received | Garment Foundry" description="Thank you. Your enquiry is received. We reply within one business day." noindex />
         <div className="max-w-2xl mx-auto text-center">
-          <GFMonogram size={56} className="mx-auto" color="#F2F2F2" />
-          <h1 className="mt-10 font-display text-4xl lg:text-5xl text-[#F5F4F0] leading-tight">Thank you. Your enquiry is received.</h1>
-          <p className="mt-6 font-body text-[14px] leading-[1.9] text-[#bbb]">
+          {/* A line draws above the monogram — the "celebration" for a confident B2B exchange. */}
+          <svg viewBox="0 0 320 2" className="mx-auto w-40 mb-10" aria-hidden="true">
+            <line x1="0" y1="1" x2="320" y2="1"
+              stroke="#F2F2F2" strokeWidth="2"
+              strokeDasharray="320" strokeDashoffset="320"
+              className="gf-stroke-draw" />
+          </svg>
+          <GFMonogram size={56} className="mx-auto gf-fade-up gf-delay-300" color="#F2F2F2" />
+          <h1 className="mt-10 font-display text-4xl lg:text-5xl text-[#F5F4F0] leading-tight gf-fade-up gf-delay-500">Thank you. Your enquiry is received.</h1>
+          <p className="mt-6 font-body text-[14px] leading-[1.9] text-[#bbb] gf-fade-up gf-delay-700">
             A member of our production team will respond with an indicative quote within <strong className="text-white">one business day</strong>.
           </p>
-          <div className="mt-10 border border-[#1a1a1a] p-6 inline-block bg-[#0a0a0a]">
+          <div className="mt-10 border border-[#1a1a1a] p-6 inline-block bg-[#0a0a0a] gf-fade-up gf-delay-900">
             <div className="font-body text-[10px] tracking-[0.15em] uppercase text-[#888]">REFERENCE</div>
             <div className="font-display text-2xl text-[#F5F4F0] mt-2">{reference}</div>
           </div>
-          <div className="mt-12 border-t border-[#1a1a1a] pt-8 max-w-md mx-auto">
+          <div className="mt-12 border-t border-[#1a1a1a] pt-8 max-w-md mx-auto gf-fade-up gf-delay-1100">
             <p className="font-body text-[13px] leading-[1.9] text-[#888]">
               If you already have a tech pack and want to share full specifications, give us the full brief now.
             </p>

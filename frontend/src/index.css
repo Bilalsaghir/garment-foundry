@@ -12,6 +12,35 @@
   --gf-muted: #777777;
   --gf-paper: #F2F2F2;
   --gf-bone: #E8E5DE;
+
+  /* Motion language — restrained, editorial. See docs/motion-handoff.md if it exists. */
+  --motion-instant: 75ms;
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 560ms;
+  --motion-ambient: 1200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* Reduced motion: the site reads correctly without animation. Collapse durations,
+   stop the marquee, cancel any in-flight transitions. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-instant: 0ms;
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-slow: 0ms;
+    --motion-ambient: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none !important; }
 }
 
 html, body {
@@ -141,19 +170,65 @@ textarea.gf-input { resize: vertical; min-height: 120px; }
 .zoom-on-hover img { transition: transform 1200ms ease; }
 .zoom-on-hover:hover img { transform: scale(1.06); }
 
-/* Marquee */
+/* Marquee — pause on hover so users can read items as they pass. */
 @keyframes gfMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.marquee-track { display: flex; gap: 4rem; animation: gfMarquee 40s linear infinite; white-space: nowrap; }
+.marquee-track { display: flex; gap: 4rem; animation: gfMarquee 30s linear infinite; white-space: nowrap; will-change: transform; }
+.marquee-track:hover { animation-play-state: paused; }
 
-/* Fade up animation */
+/* Fade up — page-load entrance and scroll-reveal share these tokens. */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 .fade-up { animation: fadeUp 700ms ease both; }
 .fade-up-d1 { animation: fadeUp 700ms 120ms ease both; }
 .fade-up-d2 { animation: fadeUp 700ms 240ms ease both; }
 .fade-up-d3 { animation: fadeUp 700ms 360ms ease both; }
+
+/* Slower, editorial entrance — used for hero choreography. */
+@keyframes gf-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.gf-fade-up { opacity: 0; animation: gf-fade-up var(--motion-ambient) var(--ease-out) forwards; }
+.gf-delay-100 { animation-delay: 100ms; }
+.gf-delay-200 { animation-delay: 200ms; }
+.gf-delay-300 { animation-delay: 300ms; }
+.gf-delay-500 { animation-delay: 500ms; }
+.gf-delay-700 { animation-delay: 700ms; }
+.gf-delay-900 { animation-delay: 900ms; }
+.gf-delay-1100 { animation-delay: 1100ms; }
+@media (prefers-reduced-motion: reduce) {
+  .gf-fade-up { opacity: 1; transform: none; animation: none; }
+}
+
+/* Form error — single shake on validation failure. */
+@keyframes gf-shake-x {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+.gf-shake { animation: gf-shake-x 360ms var(--ease-in-out); }
+@media (prefers-reduced-motion: reduce) { .gf-shake { animation: none; } }
+
+/* SVG stroke draw — used on the Quote success divider. */
+@keyframes gf-stroke-draw { to { stroke-dashoffset: 0; } }
+.gf-stroke-draw { animation: gf-stroke-draw var(--motion-ambient) var(--ease-out) 100ms forwards; }
+@media (prefers-reduced-motion: reduce) { .gf-stroke-draw { animation: none; stroke-dashoffset: 0; } }
+
+/* Radix Accordion height transitions — applies to FAQ accordion content. */
+@keyframes gf-accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes gf-accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+[data-state="open"].accordion-content { animation: gf-accordion-down var(--motion-base) var(--ease-in-out); }
+[data-state="closed"].accordion-content { animation: gf-accordion-up var(--motion-base) var(--ease-in-out); }
 
 @layer base {
   :root {

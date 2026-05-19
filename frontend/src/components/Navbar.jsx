@@ -19,13 +19,17 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  // 0..1 progress over the first 100px of scroll. Drives a smooth bg fade
+  // instead of the previous binary switch at scrollY > 8.
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
+    const max = 100;
+    const onScroll = () => setScrollProgress(Math.min(1, window.scrollY / max));
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -35,9 +39,13 @@ export default function Navbar() {
   return (
     <header
       data-testid="site-navbar"
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/85 backdrop-blur-xl border-b border-[#1f1f1f]" : "bg-transparent"
-      }`}
+      style={{
+        backgroundColor: `rgba(0, 0, 0, ${0.85 * scrollProgress})`,
+        backdropFilter: scrollProgress > 0 ? `blur(${20 * scrollProgress}px)` : "none",
+        WebkitBackdropFilter: scrollProgress > 0 ? `blur(${20 * scrollProgress}px)` : "none",
+        borderBottomColor: `rgba(31, 31, 31, ${scrollProgress})`,
+      }}
+      className="fixed top-0 inset-x-0 z-50 border-b border-transparent"
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link to="/" data-testid="nav-logo-link" className="flex items-center group">

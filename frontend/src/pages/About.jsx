@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
 import { SectionHeading, StitchedDivider } from "@/components/Section";
 import { GFMonogram } from "@/components/GFMonogram";
+import CountUp from "@/components/CountUp";
 import { IMAGES, PRINCIPLES } from "@/lib/content";
 
 export default function About() {
@@ -36,9 +37,9 @@ export default function About() {
               We bridge British design discipline with a vetted global production network — selecting the right facility, mill and finishing house for every project. We exist for the brands that consider every stitch, every label and every gram of fabric.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-6 border-y border-[#1a1a1a] py-8">
-              <div><div className="font-display text-3xl text-[#F2F2F2]">100+</div><div className="overline mt-2">BRANDS SERVED</div></div>
-              <div><div className="font-display text-3xl text-[#F2F2F2]">14</div><div className="overline mt-2">COUNTRIES SHIPPED</div></div>
-              <div><div className="font-display text-3xl text-[#F2F2F2]">2M+</div><div className="overline mt-2">UNITS PRODUCED</div></div>
+              <div><div className="font-display text-3xl text-[#F2F2F2]"><CountUp to={100} suffix="+" /></div><div className="overline mt-2">BRANDS SERVED</div></div>
+              <div><div className="font-display text-3xl text-[#F2F2F2]"><CountUp to={14} /></div><div className="overline mt-2">COUNTRIES SHIPPED</div></div>
+              <div><div className="font-display text-3xl text-[#F2F2F2]"><CountUp to={2} suffix="M+" /></div><div className="overline mt-2">UNITS PRODUCED</div></div>
             </div>
           </div>
         </div>
