@@ -8,7 +8,7 @@ const REGIONS = [
   { region: "United Kingdom", focus: "Heritage tailoring · technical knitwear · short-run boutique production." },
   { region: "Portugal", focus: "Premium jersey · cut & sew basics · refined finishing." },
   { region: "Türkiye", focus: "Denim · outerwear · activewear · mid-volume mills." },
-  { region: "India", focus: "Cotton woven · embroidery · printed apparel · sustainable yarn." },
+  { region: "Pakistan", focus: "Our manufacturing base — cotton woven, embroidery, printed apparel and sustainable yarn." },
   { region: "Bangladesh", focus: "High-volume knits · wovens · uniform programmes." },
   { region: "China", focus: "Technical fabrics · performance wear · accessories." },
 ];
