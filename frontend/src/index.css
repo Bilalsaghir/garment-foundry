@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gf-black: #000000;
+  --gf-ink: #0a0a0a;
+  --gf-charcoal: #1a1a1a;
+  --gf-border: #2a2a2a;
+  --gf-muted: #777777;
+  --gf-paper: #F2F2F2;
+  --gf-bone: #E8E5DE;
+
+  /* Motion language — restrained, editorial. See docs/motion-handoff.md if it exists. */
+  --motion-instant: 75ms;
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 560ms;
+  --motion-ambient: 1200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* Reduced motion: the site reads correctly without animation. Collapse durations,
+   stop the marquee, cancel any in-flight transitions. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-instant: 0ms;
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-slow: 0ms;
+    --motion-ambient: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none !important; }
+}
+
+html, body {
+  margin: 0;
+  background: var(--gf-black);
+  color: var(--gf-paper);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: var(--gf-paper); color: var(--gf-black); }
+
+.font-display { font-family: 'Cinzel', serif; }
+.font-body { font-family: 'Montserrat', sans-serif; }
+
+.tracking-luxe { letter-spacing: 0.22em; }
+.tracking-precision { letter-spacing: 0.06em; }
+
+/* Pinstripe grid background */
+.bg-pinstripe {
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(255,255,255,0.04) 119px, rgba(255,255,255,0.04) 120px);
+}
+.bg-pinstripe-dark {
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(0,0,0,0.06) 119px, rgba(0,0,0,0.06) 120px);
+}
+
+/* Paper texture overlay (procedural) */
+.bg-paper {
+  background-color: var(--gf-paper);
+  background-image:
+    radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 1px;
+}
+
+/* Stitched dashed seam */
+.seam {
+  border-top: 1px dashed rgba(255,255,255,0.25);
+}
+.seam-dark {
+  border-top: 1px dashed rgba(0,0,0,0.3);
+}
+
+/* Stitched arc divider via SVG-friendly border */
+.dashed-rule {
+  background-image: linear-gradient(to right, currentColor 50%, transparent 50%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+}
+
+/* Sharp button base */
+.gf-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 1rem 2rem;
+  border: 1px solid currentColor;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background-color 250ms ease, color 250ms ease, transform 250ms ease;
+  cursor: pointer;
+  border-radius: 0;
+  background: transparent;
+}
+.gf-btn-light { color: #F2F2F2; }
+.gf-btn-light:hover { background: #F2F2F2; color: #000; }
+.gf-btn-dark { color: #000; border-color: #000; }
+.gf-btn-dark:hover { background: #000; color: #F2F2F2; }
+.gf-btn-solid { background: #F2F2F2; color: #000; border-color: #F2F2F2; }
+.gf-btn-solid:hover { background: transparent; color: #F2F2F2; }
+.gf-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.gf-btn-dark:focus-visible { outline-color: #000; }
+
+/* Overline label */
+.overline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gf-muted);
+}
+
+/* Inputs */
+.gf-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  border-radius: 0;
+  color: #F2F2F2;
+  padding: 0.85rem 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 200ms ease;
+}
+.gf-input:focus { border-bottom-color: #F2F2F2; }
+.gf-input::placeholder { color: rgba(255,255,255,0.35); }
+
+textarea.gf-input { resize: vertical; min-height: 120px; }
+
+/* Monogram watermark */
+.monogram-watermark {
+  position: absolute;
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Editorial number */
+.eyebrow-number {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--gf-muted);
+}
+
+/* Slow hover image */
+.zoom-on-hover { overflow: hidden; }
+.zoom-on-hover img { transition: transform 1200ms ease; }
+.zoom-on-hover:hover img { transform: scale(1.06); }
+
+/* Marquee — pause on hover so users can read items as they pass. */
+@keyframes gfMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { display: flex; gap: 4rem; animation: gfMarquee 30s linear infinite; white-space: nowrap; will-change: transform; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Fade up — page-load entrance and scroll-reveal share these tokens. */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp 700ms ease both; }
+.fade-up-d1 { animation: fadeUp 700ms 120ms ease both; }
+.fade-up-d2 { animation: fadeUp 700ms 240ms ease both; }
+.fade-up-d3 { animation: fadeUp 700ms 360ms ease both; }
+
+/* Slower, editorial entrance — used for hero choreography. */
+@keyframes gf-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.gf-fade-up { opacity: 0; animation: gf-fade-up var(--motion-ambient) var(--ease-out) forwards; }
+.gf-delay-100 { animation-delay: 100ms; }
+.gf-delay-200 { animation-delay: 200ms; }
+.gf-delay-300 { animation-delay: 300ms; }
+.gf-delay-500 { animation-delay: 500ms; }
+.gf-delay-700 { animation-delay: 700ms; }
+.gf-delay-900 { animation-delay: 900ms; }
+.gf-delay-1100 { animation-delay: 1100ms; }
+@media (prefers-reduced-motion: reduce) {
+  .gf-fade-up { opacity: 1; transform: none; animation: none; }
+}
+
+/* Form error — single shake on validation failure. */
+@keyframes gf-shake-x {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+.gf-shake { animation: gf-shake-x 360ms var(--ease-in-out); }
+@media (prefers-reduced-motion: reduce) { .gf-shake { animation: none; } }
+
+/* SVG stroke draw — used on the Quote success divider. */
+@keyframes gf-stroke-draw { to { stroke-dashoffset: 0; } }
+.gf-stroke-draw { animation: gf-stroke-draw var(--motion-ambient) var(--ease-out) 100ms forwards; }
+@media (prefers-reduced-motion: reduce) { .gf-stroke-draw { animation: none; stroke-dashoffset: 0; } }
+
+/* Radix Accordion height transitions — applies to FAQ accordion content. */
+@keyframes gf-accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes gf-accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+[data-state="open"].accordion-content { animation: gf-accordion-down var(--motion-base) var(--ease-in-out); }
+[data-state="closed"].accordion-content { animation: gf-accordion-up var(--motion-base) var(--ease-in-out); }
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 0 0% 70%;
+    --radius: 0px;
+  }
+}
+
+@layer base {
+  [data-debug-wrapper="true"] { display: contents !important; }
+}
