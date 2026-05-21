@@ -6,6 +6,9 @@ import { GFMonogram } from "@/components/GFMonogram";
 import { SectionHeading } from "@/components/Section";
 import { IMAGES, CAPABILITIES, CATEGORIES, CATEGORY_IMAGES, CATEGORY_IMAGE_POSITION, PROCESS_STEPS, PRINCIPLES } from "@/lib/content";
 import HeroSlider from "@/components/HeroSlider";
+import StitchLine from "@/components/motion/StitchLine";
+import StaggerGrid from "@/components/motion/StaggerGrid";
+import TimelineProgress from "@/components/motion/TimelineProgress";
 const LowerHome = lazy(() => import("@/components/home/LowerHome"));
 
 // Tightened home page (audit pass 2026-05-20):
@@ -154,7 +157,7 @@ export default function Home() {
       <section className="py-12 lg:py-16 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="CAPABILITIES" number="— 003" title="Full-spectrum apparel manufacturing." subtitle="From concept refinement to delivered shipment — every stage is handled in-house or by audited partners under our supervision." />
-          <div className="mt-10 grid grid-cols-2 lg:grid-cols-5 border-t border-l border-[#1a1a1a]">
+          <StaggerGrid className="mt-10 grid grid-cols-2 lg:grid-cols-5 border-t border-l border-[#1a1a1a]" stagger={0.05}>
             {CAPABILITIES.map((c) => (
               <div
                 key={c.num}
@@ -172,9 +175,11 @@ export default function Home() {
                 <p className="mt-2 font-body text-[12px] leading-[1.7] text-[#9a9a9a]">{c.body}</p>
               </div>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
+
+      <StitchLine className="mx-auto max-w-[1440px] my-2" />
 
       {/* CATEGORIES BENTO — square tiles, denser */}
       <section className="py-12 lg:py-16 px-6 lg:px-12 bg-[#070707]">
@@ -183,7 +188,7 @@ export default function Home() {
             <SectionHeading eyebrow="PRODUCT CATEGORIES" number="— 004" title="Twelve product categories. One production network." />
             <Link to="/categories" data-testid="home-categories-link" className="gf-btn gf-btn-light self-start lg:self-auto">All Categories</Link>
           </div>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
+          <StaggerGrid className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#1a1a1a] border border-[#1a1a1a]" stagger={0.04}>
             {CATEGORIES.map((cat, i) => (
               <Link
                 key={cat}
@@ -211,7 +216,7 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
 
@@ -219,7 +224,7 @@ export default function Home() {
       <section className="py-12 lg:py-16 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="ARE WE A FIT" number="— 005" title="Built for brands ready to produce." subtitle="A two-minute self-qualifier before you write the brief. The most useful conversations start with what we are not." />
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-px bg-[#1a1a1a] border border-[#1a1a1a]">
+          <StaggerGrid className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-px bg-[#1a1a1a] border border-[#1a1a1a]" stagger={0.08}>
             {FIT_COLUMNS.map((col) => (
               <div key={col.eyebrow} className="bg-black p-6 lg:p-7">
                 <span className="overline text-[#F2F2F2]">{col.eyebrow}</span>
@@ -233,7 +238,7 @@ export default function Home() {
                 </ul>
               </div>
             ))}
-          </div>
+          </StaggerGrid>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link to="/quote" className="gf-btn gf-btn-solid">Request a Production Quote</Link>
             <Link to="/contact" className="text-[#bbb] hover:text-white font-body text-[11px] tracking-[0.22em] uppercase transition-colors">Talk to the studio →</Link>
@@ -252,12 +257,14 @@ export default function Home() {
           </div>
           <div className="col-span-12 lg:col-span-7">
             <SectionHeading eyebrow="THE PROCESS" number="— 006" title="A seven-step path from brief to delivered." />
+            <TimelineProgress>
             <ol className="mt-8 relative pl-8">
-              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-[#333333]" aria-hidden />
+              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-[#262626]" aria-hidden />
+              <div data-progress-fill className="absolute left-[7px] top-2 bottom-2 w-px bg-[#F2F2F2]" aria-hidden />
               {PROCESS_STEPS.map((s) => (
                 <li key={s.num} data-testid={`process-step-${s.num}`} className="relative pb-7 last:pb-0">
                   <span className="absolute -left-[28px] top-2 w-[14px] h-[14px] flex items-center justify-center">
-                    <span className="w-[6px] h-[6px] bg-white rounded-full" />
+                    <span data-step className="w-[6px] h-[6px] rounded-full" />
                   </span>
                   <div className="font-body text-[10px] tracking-[0.2em] uppercase text-[#666]">STEP {s.num}</div>
                   <h4 className="mt-1 font-display text-lg text-[#F5F4F0]">{s.title}</h4>
@@ -265,9 +272,13 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+            </TimelineProgress>
           </div>
         </div>
       </section>
+
+      {/* a stitch line introduces the second half of the page */}
+      <StitchLine className="mx-auto max-w-[1440px] my-2" />
 
       {/* === EVERYTHING BELOW IS CODE-SPLIT (React.lazy) FOR FAST INITIAL PAINT === */}
       <Suspense fallback={<div className="py-24" aria-hidden />}>

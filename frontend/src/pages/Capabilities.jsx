@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "@/components/PageMeta";
 import { SectionHeading } from "@/components/Section";
-import Reveal from "@/components/Reveal";
+import StaggerGrid from "@/components/motion/StaggerGrid";
+import StitchLine from "@/components/motion/StitchLine";
 import { CAPABILITIES, IMAGES } from "@/lib/content";
 
 // TODO(content): fill the MOQ floor for boutique cut-and-sew and the upper bound for high-volume runs.
@@ -43,9 +44,9 @@ export default function Capabilities() {
               `h-full` on Reveal + inner card flushes them to the row height; min-height
               on the title block keeps 1-line and 2-line titles from staggering.
               See spec in audit pass. */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-[#1a1a1a] auto-rows-fr">
-            {CAPABILITIES.map((c, i) => (
-              <Reveal key={c.num} delay={Math.min(i * 60, 360)} className="h-full">
+          <StaggerGrid className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-[#1a1a1a] auto-rows-fr" stagger={0.06}>
+            {CAPABILITIES.map((c) => (
+              <div key={c.num} className="h-full">
                 <article
                   data-testid={`cap-${c.num}`}
                   className="bg-black h-full p-6 lg:p-7 flex flex-col hover:bg-[#0a0a0a] transition-colors duration-[180ms] ease-[cubic-bezier(0.16,1,0.3,1)] group"
@@ -87,11 +88,13 @@ export default function Capabilities() {
                     {c.body}
                   </p>
                 </article>
-              </Reveal>
+              </div>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
+
+      <StitchLine className="mx-auto max-w-[1100px] my-2" />
 
       {/* CR-G: expanded capabilities detail. */}
       <section className="py-16 lg:py-24 px-6 lg:px-12 bg-[#070707] border-t border-[#1a1a1a]">
