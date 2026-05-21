@@ -9,6 +9,9 @@ import { ArrowRight } from "lucide-react";
 import { GFMonogram } from "@/components/GFMonogram";
 import { SectionHeading } from "@/components/Section";
 import { IMAGES, PRINCIPLES } from "@/lib/content";
+import StitchLine from "@/components/motion/StitchLine";
+import StaggerGrid from "@/components/motion/StaggerGrid";
+import TimelineProgress from "@/components/motion/TimelineProgress";
 
 const QC_STEPS = [
   { num: "01", title: "Incoming fabric checks",   body: "Shade, weight, hand-feel and shrinkage logged against the approved swatch before cutting starts." },
@@ -41,7 +44,7 @@ export default function LowerHome() {
           <SectionHeading eyebrow="QUALITY CONTROL" number="— 007" title="Five inspections between brief and despatch." subtitle="No black-box QC. Each garment passes a documented five-stage chain before it leaves the line." />
           <div className="mt-10 relative">
             <div className="hidden lg:block absolute top-[14px] left-0 right-0 h-px border-t border-dashed border-[#2a2a2a]" aria-hidden />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px lg:gap-0 bg-[#1a1a1a] lg:bg-transparent">
+            <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px lg:gap-0 bg-[#1a1a1a] lg:bg-transparent" stagger={0.10}>
               {QC_STEPS.map((s, i) => (
                 <div key={s.num} className="bg-black lg:bg-transparent relative pt-0 lg:pt-10 p-5 lg:px-6 lg:py-0">
                   <div className="hidden lg:flex absolute left-6 top-[7px] w-4 h-4 items-center justify-center bg-black z-[1]">
@@ -53,17 +56,19 @@ export default function LowerHome() {
                   {i < QC_STEPS.length - 1 && <div className="lg:hidden mt-5 dashed-rule text-[#2a2a2a]" />}
                 </div>
               ))}
-            </div>
+            </StaggerGrid>
           </div>
         </div>
       </section>
+
+      <StitchLine className="mx-auto max-w-[1440px] my-2" />
 
       {/* WHY GF */}
       <section className="py-12 lg:py-16 px-6 lg:px-12 bg-[#070707] relative overflow-hidden">
         <span className="monogram-watermark text-[220px] -left-6 -top-12 leading-none opacity-50">GF</span>
         <div className="max-w-[1440px] mx-auto relative">
           <SectionHeading eyebrow="WHY GARMENT FOUNDRY" number="— 008" title="Six principles. One standard." />
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]">
+          <StaggerGrid className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1a1a1a]" stagger={0.06}>
             {PRINCIPLES.map((p, i) => (
               <div key={p.title} data-testid={`principle-${i}`} className="bg-[#070707] p-7 lg:p-8 hover:bg-black transition-colors">
                 <div className="flex items-center justify-between">
@@ -75,7 +80,7 @@ export default function LowerHome() {
                 <p className="mt-4 font-body text-[13px] leading-[1.85] text-[#a8a8a8]">{p.body}</p>
               </div>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
 
@@ -148,7 +153,7 @@ export default function LowerHome() {
       <section className="py-12 lg:py-16 px-6 lg:px-12">
         <div className="max-w-[1440px] mx-auto">
           <SectionHeading eyebrow="PRODUCTION SCENARIOS" number="— 011" title="What a typical engagement looks like." subtitle="Anonymised composites of the work that comes through the studio — to set expectations before the first call." />
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+          <StaggerGrid className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10" stagger={0.12}>
             {SCENARIOS.map((sc) => (
               <article key={sc.eyebrow} className="group">
                 <div className="zoom-on-hover">
@@ -159,9 +164,11 @@ export default function LowerHome() {
                 <p className="mt-3 font-body text-[12.5px] leading-[1.85] text-[#a8a8a8]">{sc.body}</p>
               </article>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
+
+      <StitchLine className="mx-auto max-w-[1440px] my-2" />
 
       {/* FINAL CTA */}
       <section className="relative py-16 lg:py-20 px-6 lg:px-12 overflow-hidden bg-black">
@@ -176,7 +183,7 @@ export default function LowerHome() {
             Submit a brief or a tech pack — we reply with an indicative quote within one business day. Reviewed by a production manager, all-inclusive, built for bulk.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Production Quote</Link>
+            <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Quote</Link>
             <Link to="/quote" data-testid="final-cta-techpack" className="gf-btn gf-btn-light">Send a Tech Pack</Link>
           </div>
           <p className="mt-7 font-body text-[10.5px] tracking-[0.28em] uppercase text-[#888]">

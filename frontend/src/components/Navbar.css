@@ -46,7 +46,9 @@
   .gf-navbar-tag { display: none; }
   .gf-navbar-name { font-size: 13px; letter-spacing: .22em; }
 }
-@media (max-width: 420px) {
+/* Hide wordmark on all common phone widths (up to iPhone 15 Pro Max at 430px).
+   420px was too narrow — 421–430px devices still showed the wide Cinzel name. */
+@media (max-width: 479px) {
   .gf-navbar-word { display: none; }
 }
 
@@ -91,7 +93,9 @@
   transition: border-color 250ms ease, background-color 250ms ease;
 }
 .gf-navbar-iconbtn:hover { border-color: #F2F2F2; background: rgba(255, 255, 255, .06); }
-@media (max-width: 700px) { .gf-navbar-iconbtn { display: none; } }
+/* Hide search icon when the hamburger is showing — it's non-functional and
+   wastes the limited header real-estate on tablets/mobile. */
+@media (max-width: 1100px) { .gf-navbar-iconbtn { display: none; } }
 
 .gf-navbar-cta {
   display: inline-flex; align-items: center; gap: 10px;
@@ -107,7 +111,9 @@
 .gf-navbar-cta:hover { background: #F2F2F2; color: #000; }
 .gf-navbar-cta span { transition: transform 250ms ease; display: inline-block; }
 .gf-navbar-cta:hover span { transform: translateX(4px); }
-@media (max-width: 520px) { .gf-navbar-cta { display: none; } }
+/* Hide desktop CTA when the hamburger is shown — the drawer carries its own
+   "Request a Quote" CTA, so this button is redundant and crowds the header. */
+@media (max-width: 1100px) { .gf-navbar-cta { display: none; } }
 
 .gf-navbar-mobile-toggle {
   display: none;
@@ -119,11 +125,19 @@
 }
 
 /* ---------- MOBILE DRAWER ---------- */
+/* Rendered via React portal (document.body) so it is NOT a child of the
+   <header> element. This sidesteps the iOS Safari quirk where backdrop-filter
+   on a parent creates a new stacking context that clips or mispositions fixed
+   children. z-index: 9999 ensures it sits above all page content. */
 .gf-navbar-drawer {
   position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
   background: #000;
   border-top: 1px solid #1a1a1a;
   overflow-y: auto;
+  /* Prevent momentum scrolling from bleeding through to the page on iOS. */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   animation: gf-drawer-in 250ms ease both;
 }
 @media (min-width: 901px) { .gf-navbar-drawer { top: 78px; } }
