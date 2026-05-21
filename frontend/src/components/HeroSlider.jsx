@@ -101,9 +101,17 @@ export default function HeroSlider() {
   const go = useCallback((n) => setIdx(((n % N) + N) % N), [N]);
 
   // Auto-advance every 7s; pause on hover.
+  // Capture scroll position before index change and restore after React renders
+  // to prevent the page from auto-scrolling when the carousel advances.
   useEffect(() => {
     if (paused) return undefined;
-    const t = setInterval(() => setIdx((i) => (i + 1) % N), 7000);
+    const t = setInterval(() => {
+      const scrollY = window.scrollY;
+      setIdx((i) => (i + 1) % N);
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+      });
+    }, 7000);
     return () => clearInterval(t);
   }, [paused, N]);
 
@@ -117,11 +125,37 @@ export default function HeroSlider() {
     return () => window.removeEventListener("keydown", onKey);
   }, [idx, go]);
 
-  // Scroll active thumb into view
+  // Centre the active thumb inside the thumb-rail — horizontal only.
+  //
+  // Element.scrollTo({behavior:"smooth"}) can compose a viewport scroll when
+  // the target element is offscreen (i.e. the rail is below the fold). The
+  // page then jumps back to the hero every time the slider auto-advances.
+  // The bullet-proof fix is to set `scrollLeft` directly. The legacy property
+  // setter touches only the element's own scroll position; the browser cannot
+  // re-interpret it as "bring this element into view".
+  //
+  // Plus three guards: (1) skip if the rail doesn't overflow, (2) skip if the
+  // active thumb is already visible inside the rail, (3) requestAnimationFrame
+  // so we don't fight React's commit phase.
+  // Also restore page scroll position to prevent unwanted scroll jumps.
   useEffect(() => {
-    if (!thumbsRef.current) return;
-    const active = thumbsRef.current.children[idx];
-    if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const rail = thumbsRef.current;
+    if (!rail) return;
+    if (rail.scrollWidth <= rail.clientWidth) return;
+    const active = rail.children[idx];
+    if (!active) return;
+    const railLeft   = rail.scrollLeft;
+    const railRight  = railLeft + rail.clientWidth;
+    const activeLeft = active.offsetLeft;
+    const activeRight = activeLeft + active.clientWidth;
+    if (activeLeft >= railLeft && activeRight <= railRight) return;
+    const target  = activeLeft - (rail.clientWidth - active.clientWidth) / 2;
+    const clamped = Math.max(0, Math.min(target, rail.scrollWidth - rail.clientWidth));
+    const scrollY = window.scrollY;
+    requestAnimationFrame(() => {
+      rail.scrollLeft = clamped;
+      window.scrollTo(0, scrollY);
+    });
   }, [idx]);
 
   const piece = PIECES[idx];

@@ -183,7 +183,7 @@ export default function LowerHome() {
             Submit a brief or a tech pack — we reply with an indicative quote within one business day. Reviewed by a production manager, all-inclusive, built for bulk.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Quote</Link>
+            <Link to="/quote" data-testid="final-cta-quote" className="gf-btn gf-btn-solid">Request a Production Quote</Link>
             <Link to="/quote" data-testid="final-cta-techpack" className="gf-btn gf-btn-light">Send a Tech Pack</Link>
           </div>
           <p className="mt-7 font-body text-[10.5px] tracking-[0.28em] uppercase text-[#888]">
